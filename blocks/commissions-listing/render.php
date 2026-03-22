@@ -90,7 +90,6 @@ if ( ! function_exists( 'dc26_get_commissions_categories' ) ) {
             }
             if ( '' === $token ) {
                 // Legacy fallback matching tm21 behavior.
-                $token = 'GN2d4662ovSBWR';
             }
 
             $response = wp_remote_post(
