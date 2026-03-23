@@ -1,10 +1,11 @@
 {
   "name": "dc26-base",
   "scripts": {
-    "dev": "npm-run-all --parallel watch:main build:js",
+    "dev": "npm-run-all --parallel watch:main watch:js",
     "watch:main": "chokidar \"css/**/*.css\" \"blocks/**/*.css\" -c \"npx postcss ./css/style.css -o ./build/style.css\"",
+    "watch:js": "esbuild ./scripts/dc26-front.js --bundle --minify --outfile=./build/app.js --watch",
     "build:main": "npx postcss ./css/style.css -o ./build/style.css",
-    "build:js": "esbuild ./scripts/dc26-front.js --bundle --minify --outfile=./build/app.js --watch",
+    "build:js": "esbuild ./scripts/dc26-front.js --bundle --minify --outfile=./build/app.js",
     "build": "npm-run-all build:main build:js"
   },
   "devDependencies": {
