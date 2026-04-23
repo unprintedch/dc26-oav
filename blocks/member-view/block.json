@@ -1,0 +1,22 @@
+{
+    "name": "dc26/member-view",
+    "title": "Profil membre (public)",
+    "description": "Affiche le profil public d'un membre sur sa page single",
+    "category": "dc26",
+    "icon": "id-alt",
+    "keywords": [
+        "profil",
+        "member",
+        "avocat",
+        "oav"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    },
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "customClassName": true
+    }
+}

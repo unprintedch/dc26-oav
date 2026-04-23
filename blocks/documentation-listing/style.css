@@ -1,0 +1,116 @@
+.dc26-doc-listing {
+    padding: 2rem 0;
+}
+
+.dc26-doc-listing__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.dc26-doc-listing__filters {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.dc26-doc-listing__results {
+    min-width: 0;
+}
+
+.dc26-doc-listing__items {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.dc26-doc-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    background: var(--wp--preset--color--white, #ffffff);
+    border-radius: 6px;
+}
+
+.dc26-doc-item__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.dc26-doc-item__tag {
+    display: inline-block;
+    padding: 5px 10px;
+    background: var(--wp--preset--color--gray-light, #f4f4f4);
+    border: 1px solid var(--wp--preset--color--gray-light, #f4f4f4);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: inherit;
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+.dc26-doc-item__tag:hover {
+    color: var(--wp--preset--color--primary, #0b7c87);
+}
+
+.dc26-doc-item__date {
+    font-size: 0.875rem;
+    color: var(--wp--preset--color--gray-text, #808080);
+}
+
+.dc26-doc-item__title {
+    margin: 0;
+    color: var(--wp--preset--color--primary, #0b7c87);
+}
+
+.dc26-doc-item__link,
+.dc26-doc-item__resource,
+.dc26-doc-item__more {
+    color: var(--wp--preset--color--primary, #0b7c87);
+    text-decoration: none;
+}
+
+.dc26-doc-item__link:hover,
+.dc26-doc-item__resource:hover,
+.dc26-doc-item__more:hover {
+    text-decoration: underline;
+}
+
+.dc26-doc-item__attachments {
+    border-top: 1px solid var(--wp--preset--color--gray-light, #f4f4f4);
+    padding-top: 0.75rem;
+}
+
+.dc26-doc-item__label {
+    margin: 0 0 0.5rem;
+    font-size: 0.875rem;
+    color: var(--wp--preset--color--gray-text, #808080);
+}
+
+.dc26-doc-item__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.dc26-doc-item__resource,
+.dc26-doc-item__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+@media (max-width: 960px) {
+    .dc26-doc-listing__layout {
+        grid-template-columns: 1fr;
+    }
+}

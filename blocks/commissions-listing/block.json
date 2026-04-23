@@ -1,0 +1,25 @@
+{
+    "name": "dc26/commissions-listing",
+    "title": "Commissions OAV",
+    "description": "Affiche les categories de commissions et leurs membres depuis l'API OAV",
+    "category": "dc26",
+    "icon": "groups",
+    "keywords": [
+        "commission",
+        "oav",
+        "membres"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "align": [
+            "wide",
+            "full"
+        ],
+        "anchor": true,
+        "customClassName": true
+    }
+}

@@ -1,0 +1,89 @@
+/* ===================================
+   CORE ACCORDION BLOCK
+   =================================== */
+
+/* :where() → spécificité 0, Global Styles (:root :where() = 0,1,0) gagne pour le border */
+:where(.wp-block-accordion-item) {
+    border-bottom: none;
+}
+
+/* (0,2,0) > (0,1,0) du block gap Global Styles — gagne même si Global Styles est inline */
+.wp-block-accordion-item.wp-block-accordion-item {
+    margin-block-start: 0;
+}
+
+
+.wp-block-accordion-heading {
+    margin: 0;
+}
+
+.wp-block-accordion-heading__toggle {
+    width: 100%;
+    background: none;
+    border: 0;
+    padding: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    text-align: left;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+.wp-block-accordion-heading__toggle:focus,
+.wp-block-accordion-heading__toggle:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Icône +/× — masquer l'élément icon natif, utiliser ::after sur le bouton */
+.wp-block-accordion-heading__toggle-icon {
+    display: none;
+}
+
+.wp-block-accordion-heading__toggle::after {
+    content: '';
+    position: relative;
+    display: block;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+}
+
+.wp-block-accordion-heading__toggle::after,
+.wp-block-accordion-heading__toggle::before {
+    transition: transform 0.2s ease;
+}
+
+.wp-block-accordion-heading__toggle::after {
+    background: currentColor;
+    -webkit-mask:
+        linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+        linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+    mask:
+        linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+        linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+    transition: -webkit-mask 0.2s ease, mask 0.2s ease, transform 0.2s ease;
+}
+
+/* État ouvert : + → × (rotation 45deg) */
+.wp-block-accordion-item.is-open > .wp-block-accordion-heading .wp-block-accordion-heading__toggle::after {
+    transform: rotate(45deg);
+}
+
+.wp-block-accordion-heading__toggle,
+.wp-block-accordion-heading__toggle-title {
+    text-decoration: none;
+}
+
+.wp-block-accordion-heading__toggle:hover .wp-block-accordion-heading__toggle-title {
+    text-decoration: none;
+}
+
+.wp-block-accordion-panel {
+    padding: 0.5rem 0 1rem;
+    font-size: inherit;
+}

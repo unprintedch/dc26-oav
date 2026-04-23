@@ -1,0 +1,743 @@
+.dc26-member-profile {
+    padding: 2rem 0;
+}
+
+.dc26-member-profile__preview {
+    border: 2px dashed var(--wp--preset--color--gray-light, #f4f4f4);
+    padding: 1.5rem;
+    background: var(--wp--preset--color--white, #fff);
+}
+
+/* ══════════════════════════════════════════════
+   HERO : Photo + Info (2 colonnes)
+   ══════════════════════════════════════════════ */
+
+.dc26-member-profile__hero {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 3rem;
+    align-items: start;
+    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--wp--preset--color--gray-light, #f4f4f4);
+}
+
+/* ── Photo ── */
+
+.dc26-member-profile__photo {
+    position: sticky;
+    top: 2rem;
+}
+
+.dc26-member-profile__img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.dc26-member-profile__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: var(--wp--preset--color--gray-light, #f4f4f4);
+    border-radius: 8px;
+    color: var(--wp--preset--color--gray-medium, #8e8e8e);
+}
+
+/* ── Info column ── */
+
+.dc26-member-profile__name {
+    color: var(--wp--preset--color--primary, #007582);
+    margin: 0 0 0.15rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.2;
+}
+
+.dc26-member-profile__status {
+    margin: 0 0 0.25rem;
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: var(--wp--preset--color--gray-text, #808080);
+}
+
+.dc26-member-profile__titre {
+    margin: 0 0 0.25rem;
+    font-size: 1rem;
+}
+
+.dc26-member-profile__etude {
+    margin: 0.75rem 0 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.dc26-member-profile__etude a {
+    color: var(--wp--preset--color--primary, #007582);
+    text-decoration: none;
+}
+
+.dc26-member-profile__etude a:hover {
+    text-decoration: underline;
+}
+
+.dc26-member-profile__address {
+    margin: 0 0 1rem;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.dc26-member-profile__notice {
+    font-size: 0.85rem;
+    color: var(--wp--preset--color--gray-text, #808080);
+    font-style: italic;
+    margin: 0 0 0.25rem;
+}
+
+.dc26-member-profile__empty {
+    font-size: 0.95rem;
+    color: var(--wp--preset--color--gray-text, #808080);
+    margin: 0;
+}
+
+/* ── Contact pills ── */
+
+.dc26-member-profile__contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.dc26-member-profile__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--wp--preset--color--gray-light, #f4f4f4);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 0.95rem;
+    transition: background-color 0.15s ease;
+}
+
+.dc26-member-profile__pill:hover {
+    background: #e8e8e8;
+}
+
+.dc26-member-profile__pill img {
+    flex-shrink: 0;
+}
+
+/* Section dividers inside info column */
+
+.dc26-member-profile__info > [data-section] + [data-section] {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--wp--preset--color--gray-light, #f4f4f4);
+}
+
+/* ══════════════════════════════════════════════
+   CARDS : Full-width sections below hero
+   ══════════════════════════════════════════════ */
+
+.dc26-member-profile__card {
+    background: var(--wp--preset--color--gray-light, #f4f4f4);
+    border-radius: 8px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.dc26-member-profile__card > h3 {
+    margin: 0 0 1rem;
+    font-size: 1.15rem;
+}
+
+.dc26-member-profile__card--narrow {
+    max-width: 560px;
+}
+
+/* Tag groups inside cards */
+
+.dc26-member-profile__tag-group {
+    margin-bottom: 1rem;
+}
+
+.dc26-member-profile__tag-group:last-child {
+    margin-bottom: 0;
+}
+
+.dc26-member-profile__tag-group strong {
+    display: block;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wp--preset--color--gray-text, #808080);
+    margin-bottom: 0.4rem;
+}
+
+.dc26-member-profile__tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.dc26-member-profile__tag {
+    display: inline-block;
+    padding: 0.4rem 0.85rem;
+    background: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 0.9rem;
+    transition: all 0.15s ease;
+}
+
+.dc26-member-profile__tag:hover {
+    background: var(--wp--preset--color--primary, #007582);
+    color: var(--wp--preset--color--white, #fff);
+}
+
+.dc26-member-profile__commissions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dc26-member-profile__commissions li {
+    padding: 0.35rem 0;
+    font-size: 1rem;
+}
+
+.dc26-member-profile__commissions em {
+    color: var(--wp--preset--color--gray-text, #808080);
+}
+
+/* ══════════════════════════════════════════════
+   SECTION HEADERS & EDIT TOGGLE
+   ══════════════════════════════════════════════ */
+
+.dc26-member-profile__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.dc26-member-profile__section-header h2,
+.dc26-member-profile__section-header h3,
+.dc26-member-profile__section-header h4 {
+    margin: 0;
+}
+
+.dc26-member-profile__edit-btn {
+    background: none;
+    border: 1px solid var(--wp--preset--color--gray-medium, #8e8e8e);
+    border-radius: 4px;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--wp--preset--color--gray-text, #808080);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+}
+
+.dc26-member-profile__edit-btn:hover {
+    border-color: var(--wp--preset--color--primary, #007582);
+    color: var(--wp--preset--color--primary, #007582);
+}
+
+/* ══════════════════════════════════════════════
+   FORM / EDIT MODE
+   ══════════════════════════════════════════════ */
+
+.dc26-member-profile__form {
+    display: none;
+}
+
+.dc26-member-profile__form--always-visible {
+    display: block;
+}
+
+.is-editing > .dc26-member-profile__display,
+.is-editing > .dc26-member-profile__section-header .dc26-member-profile__edit-btn {
+    display: none;
+}
+
+.is-editing > .dc26-member-profile__form {
+    display: block;
+}
+
+/* Form row (inline fields) */
+
+.dc26-member-profile__form-row {
+    display: flex;
+    gap: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.dc26-member-profile__form-row > .dc26-member-profile__field {
+    margin-bottom: 0;
+}
+
+/* Fields */
+
+.dc26-member-profile__field {
+    margin-bottom: 0.85rem;
+}
+
+.dc26-member-profile__field--grow {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.dc26-member-profile__field--short {
+    flex: 0 0 100px;
+    max-width: 100px;
+}
+
+.dc26-member-profile__field label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--wp--preset--color--gray-text, #808080);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.dc26-member-profile__field input[type="text"],
+.dc26-member-profile__field input[type="email"],
+.dc26-member-profile__field input[type="tel"],
+.dc26-member-profile__field input[type="url"],
+.dc26-member-profile__field input[type="password"],
+.dc26-member-profile__field select,
+.dc26-member-profile__field textarea {
+    display: block;
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: #fff;
+    transition: border-color 0.15s ease;
+}
+
+.dc26-member-profile__field input:focus,
+.dc26-member-profile__field select:focus,
+.dc26-member-profile__field textarea:focus {
+    outline: none;
+    border-color: var(--wp--preset--color--primary, #007582);
+    box-shadow: 0 0 0 3px rgba(0, 117, 130, 0.12);
+}
+
+.dc26-member-profile__field input:disabled,
+.dc26-member-profile__field input[readonly] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.dc26-member-profile__field input[type="file"] {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+}
+
+.dc26-member-profile__field small {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.78rem;
+    color: var(--wp--preset--color--gray-text, #808080);
+}
+
+/* Field meta (counter + limit notice) */
+
+.dc26-member-profile__field-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.dc26-member-profile__counter {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--wp--preset--color--gray-text, #808080);
+    transition: color 0.15s ease;
+}
+
+.dc26-member-profile__counter.is-full {
+    color: #c0392b;
+}
+
+.dc26-member-profile__limit-notice {
+    display: none;
+    font-size: 0.82rem;
+    color: #c0392b;
+    font-style: italic;
+}
+
+.dc26-member-profile__limit-notice.is-visible {
+    display: inline;
+}
+
+/* Password section */
+
+[data-section="password"] .dc26-member-profile__form {
+    max-width: 520px;
+}
+
+.dc26-member-profile__pw-input-wrap {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+}
+
+.dc26-member-profile__pw-input-wrap input {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.dc26-member-profile__pw-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    padding: 0 0.65rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+}
+
+.dc26-member-profile__pw-toggle img {
+    display: block;
+    width: 20px;
+    height: 20px;
+    opacity: 0.45;
+    transition: opacity 0.15s ease;
+}
+
+.dc26-member-profile__pw-toggle:hover {
+    border-color: var(--wp--preset--color--primary, #007582);
+}
+
+.dc26-member-profile__pw-toggle:hover img {
+    opacity: 0.7;
+}
+
+.dc26-member-profile__pw-toggle.is-visible {
+    border-color: var(--wp--preset--color--primary, #007582);
+}
+
+.dc26-member-profile__pw-toggle.is-visible img {
+    opacity: 1;
+}
+
+.dc26-member-profile__pw-toggle.is-visible::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28px;
+    height: 2px;
+    background: var(--wp--preset--color--primary, #007582);
+    border-radius: 1px;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    pointer-events: none;
+}
+
+.dc26-member-profile__pw-suggest {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+    background: none;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.88rem;
+    color: var(--wp--preset--color--primary, #007582);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.dc26-member-profile__pw-suggest:hover {
+    border-color: var(--wp--preset--color--primary, #007582);
+    background: rgba(0, 117, 130, 0.05);
+}
+
+/* Form actions */
+
+.dc26-member-profile__form-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.dc26-member-profile__save-btn {
+    background: var(--wp--preset--color--primary, #007582);
+    color: var(--wp--preset--color--white, #fff);
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.dc26-member-profile__save-btn:hover {
+    background: var(--wp--preset--color--primary-hover, #045660);
+}
+
+.dc26-member-profile__save-btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.dc26-member-profile__cancel-btn {
+    background: none;
+    border: 1px solid var(--wp--preset--color--gray-medium, #8e8e8e);
+    border-radius: 4px;
+    width: 1.65rem;
+    height: 1.65rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: var(--wp--preset--color--gray-text, #808080);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.dc26-member-profile__cancel-btn:hover {
+    border-color: #c0392b;
+    color: #c0392b;
+}
+
+/* ── Edit mode: reposition save/cancel to header line ── */
+
+@keyframes mp-fade-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.dc26-member-profile__info > [data-section].is-editing,
+.dc26-member-profile__card[data-section].is-editing {
+    position: relative;
+}
+
+.dc26-member-profile__info > [data-section].is-editing > .dc26-member-profile__form .dc26-member-profile__form-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 0;
+    animation: mp-fade-in 0.25s ease both;
+}
+
+.dc26-member-profile__info > [data-section] + [data-section].is-editing > .dc26-member-profile__form .dc26-member-profile__form-actions {
+    top: 2rem;
+}
+
+.dc26-member-profile__card[data-section].is-editing > .dc26-member-profile__form .dc26-member-profile__form-actions {
+    position: absolute;
+    top: 2rem;
+    right: 2.5rem;
+    margin-top: 0;
+    animation: mp-fade-in 0.25s ease both;
+}
+
+/* Match edit-btn sizing */
+.dc26-member-profile__info > [data-section].is-editing .dc26-member-profile__save-btn,
+.dc26-member-profile__card[data-section].is-editing .dc26-member-profile__save-btn {
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+
+.dc26-member-profile__info > [data-section].is-editing .dc26-member-profile__cancel-btn,
+.dc26-member-profile__card[data-section].is-editing .dc26-member-profile__cancel-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1rem;
+}
+
+/* Feedback */
+
+.dc26-member-profile__feedback {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    min-height: 1.25em;
+}
+
+.dc26-member-profile__feedback:empty {
+    display: none;
+}
+
+.dc26-member-profile__feedback--success {
+    color: #0a7c3e;
+}
+
+.dc26-member-profile__feedback--error {
+    color: #c0392b;
+}
+
+/* Success checkmark */
+
+.is-saved {
+    position: relative;
+}
+
+.is-saved > .dc26-member-profile__section-header .dc26-member-profile__edit-btn {
+    position: relative;
+}
+
+.is-saved > .dc26-member-profile__section-header .dc26-member-profile__edit-btn::after {
+    content: '\2713';
+    position: absolute;
+    top: -0.55rem;
+    right: -0.55rem;
+    background: #0a7c3e;
+    color: #fff;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    animation: mp-fade-out 2s ease forwards;
+}
+
+@keyframes mp-fade-out {
+    0%, 70% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* ══════════════════════════════════════════════
+   TOM SELECT OVERRIDES
+   ══════════════════════════════════════════════ */
+
+.dc26-member-profile__card .ts-wrapper {
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.dc26-member-profile__card .ts-control {
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    padding: 0.65rem 0.85rem;
+    min-height: 54px;
+    gap: 0.5rem;
+    background: #fff;
+    box-shadow: none;
+}
+
+.dc26-member-profile__card .ts-control > .item {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 !important;
+    padding: 0.4rem 0.65rem 0.4rem 0.85rem !important;
+    background: var(--wp--preset--color--primary, #007582);
+    color: #fff;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.dc26-member-profile__card .ts-control:focus-within,
+.dc26-member-profile__card .ts-wrapper.focus .ts-control {
+    border-color: var(--wp--preset--color--primary, #007582);
+    box-shadow: 0 0 0 3px rgba(0, 117, 130, 0.12);
+}
+
+.dc26-member-profile__card .ts-control > input {
+    font-size: 0.95rem;
+    padding: 0.5rem !important;
+}
+
+.dc26-ts-chip {
+    display: inline;
+}
+
+.dc26-member-profile__card .ts-wrapper .item .remove {
+    color: var(--wp--preset--color--primary, #007582);
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.dc26-ts-option {
+    padding: 0.65rem 1rem;
+    font-size: 0.95rem;
+}
+
+.dc26-member-profile__card .ts-dropdown {
+    border: 1px solid #d0d0d0;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    margin-top: -1px;
+}
+
+.dc26-member-profile__card .ts-dropdown .active {
+    background: var(--wp--preset--color--gray-light, #f4f4f4);
+    color: inherit;
+}
+
+.dc26-member-profile__card .ts-dropdown .optgroup-header {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wp--preset--color--gray-text, #808080);
+    padding: 1rem 1rem 0.4rem;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+    .dc26-member-profile__hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .dc26-member-profile__photo {
+        position: static;
+        max-width: 220px;
+    }
+
+    .dc26-member-profile__card {
+        padding: 1.5rem;
+    }
+
+    .dc26-member-profile__form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .dc26-member-profile__field--short {
+        flex: unset;
+        max-width: unset;
+    }
+
+    .dc26-member-profile__info > [data-section].is-editing > .dc26-member-profile__form .dc26-member-profile__form-actions,
+    .dc26-member-profile__card[data-section].is-editing > .dc26-member-profile__form .dc26-member-profile__form-actions {
+        position: static;
+        margin-top: 1.25rem;
+    }
+}

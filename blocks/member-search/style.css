@@ -1,0 +1,105 @@
+.dc26-member-search {
+    padding: 2rem 0;
+}
+
+.dc26-member-search__preview {
+    border: 2px dashed var(--wp--preset--color--gray-light, #f4f4f4);
+    padding: 1.5rem;
+    background: var(--wp--preset--color--white, #fff);
+}
+
+.dc26-member-card__name  {
+
+    color: var(--wp--preset--color--primary, #0b7c87);
+    margin: 0 0 2rem;
+}
+
+.dc26-member-search__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+}
+
+
+
+.dc26-member-search__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dc26-member-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background-color: white;
+    font-size: 18px;
+    border-radius: 6px;
+}
+
+.dc26-member-card__name {
+    margin: 0 0 0.5rem;
+}
+
+.dc26-member-card__study {
+    margin: 0 0 0.5rem;
+}
+
+.dc26-member-card__study a {
+    text-decoration: none;
+}
+
+.dc26-member-card__study a:hover {
+    text-decoration: underline;
+}
+
+.dc26-member-card__address {
+    margin: 1.75rem 0 1.75rem;
+}
+
+.dc26-member-card__meta {
+    display: block;
+    text-decoration: none;
+    padding: 0.35rem 0;
+}
+
+.dc26-member-card__meta i {
+    margin-right: 0.35rem;
+}
+
+.dc26-member-card__footer {
+    margin: 0.75rem 0 0;
+    text-align: right;
+}
+
+.dc26-member-card__link {
+    text-decoration: none;
+}
+
+.dc26-member-card__link:hover {
+    text-decoration: underline;
+}
+
+
+@media (max-width: 960px) {
+    .dc26-member-search__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .dc26-member-search__sort {
+        justify-content: flex-start;
+    }
+
+    .dc26-member-search__advanced--desktop {
+        display: none;
+    }
+}
+
+@media (min-width: 961px) {
+    .dc26-member-search__advanced--mobile {
+        display: none;
+    }
+}

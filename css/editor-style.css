@@ -1,0 +1,111 @@
+/* Editor-only helpers to keep header visible */
+.editor-styles-wrapper .wp-block-template-part.is-style-sticky-header,
+.editor-styles-wrapper .is-root-container > header.wp-block-group.is-style-sticky-header,
+.editor-styles-wrapper .is-root-container > .wp-block-group.is-style-sticky-header {
+	background-color: rgba(0, 0, 0, 0.04);
+}
+
+.editor-styles-wrapper .wp-block-template-part.is-style-sticky-header .has-white-color,
+.editor-styles-wrapper .is-root-container > header.wp-block-group.is-style-sticky-header .has-white-color,
+.editor-styles-wrapper .is-root-container > .wp-block-group.is-style-sticky-header .has-white-color {
+	color: var(--wp--preset--color--black, #111) !important;
+}
+
+/* Make alignfull actually full-width in editor canvas */
+.editor-styles-wrapper .is-root-container > .wp-block[data-align="full"],
+.editor-styles-wrapper .is-root-container > [data-align="full"] > .wp-block,
+.editor-styles-wrapper .wp-block-post-content [data-align="full"] {
+	margin-left: calc(50% - 50vw) !important;
+	margin-right: calc(50% - 50vw) !important;
+	width: 100vw !important;
+	max-width: 100vw !important;
+}
+
+/* Accordion : font-size et couleur héritent du bloc pour que les réglages sidebar préviewent */
+.editor-styles-wrapper .wp-block-accordion-heading__toggle {
+	font-size: inherit;
+	color: inherit;
+}
+
+.editor-styles-wrapper .wp-block-accordion-panel {
+	font-size: inherit;
+}
+
+/* Button style variants preview in editor */
+.editor-styles-wrapper .wp-block-buttons.is-style-dc26-buttons-doc-list {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 0.95rem;
+}
+
+.editor-styles-wrapper .wp-block-buttons.is-style-dc26-buttons-doc-list > .wp-block-button {
+	width: 100%;
+	margin: 0;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-dc26-ghost-arrow,
+.editor-styles-wrapper .wp-block-button.is-style-dc26-ghost-download {
+	width: 100%;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-dc26-ghost-arrow .wp-block-button__link,
+.editor-styles-wrapper .wp-block-button.is-style-dc26-ghost-download .wp-block-button__link {
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	color: var(--wp--preset--color--primary, #007582);
+	text-transform: none;
+	letter-spacing: normal;
+	text-decoration: none;
+	line-height: 1.3;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-dc26-ghost-arrow .wp-block-button__link {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: center;
+	gap: 0.65rem;
+	width: 100%;
+	text-align: left;
+	justify-items: start;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-dc26-ghost-download .wp-block-button__link {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: 0.5rem;
+	width: 100%;
+	text-align: left;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-dc26-ghost-arrow .wp-block-button__link::after,
+.editor-styles-wrapper .wp-block-button.is-style-dc26-ghost-download .wp-block-button__link::after {
+	content: "";
+	width: 1em;
+	height: 1em;
+	flex-shrink: 0;
+	background-color: currentColor;
+	justify-self: end;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-dc26-ghost-arrow .wp-block-button__link::after {
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / 1em 1em;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / 1em 1em;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-dc26-ghost-download .wp-block-button__link::after {
+	content: none;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-dc26-ghost-download .wp-block-button__link::before {
+	content: "";
+	width: 0.75em;
+	height: 1em;
+	flex-shrink: 0;
+	background-color: currentColor;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox='0 0 12 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.88386 0C0.844795 0 0 0.844795 0 1.88386V13.187C0 14.2261 0.844795 15.0709 1.88386 15.0709H9.41931C10.4584 15.0709 11.3032 14.2261 11.3032 13.187V5.01873C11.3032 4.51833 11.106 4.03853 10.7527 3.68531L7.61493 0.550441C7.2617 0.197217 6.78485 0 6.28445 0H1.88386ZM9.58121 5.18062H6.829C6.43751 5.18062 6.12255 4.86566 6.12255 4.47417V1.72197L9.58121 5.18062Z' fill='black'/%3E%3C/svg%3E") no-repeat center / 0.75em 1em;
+	mask: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox='0 0 12 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.88386 0C0.844795 0 0 0.844795 0 1.88386V13.187C0 14.2261 0.844795 15.0709 1.88386 15.0709H9.41931C10.4584 15.0709 11.3032 14.2261 11.3032 13.187V5.01873C11.3032 4.51833 11.106 4.03853 10.7527 3.68531L7.61493 0.550441C7.2617 0.197217 6.78485 0 6.28445 0H1.88386ZM9.58121 5.18062H6.829C6.43751 5.18062 6.12255 4.86566 6.12255 4.47417V1.72197L9.58121 5.18062Z' fill='black'/%3E%3C/svg%3E") no-repeat center / 0.75em 1em;
+}

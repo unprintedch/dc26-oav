@@ -1,0 +1,23 @@
+{
+    "name": "dc26/examen-listing",
+    "title": "Sessions d'examens",
+    "description": "Liste des sessions d'examens avec filtre par année",
+    "category": "dc26",
+    "icon": "welcome-learn-more",
+    "keywords": [
+        "examen",
+        "session",
+        "stage",
+        "oav"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    },
+    "script": "file:./view.js",
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "customClassName": true
+    }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "dc26/toggle-panel",
+  "title": "Toggle Panel",
+  "description": "Two-panel toggle with switch controls",
+  "category": "dc26",
+  "icon": "screenoptions",
+  "keywords": [
+    "toggle",
+    "switch",
+    "tabs",
+    "oav"
+  ],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php",
+    "blockVersion": 3
+  },
+  "script": "file:./view.js",
+  "supports": {
+    "align": true,
+    "anchor": true,
+    "customClassName": true,
+    "jsx": true
+  }
+}

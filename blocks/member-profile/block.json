@@ -1,0 +1,23 @@
+{
+    "name": "dc26/member-profile",
+    "title": "Profil membre",
+    "description": "Affiche le profil du membre connecté",
+    "category": "dc26",
+    "icon": "admin-users",
+    "keywords": [
+        "profil",
+        "member",
+        "compte",
+        "oav"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    },
+    "script": "file:./view.js",
+    "supports": {
+        "align": true,
+        "anchor": true,
+        "customClassName": true
+    }
+}

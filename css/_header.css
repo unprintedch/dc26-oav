@@ -1,0 +1,102 @@
+/* ===================================
+   HEADER STYLES - CLEAN & SIMPLE
+   =================================== */
+
+/* WP génère des styles inline qui contraignent les enfants à contentSize
+   même avec alignwide — on bypass en forçant le padding du container */
+.is-style-sticky-header > .wp-block-group.alignfull {
+    padding-left: max(var(--wp--preset--spacing--50), calc((100% - var(--wp--style--global--wide-size)) / 2)) !important;
+    padding-right: max(var(--wp--preset--spacing--50), calc((100% - var(--wp--style--global--wide-size)) / 2)) !important;
+}
+
+/* Menu links */
+#menu-primary a {
+    font-family: var(--wp--preset--font-family--body, system-ui, -apple-system, sans-serif);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--primary);
+    text-decoration: none;
+    letter-spacing: 0.025em;
+}
+
+#menu-primary a:hover {
+    color: var(--wp--preset--color--primary-hover);
+}
+
+/* Remove focus outlines on menu items */
+#menu-primary a:focus-visible,
+#offcanvas-menu a:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Social links */
+#menu-container .wp-block-social-links.has-large-icon-size {
+    font-size: 24px;
+}
+
+/* Logo sizing */
+.logo-link {
+    display: inline-block;
+    line-height: 0;
+}
+
+.logo-image {
+    max-width: 480px;
+    height: auto;
+    display: block;
+}
+
+/* ===================================
+   SCROLL ANIMATIONS - SEPARATED FOR SMOOTHNESS
+   =================================== */
+/* WP Admin bar offset */
+.logged-in #menu-container {
+    top: 32px;
+}
+
+#menu-container {
+    transition: transform 0.3s ease, height 0.3s ease;
+  }
+  
+  #menu-container.is-shrunk {
+    height: 160px; /* Ajustez selon vos besoins */
+  }
+  
+  #menu-container.is-hidden {
+    transform: translateY(-100%);
+  }
+  
+  #menu-container.is-visible {
+    transform: translateY(0);
+  }
+
+  [data-animate-on-scroll] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  [data-animate-on-scroll].is-animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    #menu-container,
+    [data-animate-on-scroll] {
+      transition: none;
+    }
+  }
+
+  .wp-block-navigation-item.alt-navigation {
+    border: 1px solid white;
+    color: var(--wp--preset--color--white);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 0.025em;
+  }

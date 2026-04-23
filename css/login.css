@@ -1,0 +1,57 @@
+body.login {
+    background: var(--wp--preset--color--primary, #007582);
+}
+
+.login h1 a {
+    width: 220px;
+    height: 80px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.login #login {
+    margin-top: 200px;
+    padding: 2rem;
+    background-color: var(--wp--preset--color--gray-light, #f4f4f4);
+}
+
+.login #loginform,
+.login #lostpasswordform,
+.login #resetpassform {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.login .button-primary {
+    background: var(--wp--preset--color--primary, #007582);
+    border-color: var(--wp--preset--color--primary, #007582);
+    box-shadow: none;
+}
+
+.login .button-primary:hover,
+.login .button-primary:focus {
+    background: var(--wp--preset--color--primary-hover, #045660);
+    border-color: var(--wp--preset--color--primary-hover, #045660);
+}
+
+.login .notice,
+.login .message,
+.login .notice-info {
+    margin: 0 0 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: var(--wp--preset--color--white, #ffffff);
+    color: var(--wp--preset--color--gray-dark, #1c1c1c);
+    box-shadow: none;
+}
+
+.login .notice p,
+.login .message p {
+    margin: 0;
+}
+
+.login .language-switcher {
+    display: none;
+}

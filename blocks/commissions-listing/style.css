@@ -1,0 +1,176 @@
+.dc26-commissions__preview {
+    border: 1px dashed var(--wp--preset--color--gray-medium, #b8c2cc);
+    background: var(--wp--preset--color--gray-light, #f5f7f9);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.dc26-commissions__empty {
+    margin: 0;
+}
+
+.dc26-commissions {
+    display: grid;
+    gap: 3rem;
+}
+
+/* ── Catégorie ── */
+.dc26-commissions__category {
+    display: grid;
+    gap: 0;
+}
+
+.dc26-commissions__category-title {
+    margin: 0 0 1.5rem;
+    color: var(--wp--preset--color--primary, #007582);
+    font-weight: 500;
+    font-size: var(--wp--preset--font-size--large);
+}
+
+/* ── Commission — deux colonnes ── */
+.dc26-commission {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0 2rem;
+    padding: 1.25rem 0;
+    align-items: start;
+}
+
+
+/* ── Colonne gauche ── */
+.dc26-commission__label {
+    padding-top: 0.1rem;
+}
+
+.dc26-commission__title {
+    margin: 0;
+    color: var(--wp--preset--color--primary, #007582);
+}
+
+/* ── Colonne droite ── */
+.dc26-commission__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-width: 0;
+}
+
+/* Président */
+.dc26-commission__president-block {
+    margin-bottom: 1rem;
+}
+
+.dc26-commission__president-name {
+  margin: 0;
+  font-weight: 500;
+}
+
+
+.dc26-commission__president-role {
+    color: var(--wp--preset--color--primary, #007582);
+    font-weight: 500;
+    margin-top: 0;
+}
+
+/* ── Membres toggle ── */
+.dc26-commission__members {
+    /* reset browser <details> defaults */
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 1);
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.dc26-commission__members-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.65rem 0;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--wp--preset--color--black, #111);
+    list-style: none;
+    user-select: none;
+    /* reset browser summary defaults */
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.dc26-commission__members-toggle::-webkit-details-marker {
+    display: none;
+}
+
+/* Icône +/× */
+.dc26-commission__members-toggle::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    background: currentColor;
+    -webkit-mask:
+        linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+        linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+    mask:
+        linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+        linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+    transition: transform 0.2s ease;
+}
+
+.dc26-commission__members[open] .dc26-commission__members-toggle::after {
+    transform: rotate(45deg);
+}
+.dc26-commission__members-toggle-title {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* ── Liste membres ── */
+.dc26-commission__members-list {
+    margin: 0.5rem 0 0.75rem 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.35rem;
+}
+.dc26-commission__members-list ul{
+    margin: 0;
+    padding: 0;
+    padding-left: 0rem !important;
+    list-style: none;
+} 
+.dc26-commission__members-list ul{
+    padding-left: 0rem !important;
+}
+
+
+.dc26-commission__members-list li {
+    font-size: var(--wp--preset--font-size--medium);
+    font-weight: 400;
+}
+
+.dc26-commission__members-list a {
+    color: var(--wp--preset--color--black, #111);
+    text-decoration: none;
+}
+
+.dc26-commission__members-list a:hover {
+    text-decoration: underline;
+}
+
+.dc26-commission__member-info {
+    color: var(--wp--preset--color--primary, #007582);
+    font-size: 0.875rem;
+    margin-left: 0.25rem;
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+    .dc26-commission {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+    }
+}

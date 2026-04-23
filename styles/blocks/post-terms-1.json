@@ -1,0 +1,65 @@
+{
+	"version": 3,
+	"$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+	"title": "Pill shaped",
+	"slug": "post-terms-pill",
+	"blockTypes": ["core/post-terms"],
+	"styles": {
+		"spacing": {
+			"padding": {
+				"top": "0",
+				"right": "0",
+				"bottom": "0",
+				"left": "0"
+			}
+		},
+		"elements": {
+			"spacing": {
+				"margin": {
+					"bottom": "0"
+				},
+				"padding": {
+					"top": "0",
+					"right": "0",
+					"bottom": "0",
+					"left": "0"
+				}
+			},
+			"link": {
+				"color": {
+					"text": "var:preset|color|black",
+					"background": "var:preset|color|gray-light"
+				},	
+					
+				"border": {
+					"color": "var:preset|color|gray-light",
+					"radius": "20px",
+					"width": "1px",
+					"style": "solid"
+				},
+				"spacing": {
+					"padding": {
+						"top": "5px",
+						"right": "10px",
+						"bottom": "5px",
+						"left": "10px"
+					}
+				},
+				"typography": {
+					"fontSize": "16px",
+					"fontWeight": "400",
+					"lineHeight": "2.8",
+					"textDecoration": "none"
+				},
+				":hover": {
+					"color": {
+						"text": "var:preset|color|primary-hover"
+					},
+					"typography": {
+						"textDecoration": "none"
+					}
+				}
+			}
+		}
+	}
+}

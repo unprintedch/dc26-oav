@@ -1,0 +1,266 @@
+.dc26-member-view {
+    padding: 2rem 0;
+}
+
+.dc26-member-view__preview {
+    border: 2px dashed var(--wp--preset--color--gray-light, #f4f4f4);
+    padding: 1.5rem;
+    background: var(--wp--preset--color--white, #fff);
+}
+
+.dc26-member-view--private {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: var(--wp--preset--color--gray-text, #808080);
+}
+
+/* ══════════════════════════════════════════════
+   HERO : Photo + Info (2 columns)
+   ══════════════════════════════════════════════ */
+
+.dc26-member-view__hero {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 3rem;
+    align-items: start;
+    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--wp--preset--color--gray-light, #f4f4f4);
+}
+
+/* ── Photo ── */
+
+.dc26-member-view__img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.dc26-member-view__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: var(--wp--preset--color--gray-light, #f4f4f4);
+    border-radius: 8px;
+    color: var(--wp--preset--color--gray-medium, #8e8e8e);
+}
+
+/* ── Info column ── */
+
+.dc26-member-view__name-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    margin-bottom: 0.15rem;
+}
+
+.dc26-member-view__name {
+    color: var(--wp--preset--color--primary, #007582);
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.2;
+}
+
+.dc26-member-view__edit-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--wp--preset--color--primary, #007582);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--wp--preset--color--primary, #007582);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+}
+
+.dc26-member-view__edit-link:hover {
+    background: var(--wp--preset--color--primary, #007582);
+    color: var(--wp--preset--color--white, #fff);
+}
+
+.dc26-member-view__edit-link svg {
+    flex-shrink: 0;
+}
+
+.dc26-member-view__status {
+    margin: 0 0 0.25rem;
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: var(--wp--preset--color--gray-text, #808080);
+}
+
+.dc26-member-view__titre {
+    margin: 0 0 0.25rem;
+    font-size: 1rem;
+}
+
+.dc26-member-view__etude {
+    margin: 0.75rem 0 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.dc26-member-view__etude a {
+    color: var(--wp--preset--color--primary, #007582);
+    text-decoration: none;
+}
+
+.dc26-member-view__etude a:hover {
+    text-decoration: underline;
+}
+
+.dc26-member-view__address {
+    font-style: normal;
+    margin: 1rem 0;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+/* ── Contact pills ── */
+
+.dc26-member-view__contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.dc26-member-view__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--wp--preset--color--gray-light, #f4f4f4);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 0.95rem;
+    transition: background-color 0.15s ease;
+}
+
+.dc26-member-view__pill:hover {
+    background: #e8e8e8;
+}
+
+.dc26-member-view__pill img {
+    flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════
+   SECTIONS : Specialities, Languages, Commissions
+   ══════════════════════════════════════════════ */
+
+.dc26-member-view__section {
+    background: var(--wp--preset--color--gray-light, #f4f4f4);
+    border-radius: 8px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.dc26-member-view__section > h3 {
+    margin: 0 0 1rem;
+    font-size: 1.15rem;
+}
+
+.dc26-member-view__tag-group {
+    margin-bottom: 1.5rem;
+}
+
+.dc26-member-view__tag-group:last-child {
+    margin-bottom: 0;
+}
+
+.dc26-member-view__tag-group h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.15rem;
+}
+
+.dc26-member-view__tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.dc26-member-view__tag {
+    display: inline-block;
+    padding: 0.4rem 0.85rem;
+    background: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 0.9rem;
+    transition: all 0.15s ease;
+}
+
+.dc26-member-view__tag:hover {
+    background: var(--wp--preset--color--primary, #007582);
+    color: var(--wp--preset--color--white, #fff);
+}
+
+/* ── Commissions ── */
+
+.dc26-member-view__commissions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dc26-member-view__commissions li {
+    padding: 0.35rem 0;
+    font-size: 1rem;
+}
+
+.dc26-member-view__commissions em {
+    color: var(--wp--preset--color--gray-text, #808080);
+}
+
+/* ══════════════════════════════════════════════
+   BACK LINK
+   ══════════════════════════════════════════════ */
+
+.dc26-member-view__back {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--wp--preset--color--gray-light, #f4f4f4);
+}
+
+.dc26-member-view__back a {
+    color: var(--wp--preset--color--primary, #007582);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: opacity 0.15s ease;
+}
+
+.dc26-member-view__back a:hover {
+    opacity: 0.75;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+    .dc26-member-view__hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .dc26-member-view__photo {
+        max-width: 220px;
+    }
+
+    .dc26-member-view__section {
+        padding: 1.5rem;
+    }
+}

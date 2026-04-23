@@ -1,0 +1,23 @@
+{
+    "name": "dc26/documentation-listing",
+    "title": "Documentation listing",
+    "description": "Liste de documentation avec filtres FacetWP",
+    "category": "dc26",
+    "icon": "search",
+    "keywords": [
+        "documentation",
+        "facetwp",
+        "listing",
+        "oav"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    },
+    "supports": {
+        "align": true,
+        "anchor": true,
+        "customClassName": true,
+        "jsx": true
+    }
+}

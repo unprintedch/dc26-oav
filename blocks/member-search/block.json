@@ -1,0 +1,23 @@
+{
+    "name": "dc26/member-search",
+    "title": "Annuaire membres",
+    "description": "Annuaire des avocats membres avec filtres FacetWP",
+    "category": "dc26",
+    "icon": "search",
+    "keywords": [
+        "member",
+        "annuaire",
+        "facetwp",
+        "oav"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    },
+    "supports": {
+        "align": true,
+        "anchor": true,
+        "customClassName": true,
+        "jsx": true
+    }
+}

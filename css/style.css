@@ -1,0 +1,150 @@
+
+@import "dc-tailwind.css";
+@import "_header.css";
+@import "_button-variants.css";
+@import "_navigation.css";
+@import "_header-sticky.css";
+@import "facet-reset.css";
+@import "_block-style.css";
+@import "_block-style_accordion.css";
+@import "accordion-tabs.css";
+@import "_gravityform.css";
+@import "_wpml.css";
+@import "_offcanvas.css";
+
+/* @import "_woocommerce.css";
+@import "_currency.css";
+*/
+
+/* Les largeurs full et wide sont gérées nativement par WordPress avec theme.json */
+/* Pas besoin de règles CSS supplémentaires */
+
+html {
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Liens inline dans le texte : héritent de la taille du contexte */
+:is(p, li, td, blockquote, h1, h2, h3, h4, h5, h6) a {
+    font-size: inherit;
+}
+
+/* Listes à puces alignées avec le paragraphe */
+.wp-block-list,
+.wp-block-post-content ul,
+.wp-block-post-content ol {
+    padding-left: 1.25rem;
+    margin-left: 0;
+}
+
+/* Événements : masquer date publi, afficher date event */
+.category-evenements .wp-block-post-date {
+    display: none;
+}
+
+.dc-event-date {
+    display: none !important;
+}
+.category-evenements .dc-event-date {
+    display: flex !important;
+}
+a:hover {
+    text-decoration: none;
+}
+
+/* Ensure post-terms pill links keep a readable size across editor-generated variants */
+.wp-block-post-terms.is-style-post-terms-pill a,
+[class*="is-style-post-terms-pill--"] a {
+    font-size: 16px;
+}
+
+/* ── Copy email button ── */
+.dc26-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.35rem;
+    border-radius: 4px;
+    color: var(--wp--preset--color--gray-text, #808080);
+    transition: color 0.15s, background-color 0.15s;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.dc26-copy-btn:hover {
+    color: var(--wp--preset--color--primary, #007582);
+    background: var(--wp--preset--color--gray-light, #f4f4f4);
+}
+
+.dc26-copy-btn__icon-check {
+    display: none;
+    color: #2e7d32;
+}
+
+.dc26-copy-btn.is-copied .dc26-copy-btn__icon-copy { display: none; }
+.dc26-copy-btn.is-copied .dc26-copy-btn__icon-check { display: block; }
+
+.dc26-member-view__pill-group {
+    display: inline-flex;
+    align-items: center;
+}
+
+.dc26-meta-with-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+
+/* Décalage pour la barre d'administration WordPress */
+.logged-in .header-sticky {
+    top: 32px !important;
+}
+
+/* Décalage du contenu pour le header sticky */
+body {
+    padding-top: 0;
+    transition: padding-top 0.3s ease;
+}
+
+/* Remove global block gap before footer only */
+:where(.wp-site-blocks) > footer {
+    margin-block-start: 0;
+}
+
+.logged-in .dc26-navigation {
+    padding-top: 2rem;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, summary, li, strong, span, div, label, button, input, select, textarea {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+
+
+/*
+ * Progressive enhancement to reduce widows and orphans
+ * https://github.com/WordPress/gutenberg/issues/55190
+ */
+h1, h2, h3, h4, h5, h6, blockquote, caption, figcaption, p {
+    text-wrap: pretty;
+}
+
+/*
+ * Change the position of the more block on the front, by making it a block level element.
+ * https://github.com/WordPress/gutenberg/issues/65934
+*/
+.more-link {
+    display: block;
+}
+
+
