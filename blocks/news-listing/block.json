@@ -1,7 +1,7 @@
 {
     "name": "dc26/news-listing",
-    "title": "Actualités listing",
-    "description": "Liste des actualités avec filtres FacetWP",
+    "title": "Posts listing",
+    "description": "Liste de posts (events, formations, annonces, news) avec filtres FacetWP",
     "category": "dc26",
     "icon": "list-view",
     "keywords": [
