@@ -1,67 +1,6 @@
 <?php
 declare(strict_types=1);
 
-add_action('acf/init', function (): void {
-    if (!function_exists('acf_add_local_field_group')) {
-        return;
-    }
-
-    acf_add_local_field_group([
-        'key'    => 'group_dc26_news_listing',
-        'title'  => 'BLOCK – Actualités listing',
-        'fields' => [
-            [
-                'key'           => 'field_nl_categories',
-                'label'         => 'Catégories',
-                'name'          => 'nl_categories',
-                'type'          => 'taxonomy',
-                'instructions'  => 'Laisser vide pour afficher toutes les catégories.',
-                'taxonomy'      => 'category',
-                'field_type'    => 'checkbox',
-                'return_format' => 'object',
-                'add_term'      => 0,
-                'save_terms'    => 0,
-                'load_terms'    => 0,
-                'allow_null'    => 1,
-                'multiple'      => 1,
-                'wrapper'       => ['width' => '100'],
-            ],
-            [
-                'key'           => 'field_nl_posts_per_page',
-                'label'         => 'Articles par page',
-                'name'          => 'nl_posts_per_page',
-                'type'          => 'number',
-                'default_value' => 12,
-                'min'           => 1,
-                'max'           => 100,
-                'wrapper'       => ['width' => '50'],
-            ],
-            [
-                'key'           => 'field_nl_columns',
-                'label'         => 'Colonnes',
-                'name'          => 'nl_columns',
-                'type'          => 'select',
-                'choices'       => [
-                    '2' => '2 colonnes',
-                    '3' => '3 colonnes',
-                    '4' => '4 colonnes',
-                ],
-                'default_value' => '3',
-                'allow_null'    => 0,
-                'wrapper'       => ['width' => '50'],
-            ],
-        ],
-        'location' => [[
-            [
-                'param'    => 'block',
-                'operator' => '==',
-                'value'    => 'dc26/news-listing',
-            ],
-        ]],
-        'active' => true,
-    ]);
-});
-
 add_action('init', function (): void {
 
     register_block_style('core/list', [

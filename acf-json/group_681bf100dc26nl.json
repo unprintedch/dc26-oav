@@ -1,0 +1,100 @@
+{
+    "key": "group_681bf100dc26nl",
+    "title": "BLOCK – Actualités listing",
+    "fields": [
+        {
+            "key": "field_nl_categories",
+            "label": "Catégories",
+            "name": "nl_categories",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Laisser vide pour afficher toutes les catégories.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "category",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "object",
+            "field_type": "checkbox",
+            "allow_in_bindings": 0,
+            "multiple": 1,
+            "allow_null": 1
+        },
+        {
+            "key": "field_nl_posts_per_page",
+            "label": "Articles par page",
+            "name": "nl_posts_per_page",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 12,
+            "min": 1,
+            "max": 100,
+            "step": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_nl_columns",
+            "label": "Colonnes",
+            "name": "nl_columns",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "2": "2 colonnes",
+                "3": "3 colonnes",
+                "4": "4 colonnes"
+            },
+            "default_value": "3",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_custom": 0,
+            "search_placeholder": "",
+            "allow_in_bindings": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "dc26\/news-listing"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1747044000
+}
