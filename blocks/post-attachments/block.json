@@ -1,0 +1,16 @@
+{
+    "name": "dc26/post-attachments",
+    "title": "Documents & Liens",
+    "description": "Affiche les documents et liens du post courant (tous post types)",
+    "category": "dc26",
+    "icon": "paperclip",
+    "keywords": ["documents", "liens", "attachments", "post"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    },
+    "supports": {
+        "anchor": true,
+        "customClassName": true
+    }
+}

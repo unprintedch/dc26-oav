@@ -1,0 +1,52 @@
+.dc26-atc--empty {
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--gray-dark);
+}
+
+.dc26-atc__date {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin: 0 0 0.75rem;
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--gray-dark);
+}
+
+.dc26-atc__icon {
+    width: 0.9rem;
+    height: 0.9rem;
+    flex-shrink: 0;
+    color: var(--wp--preset--color--primary);
+}
+
+.dc26-atc__sep {
+    opacity: 0.4;
+}
+
+.dc26-atc__label {
+    margin: 0 0 0.4rem;
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 600;
+    color: var(--wp--preset--color--gray-dark);
+}
+
+.dc26-atc__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+}
+
+.dc26-atc__btn {
+    color: var(--wp--preset--color--primary);
+    font-size: var(--wp--preset--font-size--small);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: transparent;
+    transition: text-decoration-color 0.15s ease;
+}
+
+.dc26-atc__btn:hover {
+    text-decoration-color: currentColor;
+}

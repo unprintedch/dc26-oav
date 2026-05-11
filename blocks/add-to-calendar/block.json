@@ -1,0 +1,16 @@
+{
+    "name": "dc26/add-to-calendar",
+    "title": "Ajouter à l'agenda",
+    "description": "Affiche la date de l'événement et des boutons d'ajout à l'agenda",
+    "category": "dc26",
+    "icon": "calendar",
+    "keywords": ["agenda", "calendrier", "event", "ical", "outlook"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    },
+    "supports": {
+        "anchor": true,
+        "customClassName": true
+    }
+}

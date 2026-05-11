@@ -1,0 +1,120 @@
+{
+    "key": "group_dc26_query_listing",
+    "title": "BLOCK – Query Listing",
+    "fields": [
+        {
+            "key": "field_ql_post_type",
+            "label": "Post type",
+            "name": "post_type",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Slug du CPT à afficher (ex : post, conference-du-stage…)",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "post",
+            "placeholder": "post",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_ql_posts_per_page",
+            "label": "Posts par page",
+            "name": "posts_per_page",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 12,
+            "min": 1,
+            "max": 100,
+            "step": 1,
+            "placeholder": "12",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_ql_orderby",
+            "label": "Tri",
+            "name": "orderby",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "date": "Date",
+                "title": "Titre",
+                "menu_order": "Ordre manuel",
+                "meta_value": "Valeur méta",
+                "rand": "Aléatoire"
+            },
+            "default_value": "date",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_custom": 0,
+            "search_placeholder": ""
+        },
+        {
+            "key": "field_ql_order",
+            "label": "Ordre",
+            "name": "order",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "DESC": "Décroissant (DESC)",
+                "ASC": "Croissant (ASC)"
+            },
+            "default_value": "DESC",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_custom": 0,
+            "search_placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "dc26/query-listing"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1747526400
+}
