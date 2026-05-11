@@ -11,6 +11,29 @@ ul.wp-block-post-template > li.wp-block-post {
     padding: 0;
 }
 
+/* Post cards — carte cliquable + hover lift */
+li.wp-block-post > .wp-block-group.has-background {
+    position: relative;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+li.wp-block-post > .wp-block-group.has-background:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+li.wp-block-post .wp-block-read-more::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
+li.wp-block-post .wp-block-post-terms a {
+    position: relative;
+    z-index: 1;
+}
+
 .wp-block-details.is-style-big-details {
   border-bottom: 1px solid #e5e7eb;
   font-weight: 500;
