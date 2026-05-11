@@ -35,6 +35,29 @@
     grid-column: 1 / -1;
 }
 
+/* Zone event (date + icon) */
+.dc26-news-card__event {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    color: var(--wp--preset--color--primary);
+    margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.dc26-news-card__event-meta {
+    display: flex;
+    gap: var(--wp--preset--spacing--30);
+    font-size: 24px;
+}
+
+.dc26-news-card__icon img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
 /* Card */
 .dc26-news-card {
     display: flex;

@@ -1,0 +1,52 @@
+{
+    "key": "group_681bf200dc26ci",
+    "title": "TAXONOMY – Catégorie icône",
+    "fields": [
+        {
+            "key": "field_ci_category_icon",
+            "label": "Icône",
+            "name": "category_icon",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Icône SVG ou PNG affichée sur les cartes du listing. Idéalement SVG 30×30px.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "svg, png",
+            "allow_in_bindings": 0,
+            "preview_size": "thumbnail"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "category"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1747047600
+}
