@@ -38,6 +38,8 @@
     background-color: white;
     font-size: 18px;
     border-radius: 6px;
+    position: relative;
+    cursor: pointer;
 }
 
 .dc26-member-card__name {
@@ -79,8 +81,22 @@
     text-decoration: none;
 }
 
+.dc26-member-card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
 .dc26-member-card__link:hover {
     text-decoration: underline;
+}
+
+/* Liens secondaires au-dessus de l'overlay */
+.dc26-member-card__study a,
+.dc26-member-card__meta,
+.dc26-copy-btn {
+    position: relative;
+    z-index: 1;
 }
 
 
