@@ -1,0 +1,24 @@
+{
+    "name": "dc26/news-listing",
+    "title": "Actualités listing",
+    "description": "Liste des actualités avec filtres FacetWP",
+    "category": "dc26",
+    "icon": "list-view",
+    "keywords": [
+        "actualites",
+        "news",
+        "facetwp",
+        "listing",
+        "oav"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    },
+    "supports": {
+        "align": true,
+        "anchor": true,
+        "customClassName": true,
+        "jsx": true
+    }
+}

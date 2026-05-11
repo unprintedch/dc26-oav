@@ -1,33 +1,46 @@
-.dc26-query-listing__preview {
+.dc26-news-listing__preview {
     padding: var(--wp--preset--spacing--50);
     background: #f0f0f0;
     text-align: center;
 }
 
-.dc26-query-listing__grid {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.dc26-news-listing__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--wp--preset--spacing--40);
+    margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.dc26-news-listing__grid {
     display: grid;
     gap: var(--wp--preset--spacing--50);
     grid-template-columns: repeat(3, 1fr);
 }
 
-@media (max-width: 768px) {
-    .dc26-query-listing__grid {
+@media (max-width: 1024px) {
+    .dc26-news-listing__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .dc26-news-listing__grid {
         grid-template-columns: 1fr;
     }
 }
 
-.dc26-query-listing__item {
-    display: flex;
+.dc26-news-listing__empty {
+    grid-column: 1 / -1;
 }
 
+/* Card */
 .dc26-news-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
+    min-height: 100%;
     background: var(--wp--preset--color--white, #fff);
     padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--60);
 }
@@ -38,7 +51,7 @@
 
 .dc26-news-card__title {
     font-size: var(--wp--preset--font-size--medium);
-    margin-top: 0;
+    margin: 0 0 var(--wp--preset--spacing--40);
 }
 
 .dc26-news-card__title a {
@@ -52,7 +65,7 @@
 
 .dc26-news-card__excerpt {
     font-size: var(--wp--preset--font-size--medium);
-    color: inherit;
+    margin: 0;
 }
 
 .dc26-news-card__bottom {
@@ -63,20 +76,20 @@
     display: block;
     font-size: var(--wp--preset--font-size--small);
     color: var(--wp--preset--color--gray, #666);
-    margin-bottom: var(--wp--preset--spacing--20, 0.5rem);
+    margin-bottom: var(--wp--preset--spacing--30);
 }
 
 .dc26-news-card__footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--wp--preset--spacing--30, 0.75rem);
+    gap: var(--wp--preset--spacing--30);
 }
 
 .dc26-news-card__categories {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--wp--preset--spacing--20, 0.5rem);
+    gap: var(--wp--preset--spacing--20);
 }
 
 .dc26-news-card__cat-pill {
@@ -90,9 +103,4 @@
     color: var(--wp--preset--color--primary);
     text-decoration: none;
     font-weight: 700;
-}
-
-.dc26-query-listing__empty {
-    grid-column: 1 / -1;
-    list-style: none;
 }
