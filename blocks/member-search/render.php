@@ -261,7 +261,7 @@ if (!function_exists('dc26_member_search_scalar')) {
                                 </div>
                                 <p class="dc26-member-card__footer">
                                     <a class="dc26-member-card__link" href="<?php echo esc_url(get_permalink()); ?>">
-                                        <?php echo esc_html__('→ Voir le profil ', 'dc26-oav'); ?>
+                                        <?php echo esc_html__('Voir le profil', 'dc26-oav'); ?>
                                     </a>
                                 </p>
                             </article>
