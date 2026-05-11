@@ -13,12 +13,12 @@
     ],
     "acf": {
         "mode": "preview",
-        "renderTemplate": "render.php"
+        "renderTemplate": "render.php",
+        "blockVersion": 3
     },
     "supports": {
         "align": true,
         "anchor": true,
-        "customClassName": true,
-        "jsx": true
+        "customClassName": true
     }
 }
