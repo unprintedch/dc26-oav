@@ -79,7 +79,7 @@ $query_args = array(
                             }
                             $post_date = get_the_date('j F Y', $post_id);
                             ?>
-                            <article class="dc26-doc-item">
+                            <article class="dc26-doc-item<?php echo !have_rows('documents', $post_id) ? ' dc26-doc-item--link' : ''; ?>">
                                 <?php if (!empty($terms) || $post_date) : ?>
                                 <div class="dc26-doc-item__meta">
                                     <?php foreach ($terms as $term) : ?>
@@ -135,7 +135,7 @@ $query_args = array(
                                     </div>
                                 <?php else : ?>
                                     <a class="dc26-doc-item__more" href="<?php echo esc_url($post_link); ?>">
-                                        <?php echo esc_html__('→ Lire la suite', 'dc26-oav'); ?>
+                                        <?php echo esc_html__('Lire la suite', 'dc26-oav'); ?>
                                     </a>
                                 <?php endif; ?>
                             </article>

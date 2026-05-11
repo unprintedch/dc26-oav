@@ -74,6 +74,29 @@
     transform: rotate(45deg);
 }
 
+/* WP Interactivity API accordion (data-wp-interactive) — le span icon est forcé visible
+   car WP core peut l'avoir caché autrement que notre ::after */
+[data-wp-interactive="core/accordion"] .wp-block-accordion-heading__toggle-icon {
+    display: block !important;
+    font-size: 0;
+    line-height: 0;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    background: currentColor;
+    -webkit-mask:
+        linear-gradient(black, black) center / 100% 2px no-repeat,
+        linear-gradient(black, black) center / 2px 100% no-repeat;
+    mask:
+        linear-gradient(black, black) center / 100% 2px no-repeat,
+        linear-gradient(black, black) center / 2px 100% no-repeat;
+    transition: transform 0.2s ease;
+}
+
+[data-wp-interactive="core/accordion"] .wp-block-accordion-heading__toggle[aria-expanded="true"] .wp-block-accordion-heading__toggle-icon {
+    transform: rotate(45deg);
+}
+
 .wp-block-accordion-heading__toggle,
 .wp-block-accordion-heading__toggle-title {
     text-decoration: none;
@@ -86,4 +109,75 @@
 .wp-block-accordion-panel {
     padding: 0.5rem 0 1rem;
     font-size: inherit;
+}
+
+/* ===================================
+   CORE DETAILS BLOCK (wp-block-details)
+   =================================== */
+
+.wp-block-details {
+    border-bottom: 1px solid var(--wp--preset--color--gray-light, #f4f4f4);
+}
+
+.wp-block-details summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.65rem 0;
+    cursor: pointer;
+    list-style: none;
+    -webkit-appearance: none;
+    appearance: none;
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+.wp-block-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.wp-block-details summary::marker {
+    display: none;
+    content: '';
+}
+
+.wp-block-details summary::after {
+    content: '';
+    display: block;
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    background: currentColor;
+    -webkit-mask:
+        linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+        linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+    mask:
+        linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+        linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+    transition: transform 0.2s ease;
+}
+
+.wp-block-details[open] > summary::after {
+    transform: rotate(45deg);
+}
+
+/* Variante is-style-big-details — remplace l'icône FA par CSS mask */
+.wp-block-details.is-style-big-details summary::after {
+    font: unset;
+    content: '';
+    width: 18px;
+    height: 18px;
+    background: var(--wp--preset--color--primary, #007582);
+    -webkit-mask:
+        linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+        linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+    mask:
+        linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+        linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+}
+
+.wp-block-details.is-style-big-details[open] summary::after {
+    transform: rotate(45deg);
 }

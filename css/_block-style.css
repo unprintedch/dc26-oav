@@ -1,3 +1,16 @@
+/* Reset list styles on query loop post template */
+ul.wp-block-post-template {
+    margin: 0 !important;
+    padding: 0 !important;
+    padding-inline-start: 0 !important;
+    list-style: none !important;
+}
+
+ul.wp-block-post-template > li.wp-block-post {
+    margin: 0;
+    padding: 0;
+}
+
 .wp-block-details.is-style-big-details {
   border-bottom: 1px solid #e5e7eb;
   font-weight: 500;

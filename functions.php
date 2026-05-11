@@ -7,6 +7,7 @@ require_once get_stylesheet_directory() . '/functions/dc26-member-api.php';
 require_once get_stylesheet_directory() . '/functions/dc26-examen-api.php';
 require_once get_stylesheet_directory() . '/functions/dc26-commissions.php';
 require_once get_stylesheet_directory() . '/functions/dc26-query-variations.php';
+require_once get_stylesheet_directory() . '/functions/dc26-oav-blocks.php';
 
 // Override the dc26 block category label from "DC26 Blocks" (parent) to "OAV".
 // Priority 20 > parent priority 10 so this runs after the category is added.

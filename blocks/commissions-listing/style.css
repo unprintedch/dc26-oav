@@ -17,7 +17,7 @@
 /* ── Catégorie ── */
 .dc26-commissions__category {
     display: grid;
-    gap: 0;
+    gap: 2rem;
 }
 
 .dc26-commissions__category-title {
@@ -131,19 +131,11 @@
 /* ── Liste membres ── */
 .dc26-commission__members-list {
     margin: 0.5rem 0 0.75rem 0;
-    padding: 0;
+    padding: 0 !important;
+    padding-left: 0 !important;
     list-style: none;
     display: grid;
     gap: 0.35rem;
-}
-.dc26-commission__members-list ul{
-    margin: 0;
-    padding: 0;
-    padding-left: 0rem !important;
-    list-style: none;
-} 
-.dc26-commission__members-list ul{
-    padding-left: 0rem !important;
 }
 
 

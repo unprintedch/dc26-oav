@@ -10,13 +10,27 @@
 }
 
 .facetwp-load-more {
-    border: none;
     display: block;
     margin: 0 auto;
+    padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
+    background: var(--wp--preset--color--primary, #007582);
+    color: var(--wp--preset--color--white, #fff);
+    border: none;
+    border-radius: 30px;
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.facetwp-load-more:hover {
+    background: var(--wp--preset--color--primary-hover, #045660);
 }
 
 .facetwp-facet {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     font-size: var(--facet-font-size);
 }
 

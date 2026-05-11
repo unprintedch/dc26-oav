@@ -245,6 +245,8 @@
 
           if (img) {
             img.src = result.data.photo_url;
+            img.removeAttribute('srcset');
+            img.removeAttribute('sizes');
           } else if (placeholder) {
             var newImg = document.createElement('img');
             newImg.src = result.data.photo_url;

@@ -22,8 +22,19 @@ fi
 REMOTE="$OAV_SSH_USER@$OAV_SSH_HOST:$OAV_SSH_PATH"
 EXCLUDE=(--exclude='.git' --exclude='node_modules' --exclude='.DS_Store' --exclude='.env')
 
+echo "Committing dc26-oav..."
+cd "$THEME_DIR"
+if ! git diff --quiet || ! git diff --cached --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+  read -r -p "Message de commit : " COMMIT_MSG
+  git add -A
+  git commit -m "${COMMIT_MSG:-deploy: $(date '+%Y-%m-%d %H:%M')}"
+  git push
+else
+  echo "Rien à commiter."
+fi
+
 echo "Building dc26-oav..."
-cd "$THEME_DIR" && npm run build
+npm run build
 
 echo "Deploying dc26-base..."
 rsync -avz --delete "${EXCLUDE[@]}" "$THEMES_DIR/dc26-base/" "$REMOTE/dc26-base/"
