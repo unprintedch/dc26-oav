@@ -87,10 +87,21 @@ if (!empty($selected_cats)) {
                 $event_time    = get_field('heure', $post_id) ?: '';
                 $event_adresse = get_field('adresse', $post_id) ?: '';
 
-                // Icône depuis la catégorie principale (term_id le plus bas), fallback calendrier
-                $icon_url = '';
-                if (!empty($cats)) {
-                    $icon_url = get_field('category_icon', 'category_' . $cats[0]->term_id) ?: '';
+                // Icône depuis la catégorie principale — exclut les cats utilitaires
+                $utility_slugs = ['actualite', 'non-classe', 'archives'];
+                $icon_url      = '';
+                $icon_cat      = null;
+                foreach ($cats as $cat) {
+                    if (!in_array($cat->slug, $utility_slugs, true)) {
+                        $icon_cat = $cat;
+                        break;
+                    }
+                }
+                if (!$icon_cat && !empty($cats)) {
+                    $icon_cat = $cats[0]; // fallback si toutes sont utilitaires
+                }
+                if ($icon_cat) {
+                    $icon_url = get_field('category_icon', 'category_' . $icon_cat->term_id) ?: '';
                 }
 
                 // Détection event (pour masquer la date de publication)
