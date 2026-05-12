@@ -161,4 +161,10 @@ h1, h2, h3, h4, h5, h6, blockquote, caption, figcaption, p {
     text-decoration: underline;
 }
 
+/* Kadence tabs — supprime le padding horizontal forcé */
+.kt-tabs-wrap .wp-block-kadence-tab {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 

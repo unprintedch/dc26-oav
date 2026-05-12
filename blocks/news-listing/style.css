@@ -24,8 +24,11 @@
 .dc26-news-listing__grid--cols-3 { grid-template-columns: repeat(3, 1fr); }
 .dc26-news-listing__grid--cols-4 { grid-template-columns: repeat(4, 1fr); }
 
-@media (max-width: 1024px) {
-    .dc26-news-listing__grid--cols-4 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 1200px) {
+    .dc26-news-listing__grid--cols-3,
+    .dc26-news-listing__grid--cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 600px) {
@@ -64,7 +67,8 @@
 .dc26-news-card__event-adresse {
     display: block;
     font-size: var(--wp--preset--font-size--small);
-    color: var(--wp--preset--color--gray, #666);
+    font-weight: 300;
+    color: var(--wp--preset--color--gray-dark );
 }
 
 /* Card */
