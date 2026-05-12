@@ -16,7 +16,7 @@
 .dc26-news-listing__grid {
     display: grid;
     column-gap: var(--wp--preset--spacing--50);
-    row-gap: var(--wp--preset--spacing--70);
+    row-gap: calc(var(--wp--preset--spacing--70) * 1.8);
     grid-template-columns: repeat(3, 1fr);
 }
 
