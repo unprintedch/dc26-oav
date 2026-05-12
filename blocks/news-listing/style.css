@@ -117,9 +117,21 @@
 }
 
 .dc26-news-card__cat-pill {
+    display: inline-block;
     font-size: var(--wp--preset--font-size--small);
+    font-weight: 400;
+    line-height: 1;
     text-decoration: none;
-    color: inherit;
+    color: var(--wp--preset--color--black);
+    background: var(--wp--preset--color--gray-light);
+    border: 1px solid var(--wp--preset--color--gray-light);
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.dc26-news-card__cat-pill:hover {
+    color: var(--wp--preset--color--primary-hover);
+    text-decoration: none;
 }
 
 /* Stretched link via ::before — libère ::after pour la flèche */
