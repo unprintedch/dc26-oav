@@ -82,8 +82,7 @@
 }
 
 .dc26-news-card__title {
-   
-    font-weight: 600;
+    font-size: var(--wp--preset--font-size--large);
     margin: 0;
 }
 
