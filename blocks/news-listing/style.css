@@ -16,7 +16,7 @@
 .dc26-news-listing__grid {
     display: grid;
     column-gap: var(--wp--preset--spacing--50);
-    row-gap: calc(var(--wp--preset--spacing--70) * 1.8);
+    row-gap: var(--wp--preset--spacing--80);
     grid-template-columns: repeat(3, 1fr);
 }
 
@@ -83,6 +83,7 @@
 
 .dc26-news-card__title {
     font-size: var(--wp--preset--font-size--medium);
+    font-weight: 600;
     margin: 0;
 }
 
