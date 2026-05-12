@@ -87,21 +87,12 @@ if (!empty($selected_cats)) {
                 $event_time    = get_field('heure', $post_id) ?: '';
                 $event_adresse = get_field('adresse', $post_id) ?: '';
 
-                // Icône depuis la catégorie principale — exclut les cats utilitaires
-                $utility_slugs = ['actualite', 'non-classe', 'archives'];
-                $icon_url      = '';
-                $icon_cat      = null;
-                foreach ($cats as $cat) {
-                    if (!in_array($cat->slug, $utility_slugs, true)) {
-                        $icon_cat = $cat;
-                        break;
-                    }
-                }
-                if (!$icon_cat && !empty($cats)) {
-                    $icon_cat = $cats[0]; // fallback si toutes sont utilitaires
-                }
-                if ($icon_cat) {
-                    $icon_url = get_field('category_icon', 'category_' . $icon_cat->term_id) ?: '';
+                // Icône — catégorie principale Yoast, fallback première cat par term_id
+                $icon_url        = '';
+                $primary_cat_id  = (int) get_post_meta($post_id, '_yoast_wpseo_primary_category', true);
+                $icon_term_id    = $primary_cat_id ?: (!empty($cats) ? $cats[0]->term_id : 0);
+                if ($icon_term_id) {
+                    $icon_url = get_field('category_icon', 'category_' . $icon_term_id) ?: '';
                 }
 
                 // Détection event (pour masquer la date de publication)
