@@ -74,16 +74,28 @@ if (!empty($selected_cats)) {
                 usort($cats, fn($a, $b) => $a->term_id - $b->term_id);
 
                 // Champs event ACF (affichés si renseignés, cachés sinon)
-                $event_date = '';
-                $event_time = '';
-                $date_raw   = get_field('date', $post_id, false);
+                $event_date    = '';
+                $event_time    = '';
+                $event_adresse = '';
+                $date_raw      = get_field('date', $post_id, false);
                 if ($date_raw) {
                     $date_obj = DateTime::createFromFormat('Ymd', $date_raw);
                     if ($date_obj) {
                         $event_date = date_i18n('j F Y', $date_obj->getTimestamp());
                     }
                 }
-                $event_time = get_field('heure', $post_id) ?: '';
+                $event_time    = get_field('heure', $post_id) ?: '';
+                $event_adresse = get_field('adresse', $post_id) ?: '';
+
+                // Détection event (pour masquer la date de publication)
+                $is_event = false;
+                $event_slugs = ['evenements', '5-a-7', 'formation'];
+                foreach ($cats as $cat) {
+                    if (in_array($cat->slug, $event_slugs, true)) {
+                        $is_event = true;
+                        break;
+                    }
+                }
                 ?>
                 <article class="dc26-news-card">
 
@@ -105,6 +117,10 @@ if (!empty($selected_cats)) {
                             </div>
                         </div>
 
+                        <?php if ($event_adresse) : ?>
+                            <span class="dc26-news-card__event-adresse"><?php echo esc_html($event_adresse); ?></span>
+                        <?php endif; ?>
+
                         <h2 class="dc26-news-card__title"><?php echo esc_html($title); ?></h2>
 
                         <?php if ($excerpt) : ?>
@@ -114,9 +130,11 @@ if (!empty($selected_cats)) {
                     </div>
 
                     <div class="dc26-news-card__bottom">
+                        <?php if (!$is_event) : ?>
                         <time class="dc26-news-card__date" datetime="<?php echo esc_attr($date_iso); ?>">
                             <?php echo esc_html($date_label); ?>
                         </time>
+                        <?php endif; ?>
                         <div class="dc26-news-card__footer">
                             <?php if (!empty($cats)) : ?>
                                 <div class="dc26-news-card__categories">

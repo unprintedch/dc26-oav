@@ -57,6 +57,12 @@
     flex-shrink: 0;
 }
 
+.dc26-news-card__event-adresse {
+    display: block;
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--gray, #666);
+}
+
 /* Card */
 .dc26-news-card {
     position: relative;

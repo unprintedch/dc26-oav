@@ -19,22 +19,6 @@ add_action('init', function (): void {
     ]);
 });
 
-// Classe body pour les posts événements (masque la date de publication côté CSS)
-add_filter('body_class', function (array $classes): array {
-    if (!is_singular('post')) {
-        return $classes;
-    }
-    $event_slugs = ['evenements', '5-a-7', 'formation'];
-    $cats = get_the_category();
-    foreach ($cats as $cat) {
-        if (in_array($cat->slug, $event_slugs, true)) {
-            $classes[] = 'is-event-post';
-            break;
-        }
-    }
-    return $classes;
-});
-
 // Endpoint .ics — ?dc26-ics=POST_ID
 add_action('template_redirect', function (): void {
     $post_id = filter_input(INPUT_GET, 'dc26-ics', FILTER_VALIDATE_INT);
