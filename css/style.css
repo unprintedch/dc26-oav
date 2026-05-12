@@ -147,4 +147,18 @@ h1, h2, h3, h4, h5, h6, blockquote, caption, figcaption, p {
     display: block;
 }
 
+.dc26-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 600;
+    color: var(--wp--preset--color--primary);
+    text-decoration: none;
+}
+
+.dc26-back-link:hover {
+    text-decoration: underline;
+}
+
 
