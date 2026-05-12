@@ -147,6 +147,10 @@ h1, h2, h3, h4, h5, h6, blockquote, caption, figcaption, p {
     display: block;
 }
 
+.is-event-post .wp-block-post-date {
+    display: none;
+}
+
 .dc26-back-link {
     display: inline-flex;
     align-items: center;
