@@ -25,7 +25,7 @@ if (!empty($is_preview)) : ?>
 endif;
 
 $selected_cats  = get_field('nl_categories') ?: [];
-$posts_per_page = (int) (get_field('nl_posts_per_page') ?: 12);
+$posts_per_page = (int) (get_field('nl_posts_per_page') ?: 24);
 $columns        = (int) (get_field('nl_columns') ?: 3);
 
 $query_args = [
@@ -44,9 +44,6 @@ if (!empty($selected_cats)) {
         'terms'    => array_map('intval', wp_list_pluck($selected_cats, 'term_id')),
     ]];
 }
-
-// Catégories qui déclenchent l'affichage de la date event
-$event_slugs = ['evenements', '5-a-7', 'formation'];
 ?>
 
 <div id="<?php echo esc_attr($block_id); ?>" class="<?php echo esc_attr($class_name); ?>">
@@ -70,66 +67,50 @@ $event_slugs = ['evenements', '5-a-7', 'formation'];
                 $title      = get_the_title();
                 $date_iso   = get_the_date('c');
                 $date_label = get_the_date('j F Y');
-                $excerpt    = get_the_excerpt();
+                $excerpt    = wp_trim_words(get_the_excerpt(), 16, '&hellip;');
 
                 // Catégories triées par term_id ASC (principale = plus petit ID)
                 $cats = get_the_category();
                 usort($cats, fn($a, $b) => $a->term_id - $b->term_id);
 
-                // Détection event
-                $is_event = false;
-                foreach ($cats as $cat) {
-                    if (in_array($cat->slug, $event_slugs, true)) {
-                        $is_event = true;
-                        break;
-                    }
-                }
-
-                // Icon depuis la catégorie principale (term_id le plus bas)
-                $icon_url = '';
-                if (!empty($cats)) {
-                    $icon_url = get_field('category_icon', 'category_' . $cats[0]->term_id) ?: '';
-                }
-
-                // Date event ACF
+                // Champs event ACF (affichés si renseignés, cachés sinon)
                 $event_date = '';
                 $event_time = '';
-                if ($is_event) {
-                    $date_raw = get_field('date', $post_id, false);
-                    if ($date_raw) {
-                        $date_obj   = DateTime::createFromFormat('Ymd', $date_raw);
+                $date_raw   = get_field('date', $post_id, false);
+                if ($date_raw) {
+                    $date_obj = DateTime::createFromFormat('Ymd', $date_raw);
+                    if ($date_obj) {
                         $event_date = date_i18n('j F Y', $date_obj->getTimestamp());
                     }
-                    $event_time = get_field('heure', $post_id) ?: '';
                 }
+                $event_time = get_field('heure', $post_id) ?: '';
                 ?>
                 <article class="dc26-news-card">
 
-                    <?php if ($is_event) : ?>
-                    <div class="dc26-news-card__event">
-                        <div class="dc26-news-card__event-meta">
-                            <?php if ($event_date) : ?>
-                                <span class="dc26-news-card__event-date"><?php echo esc_html($event_date); ?></span>
-                            <?php endif; ?>
-                            <?php if ($event_time) : ?>
-                                <span class="dc26-news-card__event-time"><?php echo esc_html($event_time); ?></span>
-                            <?php endif; ?>
-                        </div>
-                        <?php if ($icon_url) : ?>
-                            <div class="dc26-news-card__icon">
-                                <img src="<?php echo esc_url($icon_url); ?>" alt="" aria-hidden="true" width="30" height="30">
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    <?php endif; ?>
-
                     <div class="dc26-news-card__top">
-                        <h2 class="dc26-news-card__title">
-                            <a href="<?php echo esc_url($permalink); ?>"><?php echo esc_html($title); ?></a>
-                        </h2>
+
+                        <div class="dc26-news-card__event">
+                            <div class="dc26-news-card__event-meta">
+                                <?php if ($event_date) : ?>
+                                    <span class="dc26-news-card__event-date"><?php echo esc_html($event_date); ?></span>
+                                <?php endif; ?>
+                                <?php if ($event_time) : ?>
+                                    <span class="dc26-news-card__event-time"><?php echo esc_html($event_time); ?></span>
+                                <?php endif; ?>
+                            </div>
+                            <div class="dc26-news-card__icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="30" height="30" fill="currentColor">
+                                    <path d="M208 64C216.8 64 224 71.2 224 80L224 128L416 128L416 80C416 71.2 423.2 64 432 64C440.8 64 448 71.2 448 80L448 128L480 128C515.3 128 544 156.7 544 192L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 192C96 156.7 124.7 128 160 128L192 128L192 80C192 71.2 199.2 64 208 64zM480 160L160 160C142.3 160 128 174.3 128 192L128 224L512 224L512 192C512 174.3 497.7 160 480 160zM512 256L128 256L128 480C128 497.7 142.3 512 160 512L480 512C497.7 512 512 497.7 512 480L512 256z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <h2 class="dc26-news-card__title"><?php echo esc_html($title); ?></h2>
+
                         <?php if ($excerpt) : ?>
                             <p class="dc26-news-card__excerpt"><?php echo esc_html($excerpt); ?></p>
                         <?php endif; ?>
+
                     </div>
 
                     <div class="dc26-news-card__bottom">
