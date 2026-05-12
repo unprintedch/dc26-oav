@@ -131,7 +131,6 @@ if (!empty($selected_cats)) {
                             <a href="<?php echo esc_url($permalink); ?>"
                                class="dc26-news-card__readmore"
                                aria-label="<?php echo esc_attr(sprintf(__('Lire : %s', 'dc26-oav'), $title)); ?>">
-                                &rarr;
                             </a>
                         </div>
                     </div>
