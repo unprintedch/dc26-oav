@@ -370,7 +370,6 @@
 		},
 		"spacing": {
 			"margin": {
-				"bottom": "var(--wp--preset--spacing--50)",
 				"top": "0"
 			},
 			"padding": {
