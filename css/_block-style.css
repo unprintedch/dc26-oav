@@ -200,22 +200,23 @@ ul.wp-block-page-list.is-style-sitemap > li > a.wp-block-pages-list__item__link:
     opacity: 0.75;
 }
 
-/* Sous-liste (pages enfants) */
+/* Sous-liste (pages enfants) — reset padding WP par défaut */
 ul.wp-block-page-list.is-style-sitemap ul.wp-block-page-list {
     list-style: none;
-    padding: 0;
+    padding: 0 !important;
+    padding-inline-start: 0 !important;
     margin: 0;
 }
 
 /* Liens enfants */
 ul.wp-block-page-list.is-style-sitemap ul.wp-block-page-list a.wp-block-pages-list__item__link {
     display: block;
-    font-size: var(--wp--preset--font-size--small, 0.875rem);
+    font-size: 0.8rem;
     font-weight: 400;
     color: currentColor;
-    opacity: 0.8;
+    opacity: 0.75;
     text-decoration: none;
-    padding: 0.2rem 0;
+    padding: 0.15rem 0;
     transition: opacity 150ms ease;
 }
 
