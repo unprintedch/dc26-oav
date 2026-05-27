@@ -200,11 +200,11 @@ ul.wp-block-page-list.is-style-sitemap > li > a.wp-block-pages-list__item__link:
     opacity: 0.75;
 }
 
-/* Sous-liste (pages enfants) — reset padding WP par défaut */
+/* Sous-liste (pages enfants) — retrait réduit */
 ul.wp-block-page-list.is-style-sitemap ul.wp-block-page-list {
     list-style: none;
     padding: 0 !important;
-    padding-inline-start: 0 !important;
+    padding-inline-start: 0.75rem !important;
     margin: 0;
 }
 
