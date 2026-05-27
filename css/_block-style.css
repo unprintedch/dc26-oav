@@ -203,7 +203,9 @@ ul.wp-block-page-list.is-style-sitemap > li > a.wp-block-pages-list__item__link:
 /* Sous-liste (pages enfants) — retrait réduit */
 ul.wp-block-page-list.is-style-sitemap ul.wp-block-page-list {
     list-style: none;
-    padding: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-inline-end: 0 !important;
     padding-inline-start: 0.75rem !important;
     margin: 0;
 }
