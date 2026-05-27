@@ -35,7 +35,7 @@ li.wp-block-post .wp-block-post-terms a {
 }
 
 .wp-block-details.is-style-big-details {
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid currentColor;
   font-weight: 500;
 }
 
