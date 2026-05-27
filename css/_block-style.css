@@ -139,3 +139,83 @@ ul.is-style-check li::before {
 .wp-block-quote footer {
   font-style: normal;
 }
+
+/* ===================================
+   PAGE LIST — STYLE SITEMAP
+   =================================== */
+
+/* Conteneur principal : grille multi-colonnes */
+ul.wp-block-page-list.is-style-sitemap {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 3;
+    column-gap: var(--wp--preset--spacing--50, 2rem);
+}
+
+/* Évite qu'un groupe parent/enfants soit coupé entre 2 colonnes */
+ul.wp-block-page-list.is-style-sitemap > li.wp-block-pages-list__item {
+    break-inside: avoid;
+    margin-bottom: var(--wp--preset--spacing--40, 1.5rem);
+}
+
+/* Tous les li : pas de puce */
+ul.wp-block-page-list.is-style-sitemap li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Lien de premier niveau */
+ul.wp-block-page-list.is-style-sitemap > li > a.wp-block-pages-list__item__link {
+    display: block;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: var(--wp--preset--font-size--x-small, 0.75rem);
+    letter-spacing: 0.07em;
+    color: var(--wp--preset--color--primary);
+    text-decoration: none;
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.35rem;
+    border-bottom: 1px solid var(--wp--preset--color--primary);
+}
+
+ul.wp-block-page-list.is-style-sitemap > li > a.wp-block-pages-list__item__link:hover {
+    color: var(--wp--preset--color--primary-hover, currentColor);
+}
+
+/* Sous-liste (pages enfants) */
+ul.wp-block-page-list.is-style-sitemap ul.wp-block-page-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Liens enfants */
+ul.wp-block-page-list.is-style-sitemap ul.wp-block-page-list a.wp-block-pages-list__item__link {
+    display: block;
+    font-size: var(--wp--preset--font-size--small, 0.875rem);
+    font-weight: 400;
+    color: var(--wp--preset--color--foreground, inherit);
+    text-decoration: none;
+    padding: 0.15rem 0;
+    transition: color 150ms ease, padding-left 150ms ease;
+}
+
+ul.wp-block-page-list.is-style-sitemap ul.wp-block-page-list a.wp-block-pages-list__item__link:hover {
+    color: var(--wp--preset--color--primary);
+    padding-left: 0.25rem;
+}
+
+/* Responsive : 2 colonnes sur tablette, 1 sur mobile */
+@media (max-width: 768px) {
+    ul.wp-block-page-list.is-style-sitemap {
+        columns: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    ul.wp-block-page-list.is-style-sitemap {
+        columns: 1;
+    }
+}

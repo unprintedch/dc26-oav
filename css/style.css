@@ -1,5 +1,5 @@
 
-@import "dc-tailwind.css";
+/* OAV overrides — parent (dc26-base) CSS already loaded via ['dc26-front-styles'] dependency */
 @import "_header.css";
 @import "_button-variants.css";
 @import "_navigation.css";
@@ -8,19 +8,10 @@
 @import "_block-style.css";
 @import "_block-style_accordion.css";
 @import "accordion-tabs.css";
-@import "_gravityform.css";
-@import "_wpml.css";
-@import "_offcanvas.css";
-
-/* @import "_woocommerce.css";
-@import "_currency.css";
-*/
-
-/* Les largeurs full et wide sont gérées nativement par WordPress avec theme.json */
-/* Pas besoin de règles CSS supplémentaires */
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: var(--site-header-height, 80px);
 }
 
 a {
