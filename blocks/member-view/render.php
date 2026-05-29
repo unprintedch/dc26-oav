@@ -15,7 +15,7 @@ if ( ! empty( $block['anchor'] ) ) {
     $anchor = 'id="' . esc_attr( $block['anchor'] ) . '" ';
 }
 
-$class_name = 'dc26-member-view';
+$class_name = 'dc26-member-view has-global-padding is-layout-constrained wp-block-group-is-layout-constrained';
 if ( ! empty( $block['className'] ) ) {
     $class_name .= ' ' . $block['className'];
 }
@@ -60,9 +60,9 @@ if ( is_user_logged_in() ) {
 <div <?php echo $anchor; ?>class="<?php echo esc_attr( $class_name ); ?>">
 
     <!-- Hero : Photo + Identity -->
-    <div class="dc26-member-view__hero">
+    <div class="dc26-member-view__hero wp-block-columns alignwide is-layout-flex wp-block-columns-is-layout-flex" style="margin-top:var(--wp--preset--spacing--0);margin-bottom:var(--wp--preset--spacing--0)">
 
-        <div class="dc26-member-view__photo">
+        <div class="dc26-member-view__photo wp-block-column is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:40%">
             <?php if ( $d['photo_id'] ) : ?>
                 <?php echo wp_get_attachment_image( $d['photo_id'], 'medium', false, [
                     'class' => 'dc26-member-view__img',
@@ -76,7 +76,7 @@ if ( is_user_logged_in() ) {
             <?php endif; ?>
         </div>
 
-        <div class="dc26-member-view__info">
+        <div class="dc26-member-view__info wp-block-column is-layout-flow wp-block-column-is-layout-flow">
             <div class="dc26-member-view__name-row">
                 <h1 class="dc26-member-view__name"><?php echo esc_html( $d['full_name'] ); ?></h1>
                 <?php if ( $is_own_profile ) : ?>
@@ -144,58 +144,74 @@ if ( is_user_logged_in() ) {
         </div>
     </div>
 
-    <?php if ( ! empty( $d['specialities_fsa'] ) || ! empty( $d['specialities'] ) ) : ?>
-    <div class="dc26-member-view__section">
-        <?php if ( ! empty( $d['specialities_fsa'] ) ) : ?>
-            <div class="dc26-member-view__tag-group">
-                <h3><?php echo esc_html__( 'Spécialisations FSA', 'dc26-oav' ); ?></h3>
-                <ul class="dc26-member-view__tags">
-                    <?php foreach ( $d['specialities_fsa'] as $term ) : ?>
-                        <li><a class="dc26-member-view__tag" href="<?php echo esc_url( $annuaire_url ); ?>?fwp_spcialistes_fsa=<?php echo esc_attr( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        <?php endif; ?>
+    <div class="dc26-member-view__sections-wrap alignfull wp-block-group has-gray-light-background-color has-background has-global-padding is-layout-constrained wp-block-group-is-layout-constrained" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)">
 
-        <?php if ( ! empty( $d['specialities'] ) ) : ?>
-            <div class="dc26-member-view__tag-group">
-                <h3><?php echo esc_html__( "Domaines d'activités", 'dc26-oav' ); ?></h3>
-                <ul class="dc26-member-view__tags">
-                    <?php foreach ( $d['specialities'] as $term ) : ?>
-                        <li><a class="dc26-member-view__tag" href="<?php echo esc_url( $annuaire_url ); ?>?fwp_specialite=<?php echo esc_attr( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        <?php endif; ?>
+    <?php if ( ! empty( $d['specialities_fsa'] ) ) : ?>
+    <div class="dc26-member-view__section wp-block-columns alignwide is-layout-flex wp-block-columns-is-layout-flex">
+        <div class="dc26-member-view__section-label wp-block-column is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:40%">
+            <h3><?php echo esc_html__( 'Spécialisations FSA', 'dc26-oav' ); ?></h3>
+        </div>
+        <div class="dc26-member-view__section-content wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+            <ul class="dc26-member-view__tags">
+                <?php foreach ( $d['specialities_fsa'] as $term ) : ?>
+                    <li><span class="dc26-member-view__tag"><?php echo esc_html( $term->name ); ?></span></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <?php if ( ! empty( $d['specialities'] ) ) : ?>
+    <div class="dc26-member-view__section wp-block-columns alignwide is-layout-flex wp-block-columns-is-layout-flex">
+        <div class="dc26-member-view__section-label wp-block-column is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:40%">
+            <h3><?php echo esc_html__( "Domaines d'activités", 'dc26-oav' ); ?></h3>
+        </div>
+        <div class="dc26-member-view__section-content wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+            <ul class="dc26-member-view__tags">
+                <?php foreach ( $d['specialities'] as $term ) : ?>
+                    <li><span class="dc26-member-view__tag"><?php echo esc_html( $term->name ); ?></span></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
     </div>
     <?php endif; ?>
 
     <?php if ( ! empty( $d['languages'] ) ) : ?>
-    <div class="dc26-member-view__section">
-        <h3><?php echo esc_html__( 'Langues', 'dc26-oav' ); ?></h3>
-        <ul class="dc26-member-view__tags">
-            <?php foreach ( $d['languages'] as $term ) : ?>
-                <li><a class="dc26-member-view__tag" href="<?php echo esc_url( $annuaire_url ); ?>?fwp_langue=<?php echo esc_attr( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></a></li>
-            <?php endforeach; ?>
-        </ul>
+    <div class="dc26-member-view__section wp-block-columns alignwide is-layout-flex wp-block-columns-is-layout-flex">
+        <div class="dc26-member-view__section-label wp-block-column is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:40%">
+            <h3><?php echo esc_html__( 'Langues', 'dc26-oav' ); ?></h3>
+        </div>
+        <div class="dc26-member-view__section-content wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+            <ul class="dc26-member-view__tags">
+                <?php foreach ( $d['languages'] as $term ) : ?>
+                    <li><span class="dc26-member-view__tag"><?php echo esc_html( $term->name ); ?></span></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
     </div>
     <?php endif; ?>
 
     <?php if ( ! empty( $d['commissions'] ) ) : ?>
-    <div class="dc26-member-view__section">
-        <h3><?php echo esc_html__( 'Commissions', 'dc26-oav' ); ?></h3>
-        <ul class="dc26-member-view__commissions">
-            <?php foreach ( $d['commissions'] as $commission ) : ?>
-                <li>
-                    <?php echo esc_html( $commission['name'] ); ?>
-                    <?php if ( $commission['president'] ) : ?>
-                        <em>&ndash; <?php echo esc_html__( 'président(e)', 'dc26-oav' ); ?></em>
-                    <?php endif; ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+    <div class="dc26-member-view__section wp-block-columns alignwide is-layout-flex wp-block-columns-is-layout-flex">
+        <div class="dc26-member-view__section-label wp-block-column is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:40%">
+            <h3><?php echo esc_html__( 'Commissions', 'dc26-oav' ); ?></h3>
+        </div>
+        <div class="dc26-member-view__section-content wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+            <ul class="dc26-member-view__commissions">
+                <?php foreach ( $d['commissions'] as $commission ) : ?>
+                    <li>
+                        <?php echo esc_html( $commission['name'] ); ?>
+                        <?php if ( $commission['president'] ) : ?>
+                            <em>&ndash; <?php echo esc_html__( 'président(e)', 'dc26-oav' ); ?></em>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
     </div>
     <?php endif; ?>
+
+    </div><!-- /.dc26-member-view__sections-wrap -->
 
     <div class="dc26-member-view__back">
         <a href="<?php echo esc_url( $annuaire_url ); ?>">&larr; <?php echo esc_html__( 'Retour à l\'annuaire', 'dc26-oav' ); ?></a>
