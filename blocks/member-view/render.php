@@ -91,9 +91,9 @@ if ( is_user_logged_in() ) {
                 <p class="dc26-member-view__status"><?php echo esc_html( $d['status'] ); ?></p>
             <?php endif; ?>
 
-            <?php if ( $d['titre'] ) : ?>
+            <!-- <?php if ( $d['titre'] ) : ?>
                 <p class="dc26-member-view__titre"><?php echo esc_html( $d['titre'] ); ?></p>
-            <?php endif; ?>
+            <?php endif; ?> -->
 
             <?php if ( $d['etude_name'] && $annuaire_url ) : ?>
                 <p class="dc26-member-view__etude">
@@ -112,34 +112,34 @@ if ( is_user_logged_in() ) {
 
             <div class="dc26-member-view__contact">
                 <?php if ( $d['phone'] ) : ?>
-                    <a class="dc26-member-view__pill" href="tel:<?php echo esc_attr( $d['phone'] ); ?>">
-                        <img src="<?php echo esc_url( $icon_base . 'phone.svg' ); ?>" alt="" width="16" height="16">
+                    <a class="dc26-member-card__meta" href="tel:<?php echo esc_attr( $d['phone'] ); ?>">
+                        <img src="<?php echo esc_url( $icon_base . 'phone.svg' ); ?>" alt="" style="width:0.8em;height:0.8em;vertical-align:middle;margin-right:0.35rem;">
                         <?php echo esc_html( $d['phone'] ); ?>
                     </a>
                 <?php endif; ?>
                 <?php if ( $d['email'] ) : ?>
-                    <div class="dc26-member-view__pill-group">
-                        <a class="dc26-member-view__pill" href="mailto:<?php echo esc_attr( $d['email'] ); ?>">
-                            <img src="<?php echo esc_url( $icon_base . 'envelope.svg' ); ?>" alt="" width="16" height="16">
-                            <?php echo esc_html( $d['email'] ); ?>
+                    <span class="dc26-meta-with-copy">
+                        <a class="dc26-member-card__meta" href="mailto:<?php echo esc_attr( $d['email'] ); ?>">
+                            <img src="<?php echo esc_url( $icon_base . 'envelope.svg' ); ?>" alt="" style="width:0.8em;height:0.8em;vertical-align:middle;margin-right:0.35rem;">
+                            <?php echo esc_html__( 'Email', 'dc26-oav' ); ?>
                         </a>
                         <button type="button" class="dc26-copy-btn" data-email="<?php echo esc_attr( $d['email'] ); ?>" aria-label="<?php esc_attr_e( 'Copier l\'adresse email', 'dc26-oav' ); ?>">
                             <img class="dc26-copy-btn__icon-copy" src="<?php echo esc_url( $icon_base . 'copy-light-full.svg' ); ?>" alt="" width="14" height="14" aria-hidden="true">
                             <svg class="dc26-copy-btn__icon-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
                         </button>
-                    </div>
-                <?php endif; ?>
-                <?php if ( $d['homepage_url'] ) : ?>
-                    <a class="dc26-member-view__pill" href="<?php echo esc_url( $d['homepage_url'] ); ?>" target="_blank" rel="noopener noreferrer">
-                        <img src="<?php echo esc_url( $icon_base . 'link.svg' ); ?>" alt="" width="16" height="16">
-                        <?php echo esc_html( $d['homepage_label'] ?: $d['homepage_url'] ); ?>
-                    </a>
-                <?php endif; ?>
-                <?php if ( $d['fax'] ) : ?>
-                    <span class="dc26-member-view__pill">
-                        <?php echo esc_html__( 'Fax :', 'dc26-oav' ); ?> <?php echo esc_html( $d['fax'] ); ?>
                     </span>
                 <?php endif; ?>
+                <?php if ( $d['homepage_url'] ) : ?>
+                    <a class="dc26-member-card__meta" href="<?php echo esc_url( $d['homepage_url'] ); ?>" target="_blank" rel="noopener noreferrer">
+                        <img src="<?php echo esc_url( $icon_base . 'link.svg' ); ?>" alt="" style="width:0.8em;height:0.8em;vertical-align:middle;margin-right:0.35rem;">
+                        <?php echo esc_html__( 'Site', 'dc26-oav' ); ?>
+                    </a>
+                <?php endif; ?>
+                <!-- <?php if ( $d['fax'] ) : ?>
+                    <span class="dc26-member-card__meta">
+                        <?php echo esc_html__( 'Fax :', 'dc26-oav' ); ?> <?php echo esc_html( $d['fax'] ); ?>
+                    </span>
+                <?php endif; ?> -->
             </div>
         </div>
     </div>

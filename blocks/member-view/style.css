@@ -53,11 +53,7 @@
 /* ── Info column ── */
 
 .dc26-member-view__name-row {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0.75rem 1.5rem;
-    margin-bottom: 0.15rem;
+    margin-bottom: 0;
 }
 
 .dc26-member-view__name {
@@ -92,19 +88,19 @@
 }
 
 .dc26-member-view__status {
-    margin: 0 0 0.25rem;
+    margin: 0;
     font-weight: 300;
     font-size: 1.1rem;
     color: var(--wp--preset--color--gray-text, #808080);
 }
 
 .dc26-member-view__titre {
-    margin: 0 0 0.25rem;
+    margin: 0;
     font-size: 1rem;
 }
 
 .dc26-member-view__etude {
-    margin: 0.75rem 0 0;
+    margin: 0.5rem 0 0;
     font-size: 1.1rem;
     font-weight: 500;
 }
@@ -128,31 +124,14 @@
 /* ── Contact pills ── */
 
 .dc26-member-view__contact {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
     margin-top: 1rem;
 }
 
-.dc26-member-view__pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--wp--preset--color--gray-light, #f4f4f4);
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
+.dc26-member-view .dc26-member-card__meta {
+    display: block;
     text-decoration: none;
+    padding: 0.35rem 0;
     color: inherit;
-    font-size: 0.95rem;
-    transition: background-color 0.15s ease;
-}
-
-.dc26-member-view__pill:hover {
-    background: #e8e8e8;
-}
-
-.dc26-member-view__pill img {
-    flex-shrink: 0;
 }
 
 /* ══════════════════════════════════════════════
@@ -169,7 +148,6 @@
 
 .dc26-member-view__section-label h3 {
     margin: 0;
-    font-size: var(--wp--preset--font-size--small, 0.875rem);
     color: var(--wp--preset--color--primary, #007582);
     line-height: 1.3;
 }
