@@ -87,20 +87,19 @@
     flex-shrink: 0;
 }
 
-.dc26-member-view__status {
+.dc26-member-view__info > .dc26-member-view__status {
     margin: 0;
     font-weight: 300;
     font-size: 1.1rem;
-    color: var(--wp--preset--color--gray-text, #808080);
 }
 
-.dc26-member-view__titre {
+.dc26-member-view__info > .dc26-member-view__titre {
     margin: 0;
     font-size: 1rem;
 }
 
-.dc26-member-view__etude {
-    margin: 0.5rem 0 0;
+.dc26-member-view__info > .dc26-member-view__etude {
+    margin: var(--wp--preset--spacing--large, 1.25rem) 0 0 0;
     font-size: 1.1rem;
     font-weight: 500;
 }
@@ -116,7 +115,6 @@
 
 .dc26-member-view__address {
     font-style: normal;
-    margin: 1rem 0;
     line-height: 1.7;
     font-size: 1rem;
 }

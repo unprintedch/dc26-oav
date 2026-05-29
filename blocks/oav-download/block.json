@@ -1,0 +1,17 @@
+{
+  "name": "dc26/oav-download",
+  "title": "OAV Download",
+  "description": "Bloc de téléchargement avec engagement — cases à cocher requises avant téléchargement.",
+  "category": "dc26",
+  "icon": "download",
+  "keywords": ["download", "téléchargement", "engagement", "fichier"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php",
+    "blockVersion": 3
+  },
+  "supports": {
+    "anchor": true,
+    "customClassName": true
+  }
+}

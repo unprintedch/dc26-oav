@@ -76,7 +76,7 @@ if ( is_user_logged_in() ) {
             <?php endif; ?>
         </div>
 
-        <div class="dc26-member-view__info wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+        <div class="dc26-member-view__info wp-block-column">
             <div class="dc26-member-view__name-row">
                 <h1 class="dc26-member-view__name"><?php echo esc_html( $d['full_name'] ); ?></h1>
                 <?php if ( $is_own_profile ) : ?>
@@ -88,7 +88,7 @@ if ( is_user_logged_in() ) {
             </div>
 
             <?php if ( $d['status'] ) : ?>
-                <p class="dc26-member-view__status"><?php echo esc_html( $d['status'] ); ?></p>
+                <div class="dc26-member-view__status"><?php echo esc_html( $d['status'] ); ?></div>
             <?php endif; ?>
 
             <!-- <?php if ( $d['titre'] ) : ?>
