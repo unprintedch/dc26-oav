@@ -5,6 +5,7 @@
   "category": "dc26",
   "icon": "download",
   "keywords": ["download", "téléchargement", "engagement", "fichier"],
+  "script": "file:./view.js",
   "acf": {
     "mode": "preview",
     "renderTemplate": "render.php",
