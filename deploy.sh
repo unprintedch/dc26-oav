@@ -20,8 +20,22 @@ fi
 : "${OAV_SSH_PATH:?OAV_SSH_PATH not set in .env}"
 
 REMOTE="$OAV_SSH_USER@$OAV_SSH_HOST:$OAV_SSH_PATH"
-EXCLUDE=(--exclude='.git' --exclude='node_modules' --exclude='.DS_Store' --exclude='.env')
+SSH="$OAV_SSH_USER@$OAV_SSH_HOST"
+WP_ROOT="sites/dev.oav.ch"
+EXCLUDE=(--exclude='.git' --exclude='node_modules' --exclude='.DS_Store' --exclude='.env' --exclude='_backup-templates')
 
+# ── 1. Pull server → local (patterns, parts, templates) ────────────────────
+echo "Pulling server files to local (parts, templates, patterns)..."
+rsync -avz --ignore-existing \
+  "$SSH:$OAV_SSH_PATH/dc26-oav/parts/" "$THEME_DIR/parts/"
+rsync -avz --ignore-existing \
+  "$SSH:$OAV_SSH_PATH/dc26-oav/templates/" "$THEME_DIR/templates/"
+rsync -avz --ignore-existing \
+  "$SSH:$OAV_SSH_PATH/dc26-oav/patterns/" "$THEME_DIR/patterns/" 2>/dev/null || true
+rsync -avz --ignore-existing \
+  "$SSH:$OAV_SSH_PATH/dc26-oav/assets/fonts/" "$THEME_DIR/assets/fonts/" 2>/dev/null || true
+
+# ── 2. Commit ───────────────────────────────────────────────────────────────
 echo "Committing dc26-oav..."
 cd "$THEME_DIR"
 if ! git diff --quiet || ! git diff --cached --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
@@ -33,13 +47,15 @@ else
   echo "Rien à commiter."
 fi
 
+# ── 3. Build ────────────────────────────────────────────────────────────────
 echo "Building dc26-oav..."
 npm run build
 
+# ── 4. Deploy (sans --delete) ───────────────────────────────────────────────
 echo "Deploying dc26-base..."
-rsync -avz --delete "${EXCLUDE[@]}" "$THEMES_DIR/dc26-base/" "$REMOTE/dc26-base/"
+rsync -avz "${EXCLUDE[@]}" "$THEMES_DIR/dc26-base/" "$REMOTE/dc26-base/"
 
 echo "Deploying dc26-oav..."
-rsync -avz --delete "${EXCLUDE[@]}" "$THEME_DIR/" "$REMOTE/dc26-oav/"
+rsync -avz "${EXCLUDE[@]}" "$THEME_DIR/" "$REMOTE/dc26-oav/"
 
 echo "Done — https://dev.oav.ch"
