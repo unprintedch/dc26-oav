@@ -2,6 +2,7 @@
 /* OAV overrides — parent (dc26-base) CSS already loaded via ['dc26-front-styles'] dependency */
 @import "_header.css";
 @import "_button-variants.css";
+@import "_navigation.css";
 @import "_header-sticky.css";
 @import "facet-reset.css";
 @import "_block-style.css";
