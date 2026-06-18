@@ -1,6 +1,0 @@
-/* Undo base's forced height/overflow on submenus in mobile overlay —
-   let WP Navigation accordion toggle work */
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container {
-    height: revert !important;
-    overflow: revert !important;
-}
