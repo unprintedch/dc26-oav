@@ -1,9 +1,6 @@
-/* Undo base's forced sizing on submenus inside mobile overlay —
-   let WP Navigation block handle accordion toggle natively */
+/* Undo base's forced height/overflow on submenus in mobile overlay —
+   let WP Navigation accordion toggle work */
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container {
     height: revert !important;
     overflow: revert !important;
-    width: revert !important;
-    opacity: revert !important;
-    visibility: revert !important;
 }
