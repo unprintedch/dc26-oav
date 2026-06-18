@@ -34,32 +34,15 @@ li.wp-block-post .wp-block-post-terms a {
     z-index: 1;
 }
 
+/* Override parent border color */
 .wp-block-details.is-style-big-details {
-  border-bottom: 1px solid currentColor;
-  font-weight: 500;
+  border-bottom-color: currentColor;
 }
 
-
-
-
-.wp-block-details.is-style-big-details summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  font-size: 35px;
-  font-weight: 600;
-  padding-bottom: 1.75rem;
-}
-
-.wp-block-details.is-style-big-details summary::marker {
-  display: none;
-}
-
+/* Override parent icon: Font Awesome au lieu de SVG mask */
 .wp-block-details.is-style-big-details summary::after {
   color: var(--wp--preset--color--primary);
   transition: all 300ms;
-  transform: rotate(180deg);
   font-size: 1.5rem;
   content: "\f078";
   font: var(--fa-font-light);
@@ -70,6 +53,7 @@ li.wp-block-post .wp-block-post-terms a {
   transform: rotate(0deg);
 }
 
+/* Variante small */
 div.is-list-small ul.is-style-check li {
   font-size: 15px;
   line-height: 1.375;
@@ -77,15 +61,13 @@ div.is-list-small ul.is-style-check li {
   padding-bottom: 0;
 }
 
+/* Override parent check list: Font Awesome, sizing différent */
 ul.is-style-check {
-  list-style: none;
   font-size: 18px;
   font-weight: 500;
 }
 
 ul.is-style-check li {
-  display: flex;
-  align-items: flex-start;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
   padding-top: 0.5rem;
@@ -100,41 +82,6 @@ ul.is-style-check li::before {
   font: var(--fa-font-regular);
 }
 
-.is-style-badge-title {
-  border: 2px solid black;
-  border-radius: 9999px;
-  aspect-ratio: 1 / 1;
-  max-width: 160px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 2rem;
-  text-transform: uppercase;
-}
-
-.wp-block-search__inside-wrapper{
-  padding: 6px 12px 7px 16px;
-}
-
-.wp-block-search__input {
-  color: var(--wp--preset--color--primary, #8e8e8e);
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.wp-block-search__input::placeholder {
-  color: var(--wp--preset--color--primary, #8e8e8e);
-  font-size: 18px;
-  font-weight: 400;
-  opacity: 0.8;
-}
-
-.wp-block-search .wp-block-search__button.wp-element-button {
-  padding: 0;
-}
-
 .wp-block-quote cite,
 .wp-block-quote footer {
   font-style: normal;
@@ -144,14 +91,12 @@ ul.is-style-check li::before {
    PAGE LIST — STYLE SITEMAP
    =================================== */
 
-/* Tous les li : pas de puce */
 ul.wp-block-page-list.is-style-sitemap li {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-/* Desktop : flex — 1 colonne par page parent, chaque li s'étire également */
 @media (min-width: 769px) {
     ul.wp-block-page-list.is-style-sitemap {
         display: flex;
@@ -169,7 +114,6 @@ ul.wp-block-page-list.is-style-sitemap li {
     }
 }
 
-/* Mobile : empilement vertical */
 @media (max-width: 768px) {
     ul.wp-block-page-list.is-style-sitemap {
         display: flex;
@@ -181,7 +125,6 @@ ul.wp-block-page-list.is-style-sitemap li {
     }
 }
 
-/* Lien de premier niveau — titre de colonne */
 ul.wp-block-page-list.is-style-sitemap > li > a.wp-block-pages-list__item__link {
     display: block;
     font-weight: 700;
@@ -200,7 +143,6 @@ ul.wp-block-page-list.is-style-sitemap > li > a.wp-block-pages-list__item__link:
     opacity: 0.75;
 }
 
-/* Sous-liste (pages enfants) — classe réelle : wp-block-navigation__submenu-container */
 ul.wp-block-page-list.is-style-sitemap ul.wp-block-navigation__submenu-container {
     list-style: none;
     padding: 0 !important;
@@ -208,7 +150,6 @@ ul.wp-block-page-list.is-style-sitemap ul.wp-block-navigation__submenu-container
     margin: 0;
 }
 
-/* Liens enfants */
 ul.wp-block-page-list.is-style-sitemap ul.wp-block-navigation__submenu-container a.wp-block-pages-list__item__link {
     display: block;
     font-size: 0.78rem;

@@ -1,71 +1,9 @@
-.is-style-dc26-tabs-vertical {
-    --dc26-tabs-nav-width: 275px;
-    --dc26-tabs-gap: 8rem;
-    position: relative;
-    display: block;
-    padding-left: calc(var(--dc26-tabs-nav-width) + var(--dc26-tabs-gap));
-}
-
-.is-style-dc26-tabs-vertical > .wp-block-accordion-item {
-    display: block;
-    border-bottom: 0;
-    padding: 0;
-}
-
-.is-style-dc26-tabs-vertical > .wp-block-accordion-item > .wp-block-accordion-heading {
-    margin: 0 0 0.75rem;
-    position: relative;
-    left: calc(-1 * (var(--dc26-tabs-nav-width) + var(--dc26-tabs-gap)));
-    width: var(--dc26-tabs-nav-width);
-}
-
+/* OAV override — tab buttons bg gray-light au lieu de white */
 .is-style-dc26-tabs-vertical > .wp-block-accordion-item > .wp-block-accordion-heading .wp-block-accordion-heading__toggle {
-    width: 100%;
-    text-align: left;
-    padding: 0.75rem 1rem;
-    border: 0;
-    border-radius: 9999px;
     background: var(--wp--preset--color--gray-light, #f4f4f4);
-    color: var(--wp--preset--color--primary, #0b7c87);
-    font-weight: 600;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.is-style-dc26-tabs-vertical > .wp-block-accordion-item.is-active > .wp-block-accordion-heading .wp-block-accordion-heading__toggle,
-.is-style-dc26-tabs-vertical > .wp-block-accordion-item > .wp-block-accordion-heading .wp-block-accordion-heading__toggle[aria-expanded="true"] {
-    background: var(--wp--preset--color--primary, #0b7c87);
-    color: var(--wp--preset--color--white, #ffffff);
-}
-
-.is-style-dc26-tabs-vertical > .wp-block-accordion-item > .wp-block-accordion-panel {
-    position: absolute;
-    top: 0;
-    left: calc(var(--dc26-tabs-nav-width) + var(--dc26-tabs-gap));
-    right: 0;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    padding: 0;
-    transition: opacity 0.2s ease;
-}
-
-.is-style-dc26-tabs-vertical > .wp-block-accordion-item > .wp-block-accordion-panel > :where(.is-layout-flow) > * {
-    margin-block-start: 0;
-}
-
-.is-style-dc26-tabs-vertical > .wp-block-accordion-item > .wp-block-accordion-panel > :where(.is-layout-flow) > * + * {
-    margin-block-start: var(--wp--preset--spacing--30, 24px);
-}
-
-.is-style-dc26-tabs-vertical > .wp-block-accordion-item.is-open > .wp-block-accordion-panel,
-.is-style-dc26-tabs-vertical > .wp-block-accordion-item.is-active > .wp-block-accordion-panel {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    padding: 0.25rem 0;
-}
-
-/* ── Variante : tabs horizontaux ── */
+/* ── Variante OAV : tabs horizontaux ── */
 .is-style-dc26-tabs-horizontal {
     display: flex;
     flex-wrap: wrap;
@@ -83,7 +21,6 @@
     margin: 0 0.5rem 1.5rem 0;
 }
 
-/* Masquer l'icône +/× uniquement sur les boutons de tab directs, pas les accordions imbriqués */
 .is-style-dc26-tabs-horizontal > .wp-block-accordion-item > .wp-block-accordion-heading .wp-block-accordion-heading__toggle::after {
     display: none;
 }
@@ -120,30 +57,4 @@
     height: auto;
     overflow: visible;
     padding: 1.5rem 0 0;
-}
-
-
-@media (max-width: 782px) {
-    .is-style-dc26-tabs-vertical {
-        padding-left: 0;
-    }
-
-    .is-style-dc26-tabs-vertical > .wp-block-accordion-item > .wp-block-accordion-heading {
-        margin-bottom: 0;
-        left: 0;
-        width: 100%;
-    }
-
-    .is-style-dc26-tabs-vertical > .wp-block-accordion-item > .wp-block-accordion-heading .wp-block-accordion-heading__toggle {
-        width: 100%;
-        border-radius: 0.5rem;
-    }
-
-    .is-style-dc26-tabs-vertical > .wp-block-accordion-item > .wp-block-accordion-panel {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        padding: 0.5rem 0 1rem;
-    }
 }

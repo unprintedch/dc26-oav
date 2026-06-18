@@ -34,6 +34,13 @@ header.wp-block-template-part.is-style-sticky-header {
 	margin-block-start: 0;
 }
 
+/* Neutralise le ::before de base (backdrop-filter sur pseudo-élément,
+   inutile avec sticky — OAV met le backdrop-filter directement) */
+.is-style-sticky-header > header.wp-block-group::before,
+.is-style-sticky-header > .wp-block-group::before {
+	content: none;
+}
+
 .is-style-sticky-header > header.wp-block-group,
 .is-style-sticky-header > .wp-block-group {
 	width: 100%;
