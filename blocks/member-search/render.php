@@ -252,7 +252,7 @@ if (!function_exists('dc26_member_search_scalar')) {
                                     <?php endif; ?>
 
                                     <?php if ($homepage_url) : ?>
-                                        <a class="dc26-member-card__meta" href="<?php echo esc_url($homepage_url); ?>">
+                                        <a class="dc26-member-card__meta" href="<?php echo esc_url($homepage_url); ?>" target="_blank" rel="noopener noreferrer">
                                             <img src="<?php echo esc_url($icon_base_path . 'link.svg'); ?>" alt="Site web" style="width: 0.8em; height: 0.8em; vertical-align: middle; margin-right: 0.35rem;">
                                             Site
                                             <?php //echo esc_html($homepage_label ?: $homepage); ?>
