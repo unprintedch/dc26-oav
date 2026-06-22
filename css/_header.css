@@ -4,19 +4,12 @@
     padding-right: max(var(--wp--preset--spacing--50), calc((100% - var(--wp--style--global--wide-size)) / 2)) !important;
 }
 
-/* Allow submenus to overflow the header container */
-.is-style-sticky-header,
-.is-style-sticky-header > .wp-block-group,
-.is-style-sticky-header .wp-block-group,
-.is-style-sticky-header .wp-block-navigation {
-    overflow: visible !important;
+/* Submenu: hide instantly on hover-out (no flash of empty bg) */
+.wp-block-navigation .has-child > .wp-block-navigation__submenu-container {
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0s;
 }
 
-/* Click-toggle submenu for # links */
-.wp-block-navigation .has-child.is-menu-open > .wp-block-navigation__submenu-container {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0s;
+.wp-block-navigation .has-child:hover > .wp-block-navigation__submenu-container,
+.wp-block-navigation .has-child:focus-within > .wp-block-navigation__submenu-container {
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0s;
 }
