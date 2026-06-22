@@ -3,3 +3,20 @@
     padding-left: max(var(--wp--preset--spacing--50), calc((100% - var(--wp--style--global--wide-size)) / 2)) !important;
     padding-right: max(var(--wp--preset--spacing--50), calc((100% - var(--wp--style--global--wide-size)) / 2)) !important;
 }
+
+/* Allow submenus to overflow the header container */
+.is-style-sticky-header,
+.is-style-sticky-header > .wp-block-group,
+.is-style-sticky-header .wp-block-group,
+.is-style-sticky-header .wp-block-navigation {
+    overflow: visible !important;
+}
+
+/* Click-toggle submenu for # links */
+.wp-block-navigation .has-child.is-menu-open > .wp-block-navigation__submenu-container {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0s;
+}

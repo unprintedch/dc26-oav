@@ -33,6 +33,10 @@
     cursor: pointer;
 }
 
+.wp-block-accordion-item {
+    border-color: currentColor;
+}
+
 .wp-block-accordion-heading__toggle:focus,
 .wp-block-accordion-heading__toggle:focus-visible {
     outline: none;
