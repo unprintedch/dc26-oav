@@ -86,7 +86,6 @@ ul.is-style-check li::before {
 .wp-block-quote footer {
   font-style: normal;
 }
-
 /* ===================================
    PAGE LIST — STYLE SITEMAP
    =================================== */
@@ -100,7 +99,9 @@ ul.wp-block-page-list.is-style-sitemap li {
 @media (min-width: 769px) {
     ul.wp-block-page-list.is-style-sitemap {
         display: flex;
-        flex-wrap: nowrap;
+        flex-direction: row-reverse;
+        flex-wrap: wrap;
+        justify-content: flex-end;
         align-items: flex-start;
         gap: var(--wp--preset--spacing--50, 2rem);
         padding: 0;
@@ -109,7 +110,7 @@ ul.wp-block-page-list.is-style-sitemap li {
     }
 
     ul.wp-block-page-list.is-style-sitemap > li.wp-block-pages-list__item {
-        flex: 1 1 0;
+        width: calc(25% - var(--wp--preset--spacing--50, 2rem) * 3 / 4);
         min-width: 0;
     }
 }
@@ -128,9 +129,7 @@ ul.wp-block-page-list.is-style-sitemap li {
 ul.wp-block-page-list.is-style-sitemap > li > a.wp-block-pages-list__item__link {
     display: block;
     font-weight: 700;
-    text-transform: uppercase;
     font-size: var(--wp--preset--font-size--x-small, 0.75rem);
-    letter-spacing: 0.08em;
     color: currentColor;
     text-decoration: none;
     padding-bottom: 0.5rem;

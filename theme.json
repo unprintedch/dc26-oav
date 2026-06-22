@@ -349,6 +349,11 @@
 		},
 		"blocks": {
 			"core/accordion": {
+				"color": {
+					"text": true,
+					"background": true,
+					"link": true
+				},
 				"spacing": {
 					"blockGap": "0"
 				}
