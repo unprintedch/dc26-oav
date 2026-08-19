@@ -24,3 +24,16 @@ function dc26_oav_enqueue_styles(): void {
     );
 }
 add_action('wp_enqueue_scripts', 'dc26_oav_enqueue_styles');
+
+/**
+ * Hide the front-end admin bar for OAV members — they only need the
+ * public site and their profile block, not the WP toolbar.
+ */
+function dc26_oav_hide_admin_bar_for_members(bool $show): bool {
+    $user = wp_get_current_user();
+    if (in_array('membre-oav', (array) $user->roles, true)) {
+        return false;
+    }
+    return $show;
+}
+add_filter('show_admin_bar', 'dc26_oav_hide_admin_bar_for_members');
