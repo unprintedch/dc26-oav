@@ -1,12 +1,13 @@
 /* OAV — load-more button styling */
 .facetwp-load-more {
     display: block;
-    margin: 0 auto;
+    margin: var(--wp--preset--spacing--60) auto 0;
     padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
     background: var(--wp--preset--color--primary, #007582);
     color: var(--wp--preset--color--white, #fff);
     border: none;
     border-radius: 30px;
+    font-family: var(--wp--preset--font-family--work-sans);
     font-size: var(--wp--preset--font-size--small);
     font-weight: 400;
     text-transform: uppercase;
