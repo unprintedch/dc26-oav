@@ -28,6 +28,35 @@ $selected_cats  = get_field('nl_categories') ?: [];
 $posts_per_page = (int) (get_field('nl_posts_per_page') ?: 24);
 $columns        = (int) (get_field('nl_columns') ?: 3);
 
+$selected_ids = !empty($selected_cats)
+    ? array_map('intval', wp_list_pluck($selected_cats, 'term_id'))
+    : [];
+
+$all_ids       = $selected_ids;
+$cat_hierarchy = [];
+
+foreach ($selected_ids as $tid) {
+    $children = get_term_children($tid, 'category');
+    if (!empty($children) && !is_wp_error($children)) {
+        $parent_term = get_term($tid, 'category');
+        if (!$parent_term || is_wp_error($parent_term)) {
+            continue;
+        }
+        $child_slugs = [];
+        foreach ($children as $child_id) {
+            $child_term = get_term((int) $child_id, 'category');
+            if ($child_term && !is_wp_error($child_term)) {
+                $child_slugs[] = $child_term->slug;
+                $all_ids[]     = (int) $child_id;
+            }
+        }
+        if (!empty($child_slugs)) {
+            $cat_hierarchy[$parent_term->slug] = $child_slugs;
+        }
+    }
+}
+$all_ids = array_unique($all_ids);
+
 $query_args = [
     'post_type'      => 'post',
     'post_status'    => 'publish',
@@ -37,40 +66,69 @@ $query_args = [
     'facetwp'        => true,
 ];
 
-if (!empty($selected_cats)) {
+if (!empty($all_ids)) {
     $query_args['tax_query'] = [[
-        'taxonomy' => 'category',
-        'field'    => 'term_id',
-        'terms'    => array_map('intval', wp_list_pluck($selected_cats, 'term_id')),
+        'taxonomy'         => 'category',
+        'field'            => 'term_id',
+        'terms'            => $all_ids,
+        'include_children' => false,
     ]];
 }
 ?>
 
-<div id="<?php echo esc_attr($block_id); ?>" class="<?php echo esc_attr($class_name); ?>">
+<div id="<?php echo esc_attr($block_id); ?>" class="<?php echo esc_attr($class_name); ?>"
+     data-cat-hierarchy="<?php echo esc_attr(wp_json_encode($cat_hierarchy)); ?>">
 
     <div class="dc26-news-listing__toolbar">
         <?php if (function_exists('facetwp_display')) : ?>
             <?php echo facetwp_display('facet', 'categories_news_pills'); ?>
             <?php echo facetwp_display('facet', 'recherche'); ?>
         <?php endif; ?>
+        <div class="dc26-news-listing__sub-pills" style="display:none"></div>
     </div>
 
-    <div class="facetwp-template dc26-news-listing__grid dc26-news-listing__grid--cols-<?php echo esc_attr($columns); ?>">
-        <?php
-        $news_query = new WP_Query($query_args);
+    <?php
+    // Tri par proximité de date (le plus proche d'aujourd'hui en premier) — un post
+    // sans date d'événement ACF est toujours considéré "à venir" et trié par date de
+    // publication ; seul un événement dont la date ACF est passée descend dans la
+    // section "passés".
+    $today_ymd = (int) current_time('Ymd');
+    $sortable  = [];
 
-        if ($news_query->have_posts()) :
-            while ($news_query->have_posts()) :
-                $news_query->the_post();
-                $post_id    = get_the_ID();
-                $permalink  = get_permalink();
-                $title      = get_the_title();
-                $date_iso   = get_the_date('c');
-                $date_label = get_the_date('j F Y');
-                $excerpt    = wp_trim_words(get_the_excerpt(), 16, '&hellip;');
+    $news_query = new WP_Query($query_args);
+
+    if ($news_query->have_posts()) :
+        while ($news_query->have_posts()) :
+            $news_query->the_post();
+            $pid            = get_the_ID();
+            $date_raw       = get_field('date', $pid, false);
+            $has_event_date = !empty($date_raw);
+            $effective_ymd  = $has_event_date ? (int) $date_raw : (int) get_the_date('Ymd');
+
+            $sortable[] = [
+                'post_id'  => $pid,
+                'is_past'  => $has_event_date && $effective_ymd < $today_ymd,
+                'distance' => abs($effective_ymd - $today_ymd),
+            ];
+        endwhile;
+        wp_reset_postdata();
+    endif;
+
+    $upcoming = array_values(array_filter($sortable, fn($item) => !$item['is_past']));
+    $past     = array_values(array_filter($sortable, fn($item) => $item['is_past']));
+
+    usort($upcoming, fn($a, $b) => $a['distance'] <=> $b['distance']);
+    usort($past, fn($a, $b) => $a['distance'] <=> $b['distance']);
+
+    $render_card = function ($post_id) {
+                $permalink  = get_permalink($post_id);
+                $title      = get_the_title($post_id);
+                $date_iso   = get_the_date('c', $post_id);
+                $date_label = get_the_date('j F Y', $post_id);
+                $excerpt    = wp_trim_words(get_the_excerpt($post_id), 16, '&hellip;');
 
                 // Catégories triées par term_id ASC (principale = plus petit ID)
-                $cats = get_the_category();
+                $cats = get_the_category($post_id);
                 usort($cats, fn($a, $b) => $a->term_id - $b->term_id);
 
                 // Champs event ACF (affichés si renseignés, cachés sinon)
@@ -169,13 +227,29 @@ if (!empty($selected_cats)) {
                     </div>
 
                 </article>
-            <?php endwhile; ?>
-        <?php else : ?>
+                <?php
+    };
+    ?>
+
+    <div class="facetwp-template dc26-news-listing__results">
+        <?php if (!empty($upcoming)) : ?>
+            <div class="dc26-news-listing__grid dc26-news-listing__grid--cols-<?php echo esc_attr($columns); ?>">
+                <?php foreach ($upcoming as $item) : $render_card($item['post_id']); endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($past)) : ?>
+            <h2 class="dc26-news-listing__section-title"><?php esc_html_e('Événements passés', 'dc26-oav'); ?></h2>
+            <div class="dc26-news-listing__grid dc26-news-listing__grid--cols-<?php echo esc_attr($columns); ?> dc26-news-listing__grid--past">
+                <?php foreach ($past as $item) : $render_card($item['post_id']); endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (empty($upcoming) && empty($past)) : ?>
             <p class="dc26-news-listing__empty">
                 <?php esc_html_e('Aucun résultat.', 'dc26-oav'); ?>
             </p>
         <?php endif; ?>
-        <?php wp_reset_postdata(); ?>
     </div>
 
     <?php if (function_exists('facetwp_display')) : ?>

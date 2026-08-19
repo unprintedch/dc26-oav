@@ -38,3 +38,25 @@ add_filter('facetwp_facet_render_args', function (array $args): array {
 
     return $args;
 });
+
+/**
+ * Group the date_de_publication facet by month instead of indexing every
+ * exact post_date timestamp as its own value.
+ */
+add_filter('facetwp_indexer_row_data', function (array $output, array $params): array {
+    if ('date_de_publication' !== ($params['facet']['name'] ?? '')) {
+        return $output;
+    }
+
+    foreach ($output as &$row) {
+        $timestamp = strtotime((string) $row['facet_value']);
+        if (!$timestamp) {
+            continue;
+        }
+        $row['facet_value'] = gmdate('Y-m', $timestamp);
+        $row['facet_display_value'] = date_i18n('F Y', $timestamp);
+    }
+    unset($row);
+
+    return $output;
+}, 10, 2);

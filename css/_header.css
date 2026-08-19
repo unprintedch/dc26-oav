@@ -7,9 +7,24 @@
 /* Submenu: hide instantly on hover-out (no flash of empty bg) */
 .wp-block-navigation .has-child > .wp-block-navigation__submenu-container {
     transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0s;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .wp-block-navigation .has-child:hover > .wp-block-navigation__submenu-container,
 .wp-block-navigation .has-child:focus-within > .wp-block-navigation__submenu-container {
     transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0s;
+}
+
+/* Subtle hover on submenu items */
+.wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+    padding: 0.35rem 0.75rem;
+    margin: 0 0.25rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
+
+.wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover {
+    background-color: color-mix(in srgb, currentColor 10%, transparent);
+    padding-left: 1rem;
 }
