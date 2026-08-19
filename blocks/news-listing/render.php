@@ -95,7 +95,8 @@ if (!empty($all_ids)) {
     $today_ymd = (int) current_time('Ymd');
     $sortable  = [];
 
-    $news_query = new WP_Query($query_args);
+    $news_query   = new WP_Query($query_args);
+    $current_page = (int) ($news_query->query_vars['paged'] ?? 1) ?: 1;
 
     if ($news_query->have_posts()) :
         while ($news_query->have_posts()) :
@@ -239,7 +240,9 @@ if (!empty($all_ids)) {
         <?php endif; ?>
 
         <?php if (!empty($past)) : ?>
-            <h2 class="dc26-news-listing__section-title"><?php esc_html_e('Événements passés', 'dc26-oav'); ?></h2>
+            <?php if ($current_page <= 1) : ?>
+                <h2 class="dc26-news-listing__section-title"><?php esc_html_e('Événements passés', 'dc26-oav'); ?></h2>
+            <?php endif; ?>
             <div class="dc26-news-listing__grid dc26-news-listing__grid--cols-<?php echo esc_attr($columns); ?> dc26-news-listing__grid--past">
                 <?php foreach ($past as $item) : $render_card($item['post_id']); endforeach; ?>
             </div>
