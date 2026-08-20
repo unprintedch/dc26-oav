@@ -100,6 +100,42 @@ $query_args = array(
                                         <a class="dc26-doc-row__link" href="<?php echo esc_url($post_link); ?>">
                                             <?php echo esc_html($post_title); ?>
                                         </a>
+                                        <?php if ($has_attachments) : ?>
+                                            <ul class="dc26-doc-row__files">
+                                                <?php while (have_rows('documents', $post_id)) : the_row(); ?>
+                                                    <?php if (get_row_layout() === 'link') : ?>
+                                                        <?php
+                                                        $link = get_sub_field('link');
+                                                        $link_title = !empty($link['title']) ? $link['title'] : '';
+                                                        $link_url = !empty($link['url']) ? $link['url'] : '';
+                                                        ?>
+                                                        <?php if ($link_title && $link_url) : ?>
+                                                            <li>
+                                                                <a class="dc26-doc-row__file" href="<?php echo esc_url($link_url); ?>">
+                                                                    <img src="<?php echo esc_url($icon_base_path . 'link.svg'); ?>" alt="">
+                                                                    <?php echo esc_html($link_title); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                    <?php endif; ?>
+                                                    <?php if (get_row_layout() === 'document') : ?>
+                                                        <?php
+                                                        $document = get_sub_field('document');
+                                                        $document_title = !empty($document['title']) ? $document['title'] : '';
+                                                        $document_url = !empty($document['url']) ? $document['url'] : '';
+                                                        ?>
+                                                        <?php if ($document_title && $document_url) : ?>
+                                                            <li>
+                                                                <a class="dc26-doc-row__file" href="<?php echo esc_url($document_url); ?>">
+                                                                    <img src="<?php echo esc_url($icon_base_path . 'document.svg'); ?>" alt="">
+                                                                    <?php echo esc_html($document_title); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                    <?php endif; ?>
+                                                <?php endwhile; ?>
+                                            </ul>
+                                        <?php endif; ?>
                                     </span>
 
                                     <span class="dc26-doc-row__category" role="cell">
@@ -109,34 +145,7 @@ $query_args = array(
                                     </span>
 
                                     <span class="dc26-doc-row__actions" role="cell">
-                                        <?php if ($has_attachments) : ?>
-                                            <?php while (have_rows('documents', $post_id)) : the_row(); ?>
-                                                <?php if (get_row_layout() === 'link') : ?>
-                                                    <?php
-                                                    $link = get_sub_field('link');
-                                                    $link_title = !empty($link['title']) ? $link['title'] : '';
-                                                    $link_url = !empty($link['url']) ? $link['url'] : '';
-                                                    ?>
-                                                    <?php if ($link_title && $link_url) : ?>
-                                                        <a class="dc26-doc-row__download" href="<?php echo esc_url($link_url); ?>" title="<?php echo esc_attr($link_title); ?>">
-                                                            <img src="<?php echo esc_url($icon_base_path . 'link.svg'); ?>" alt="<?php echo esc_attr($link_title); ?>">
-                                                        </a>
-                                                    <?php endif; ?>
-                                                <?php endif; ?>
-                                                <?php if (get_row_layout() === 'document') : ?>
-                                                    <?php
-                                                    $document = get_sub_field('document');
-                                                    $document_title = !empty($document['title']) ? $document['title'] : '';
-                                                    $document_url = !empty($document['url']) ? $document['url'] : '';
-                                                    ?>
-                                                    <?php if ($document_title && $document_url) : ?>
-                                                        <a class="dc26-doc-row__download" href="<?php echo esc_url($document_url); ?>" title="<?php echo esc_attr($document_title); ?>">
-                                                            <img src="<?php echo esc_url($icon_base_path . 'document.svg'); ?>" alt="<?php echo esc_attr($document_title); ?>">
-                                                        </a>
-                                                    <?php endif; ?>
-                                                <?php endif; ?>
-                                            <?php endwhile; ?>
-                                        <?php else : ?>
+                                        <?php if (!$has_attachments) : ?>
                                             <a class="dc26-doc-row__more" href="<?php echo esc_url($post_link); ?>" aria-label="<?php echo esc_attr__('Lire la suite', 'dc26-oav'); ?>"></a>
                                         <?php endif; ?>
                                     </span>
