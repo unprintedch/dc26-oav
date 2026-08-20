@@ -89,7 +89,7 @@
    so date/title/category/action columns stay aligned across AJAX-refreshed results. */
 .dc26-doc-listing__table {
     display: grid;
-    grid-template-columns: 7.5rem minmax(0, 1fr) minmax(0, 16rem) 3rem;
+    grid-template-columns: 7.5rem minmax(0, 1fr) minmax(0, 16rem) minmax(3rem, 8rem);
     column-gap: 1.5rem;
 }
 
@@ -171,6 +171,8 @@
 
 .dc26-doc-row__actions {
     gap: 0.5rem;
+    row-gap: 0.5rem;
+    flex-wrap: wrap;
     justify-content: flex-end;
 }
 
