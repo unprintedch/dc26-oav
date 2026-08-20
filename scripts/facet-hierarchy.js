@@ -94,5 +94,27 @@
     }
   }
 
+  /**
+   * Default the categories_news_pills radio facet to "À la une"
+   * (slug "actualite") on first page load only — never overrides a
+   * deep-linked selection (e.g. ?_categories_news_pills=formation) and
+   * never fires again on subsequent AJAX refreshes.
+   */
+  function applyDefaultPill() {
+    if (FWP.loaded) return;
+
+    var current =
+      typeof FWP !== "undefined" && FWP.facets
+        ? FWP.facets["categories_news_pills"] || []
+        : [];
+    if (current.length) return;
+
+    var defaultPill = document.querySelector(
+      '.facetwp-facet-categories_news_pills .facetwp-radio[data-value="actualite"]'
+    );
+    if (defaultPill) defaultPill.click();
+  }
+
+  document.addEventListener("facetwp-loaded", applyDefaultPill);
   document.addEventListener("facetwp-loaded", reorganize);
 })();
