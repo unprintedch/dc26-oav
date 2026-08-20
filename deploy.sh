@@ -21,8 +21,7 @@ fi
 
 REMOTE="$OAV_SSH_USER@$OAV_SSH_HOST:$OAV_SSH_PATH"
 SSH="$OAV_SSH_USER@$OAV_SSH_HOST"
-WP_ROOT="sites/dev.oav.ch"
-EXCLUDE=(--exclude='.git' --exclude='node_modules' --exclude='.DS_Store' --exclude='.env' --exclude='_backup-templates')
+EXCLUDE=(--exclude='.git' --exclude='node_modules' --exclude='.DS_Store' --exclude='.env' --exclude='_backup-templates' --exclude='.claude' --exclude='.vscode' --exclude='.idea')
 
 # ── 1. Pull server → local (patterns, parts, templates) ────────────────────
 echo "Pulling server files to local (parts, templates, patterns)..."
@@ -58,4 +57,4 @@ rsync -avz "${EXCLUDE[@]}" "$THEMES_DIR/dc26-base/" "$REMOTE/dc26-base/"
 echo "Deploying dc26-oav..."
 rsync -avz "${EXCLUDE[@]}" "$THEME_DIR/" "$REMOTE/dc26-oav/"
 
-echo "Done — https://dev.oav.ch"
+echo "Done — https://oav.ch"
