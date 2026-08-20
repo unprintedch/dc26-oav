@@ -1,0 +1,46 @@
+{
+    "key": "group_dc26_documentation_type_visibility",
+    "title": "TAXONOMY – Documentation type (visibilité)",
+    "fields": [
+        {
+            "key": "field_dtv_public_default",
+            "label": "Public par défaut",
+            "name": "public_default",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Les documents de cette catégorie sont publics par défaut (visibles sans connexion), sauf si le document a \"Forcer en privé\" activé. Décoché = catégorie réservée aux membres par défaut.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "documentation-type"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Contrôle la visibilité par défaut des documents de ce type",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1787230601
+}
