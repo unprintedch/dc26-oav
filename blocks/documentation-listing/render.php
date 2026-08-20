@@ -20,6 +20,8 @@ if (!empty($block['align'])) {
 
 $is_admin = is_admin();
 
+$type_filter = get_field('type_filter') ?: '';
+
 $query_args = array(
     'posts_per_page' => -1,
     'post_type' => array('documentation', 'post', 'page'),
@@ -28,6 +30,16 @@ $query_args = array(
     'orderby' => array('date' => 'DESC'),
     'facetwp' => true,
 );
+
+if ($type_filter) {
+    $query_args['tax_query'] = array(
+        array(
+            'taxonomy' => 'documentation-type',
+            'field' => 'term_id',
+            'terms' => (int) $type_filter,
+        ),
+    );
+}
 ?>
 
 <div <?php echo esc_attr($anchor); ?> class="<?php echo esc_attr($class_name); ?>">
@@ -44,11 +56,13 @@ $query_args = array(
                         <?php echo facetwp_display('facet', 'recherche'); ?>
                     <?php endif; ?>
                 </div>
-                <div class="dc26-doc-listing__types">
-                    <?php if (function_exists('facetwp_display')) : ?>
-                        <?php echo facetwp_display('facet', 'documentation_type'); ?>
-                    <?php endif; ?>
-                </div>
+                <?php if (!$type_filter) : ?>
+                    <div class="dc26-doc-listing__types">
+                        <?php if (function_exists('facetwp_display')) : ?>
+                            <?php echo facetwp_display('facet', 'documentation_type'); ?>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
                 <div class="dc26-doc-listing__dates">
                     <?php if (function_exists('facetwp_display')) : ?>
                         <?php echo facetwp_display('facet', 'date_de_publication'); ?>

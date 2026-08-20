@@ -1,0 +1,49 @@
+{
+    "key": "group_dc26_documentation_listing",
+    "title": "BLOCK – Documentation Listing",
+    "fields": [
+        {
+            "key": "field_dl_type_filter",
+            "label": "Type de documentation (filtre fixe)",
+            "name": "type_filter",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Si renseigné, la liste n'affiche que les documents de ce type et le facet \"Type\" est masqué. Laisser vide pour afficher tous les types (comportement par défaut).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "documentation-type",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "field_type": "select",
+            "allow_null": 1,
+            "multiple": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "dc26/documentation-listing"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Champs pour le bloc Documentation Listing",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1787232492
+}
