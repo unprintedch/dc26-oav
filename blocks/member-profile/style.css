@@ -9,6 +9,34 @@
 }
 
 /* ══════════════════════════════════════════════
+   TOPBAR : Déconnexion
+   ══════════════════════════════════════════════ */
+
+.dc26-member-profile__topbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.dc26-member-profile__logout-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--wp--preset--color--gray-medium, #8e8e8e);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--wp--preset--color--gray-text, #808080);
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.dc26-member-profile__logout-link:hover {
+    border-color: var(--wp--preset--color--primary, #007582);
+    color: var(--wp--preset--color--primary, #007582);
+}
+
+/* ══════════════════════════════════════════════
    HERO : Photo + Info (2 colonnes)
    ══════════════════════════════════════════════ */
 

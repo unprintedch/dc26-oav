@@ -75,6 +75,20 @@ wp_enqueue_script( 'tom-select', $ts_base . '/tom-select.complete.min.js', [], (
      data-nonce="<?php echo esc_attr( wp_create_nonce( 'wp_rest' ) ); ?>">
 
     <!-- ══════════════════════════════════════
+         TOPBAR : Déconnexion
+         ══════════════════════════════════════ -->
+    <div class="dc26-member-profile__topbar">
+        <a class="dc26-member-profile__logout-link" href="<?php echo esc_url( wp_logout_url( home_url( '/' ) ) ); ?>">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            <?php echo esc_html__( 'Se déconnecter', 'dc26-oav' ); ?>
+        </a>
+    </div>
+
+    <!-- ══════════════════════════════════════
          HERO : Photo + Infos (2 colonnes)
          ══════════════════════════════════════ -->
     <div class="dc26-member-profile__hero">
