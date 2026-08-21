@@ -21,6 +21,17 @@
     color: var(--wp--preset--color--gray-text, #808080);
 }
 
+.dc26-member-view__lock {
+    display: inline-flex;
+    margin-bottom: 0.75rem;
+}
+
+.dc26-member-view__lock svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: currentColor;
+}
+
 /* ══════════════════════════════════════════════
    HERO : Photo + Info (wp-block-columns 40/60)
    ══════════════════════════════════════════════ */

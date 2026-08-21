@@ -37,8 +37,16 @@ if ( ! $post_id || 'member' !== get_post_type( $post_id ) ) {
     return;
 }
 
-if ( has_term( 1915, 'statut', $post_id ) ) : ?>
+if ( has_term( 1915, 'statut', $post_id ) ) :
+    $lock_icon_path = get_stylesheet_directory() . '/assets/icons/SVG/lock-sharp-regular-full.svg';
+    $lock_icon = file_exists( $lock_icon_path )
+        ? str_replace( 'fill: #007582;', 'fill: currentColor;', file_get_contents( $lock_icon_path ) )
+        : '';
+    ?>
     <div <?php echo $anchor; ?>class="<?php echo esc_attr( $class_name ); ?> dc26-member-view--private">
+        <?php if ( $lock_icon ) : ?>
+            <span class="dc26-member-view__lock" aria-hidden="true"><?php echo $lock_icon; ?></span>
+        <?php endif; ?>
         <p><?php echo esc_html__( 'Ce profil n\'est pas public.', 'dc26-oav' ); ?></p>
     </div>
     <?php return;
