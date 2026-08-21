@@ -136,6 +136,19 @@
     text-decoration: none;
 }
 
+.dc26-doc-row__lock {
+    display: inline-flex;
+    align-items: center;
+    color: var(--wp--preset--color--gray-text, #808080);
+    margin-right: 0.35rem;
+}
+
+.dc26-doc-row__lock svg {
+    width: 0.8125rem;
+    height: 0.8125rem;
+    fill: currentColor;
+}
+
 .dc26-doc-row__files {
     display: flex;
     flex-direction: column;

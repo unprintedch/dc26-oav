@@ -89,6 +89,10 @@ if ($type_filter) {
                         $documentation_query = new WP_Query($query_args);
                         if ($documentation_query->have_posts()) :
                             $icon_base_path = get_stylesheet_directory_uri() . '/assets/img/';
+                            $lock_icon_path = get_stylesheet_directory() . '/assets/icons/SVG/lock-sharp-regular-full.svg';
+                            $lock_icon = file_exists($lock_icon_path)
+                                ? str_replace('fill: #007582;', 'fill: currentColor;', file_get_contents($lock_icon_path))
+                                : '';
                             while ($documentation_query->have_posts()) :
                                 $documentation_query->the_post();
                                 $post_id = get_the_ID();
@@ -106,12 +110,17 @@ if ($type_filter) {
                                 }
                                 $post_date = get_the_date('j F Y', $post_id);
                                 $has_attachments = have_rows('documents', $post_id);
+                                $is_private = get_post_status($post_id) === 'private';
                                 ?>
                                 <div class="dc26-doc-row<?php echo !$has_attachments ? ' dc26-doc-row--link' : ''; ?>" role="row">
                                     <span class="dc26-doc-row__date" role="cell"><?php echo esc_html($post_date); ?></span>
 
                                     <span class="dc26-doc-row__title" role="cell">
                                         <a class="dc26-doc-row__link" href="<?php echo esc_url($post_link); ?>">
+                                            <?php if ($is_private && $lock_icon) : ?>
+                                                <span class="dc26-doc-row__lock" aria-hidden="true" title="<?php echo esc_attr__('Document privé', 'dc26-oav'); ?>"><?php echo $lock_icon; ?></span>
+                                                <span class="screen-reader-text"><?php echo esc_html__('Document privé', 'dc26-oav'); ?></span>
+                                            <?php endif; ?>
                                             <?php echo esc_html($post_title); ?>
                                         </a>
                                         <?php if ($has_attachments) : ?>
