@@ -103,6 +103,7 @@
 
 .dc26-doc-row > * {
     padding: 0.9rem 0;
+    border-top: 1px solid var(--wp--preset--color--white, #fff);
     border-bottom: 1px solid var(--wp--preset--color--gray-light, #f4f4f4);
     display: flex;
     align-items: center;
