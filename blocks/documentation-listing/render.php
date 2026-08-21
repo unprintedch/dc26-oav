@@ -26,7 +26,7 @@ $query_args = array(
     'posts_per_page' => -1,
     'post_type' => array('documentation', 'post', 'page'),
     // 'post_type' => array('documentation'),
-    'post_status' => array('publish', 'private'),
+    'post_status' => 'publish',
     'orderby' => array('date' => 'DESC'),
     'facetwp' => true,
 );
@@ -110,7 +110,8 @@ if ($type_filter) {
                                 }
                                 $post_date = get_the_date('j F Y', $post_id);
                                 $has_attachments = have_rows('documents', $post_id);
-                                $is_private = get_post_status($post_id) === 'private';
+                                $is_private = function_exists('dc26_members_only_is_protected')
+                                    && dc26_members_only_is_protected($post_id);
                                 ?>
                                 <div class="dc26-doc-row<?php echo !$has_attachments ? ' dc26-doc-row--link' : ''; ?>" role="row">
                                     <span class="dc26-doc-row__date" role="cell"><?php echo esc_html($post_date); ?></span>

@@ -43,7 +43,7 @@ if ( $is_logged_in ) {
 $examen_query = new WP_Query( [
     'post_type'      => 'examen',
     'posts_per_page' => -1,
-    'post_status'    => [ 'publish', 'private' ],
+    'post_status'    => 'publish',
     'orderby'        => 'title',
     'order'          => 'DESC',
 ] );
@@ -67,6 +67,11 @@ while ( $examen_query->have_posts() ) {
 }
 wp_reset_postdata();
 
+$lock_icon_path = get_stylesheet_directory() . '/assets/icons/SVG/lock-sharp-regular-full.svg';
+$lock_icon = file_exists( $lock_icon_path )
+    ? str_replace( 'fill: #007582;', 'fill: currentColor;', file_get_contents( $lock_icon_path ) )
+    : '';
+
 ?>
 
 <div <?php echo $anchor; ?>class="<?php echo esc_attr( $class_name ); ?>"<?php if ( $is_logged_in ) : ?> data-logged-in data-rest-url="<?php echo esc_attr( rest_url( 'dc26/v1/examen-progress' ) ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'wp_rest' ) ); ?>"<?php endif; ?>>
@@ -80,6 +85,9 @@ wp_reset_postdata();
         $post_id = $item['post_id'];
         $year    = $item['year'];
         $is_open = 0 === $index;
+
+        $is_protected = function_exists( 'dc26_members_only_is_protected' ) && dc26_members_only_is_protected( $post_id );
+        $is_locked    = $is_protected && ! $is_logged_in;
 
         $year_total = 0;
         $year_done  = 0;
@@ -105,9 +113,14 @@ wp_reset_postdata();
         }
         $year_pct = $year_total > 0 ? round( ( $year_done / $year_total ) * 100 ) : 0;
     ?>
-    <details class="dc26-examen-listing__year" <?php echo $is_open ? 'open' : ''; ?>>
+    <details class="dc26-examen-listing__year<?php echo $is_locked ? ' dc26-examen-listing__year--locked' : ''; ?>" <?php echo $is_open ? 'open' : ''; ?>>
         <summary class="dc26-examen-listing__year-header">
-            <h2 class="dc26-examen-listing__year-title"><?php echo esc_html( $year ); ?></h2>
+            <h2 class="dc26-examen-listing__year-title">
+                <?php if ( $is_locked && $lock_icon ) : ?>
+                    <span class="dc26-examen-year__lock" aria-hidden="true" title="<?php echo esc_attr__( 'Réservé aux membres', 'dc26-oav' ); ?>"><?php echo $lock_icon; ?></span>
+                <?php endif; ?>
+                <?php echo esc_html( $year ); ?>
+            </h2>
             <?php if ( $is_logged_in && $year_total > 0 ) : ?>
                 <span class="dc26-examen-year__progress" data-done="<?php echo $year_done; ?>" data-total="<?php echo $year_total; ?>">
                     <span class="dc26-examen-year__progress-bar">
@@ -119,7 +132,12 @@ wp_reset_postdata();
             <span class="dc26-examen-listing__chevron" aria-hidden="true"></span>
         </summary>
 
-        <?php if ( have_rows( 'session', $post_id ) ) : ?>
+        <?php if ( $is_locked ) : ?>
+        <div class="dc26-examen-listing__locked">
+            <p><?php echo esc_html__( 'Ce contenu est réservé aux membres connectés. Veuillez vous identifier pour y accéder.', 'dc26-oav' ); ?></p>
+            <?php echo do_shortcode( '[dc26_login_form]' ); ?>
+        </div>
+        <?php elseif ( have_rows( 'session', $post_id ) ) : ?>
         <div class="dc26-examen-listing__sessions">
             <?php while ( have_rows( 'session', $post_id ) ) : the_row();
                 $titre     = get_sub_field( 'titre' );

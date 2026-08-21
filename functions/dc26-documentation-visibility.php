@@ -2,17 +2,18 @@
 declare(strict_types=1);
 
 /**
- * Automatic public/private visibility for the `documentation` CPT.
+ * Automatic members-only gating for the `documentation` CPT.
  *
- * Rule: a document is public (post_status=publish) if at least one of its
- * `documentation-type` terms has `public_default` checked, unless the
- * document itself has `force_private` checked — otherwise private.
- * Native WP_Query already excludes `private` posts for logged-out visitors,
- * so no extra front-end gating is needed.
+ * Rule: a document is public if at least one of its `documentation-type`
+ * terms has `public_default` checked, unless the document itself has
+ * `force_private` checked — otherwise it's gated via the dc26-login plugin's
+ * `_members_only` meta (post_status always stays publish). This reuses the
+ * same members-only system as manually-flagged posts/pages, so the_content,
+ * excerpt and REST output are all gated consistently for every post type.
  */
 
 /**
- * Compute and apply the correct post_status for one documentation post.
+ * Compute and apply the correct `_members_only` state for one documentation post.
  *
  * @param int $post_id Documentation post ID.
  */
@@ -28,7 +29,7 @@ function dc26_documentation_apply_visibility( int $post_id ): void {
     }
 
     if ( (bool) get_field( 'force_private', $post_id ) ) {
-        $target_status = 'private';
+        $is_public = false;
     } else {
         $term_ids = wp_get_object_terms( $post_id, 'documentation-type', [ 'fields' => 'ids' ] );
         $is_public = false;
@@ -40,11 +41,15 @@ function dc26_documentation_apply_visibility( int $post_id ): void {
                 }
             }
         }
-        $target_status = $is_public ? 'publish' : 'private';
     }
 
-    if ( $target_status !== $post->post_status ) {
-        wp_update_post( [ 'ID' => $post_id, 'post_status' => $target_status ] );
+    $members_only = ! $is_public;
+    if ( (bool) get_post_meta( $post_id, '_members_only', true ) !== $members_only ) {
+        update_post_meta( $post_id, '_members_only', $members_only );
+    }
+
+    if ( 'private' === $post->post_status ) {
+        wp_update_post( [ 'ID' => $post_id, 'post_status' => 'publish' ] );
     }
 }
 
