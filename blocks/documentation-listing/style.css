@@ -85,8 +85,10 @@
     min-width: 0;
 }
 
-/* Div-based table: header row + item rows share one grid via display:contents,
-   so date/title/category/action columns stay aligned across AJAX-refreshed results. */
+/* Div-based table: rows use grid-template-columns:subgrid to align on the
+   same column tracks as the parent grid, while staying real boxes (needed
+   so each row can host an absolutely-positioned full-row link — see
+   .dc26-doc-row__row-link). */
 .dc26-doc-listing__table {
     display: grid;
     grid-template-columns: 7.5rem minmax(0, 1fr) minmax(0, 16rem) 3rem;
@@ -98,7 +100,10 @@
 }
 
 .dc26-doc-row {
-    display: contents;
+    position: relative;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
 }
 
 .dc26-doc-row > * {
@@ -111,6 +116,7 @@
 .dc26-doc-row--head > * {
     padding-top: 0;
     padding-bottom: 0.75rem;
+    border-top: none;
     border-bottom: 1px solid var(--wp--preset--color--gray-text, #808080);
     font-size: 0.75rem;
     text-transform: uppercase;
@@ -160,6 +166,8 @@
 }
 
 .dc26-doc-row__file {
+    position: relative;
+    z-index: 1;
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
@@ -180,17 +188,14 @@
     text-decoration: underline;
 }
 
-.dc26-doc-row--link .dc26-doc-row__link {
-    position: relative;
-}
-
-.dc26-doc-row--link .dc26-doc-row__link::after {
-    content: '';
+.dc26-doc-row__row-link {
     position: absolute;
-    inset: -0.9rem -0.75rem;
+    inset: 0;
+    padding: 0;
+    border: none;
 }
 
-.dc26-doc-row__link:hover {
+.dc26-doc-row:hover .dc26-doc-row__link {
     color: var(--wp--preset--color--primary, #0b7c87);
 }
 
@@ -239,7 +244,7 @@
     transition: transform 0.2s ease;
 }
 
-.dc26-doc-row--link:hover .dc26-doc-row__more::before {
+.dc26-doc-row:hover .dc26-doc-row__more::before {
     transform: translateX(3px);
 }
 
@@ -268,6 +273,7 @@
 
     .dc26-doc-row > * {
         padding: 0;
+        border-top: none;
         border-bottom: none;
     }
 

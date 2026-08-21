@@ -113,7 +113,7 @@ if ($type_filter) {
                                 $is_private = function_exists('dc26_members_only_is_protected')
                                     && dc26_members_only_is_protected($post_id);
                                 ?>
-                                <div class="dc26-doc-row<?php echo !$has_attachments ? ' dc26-doc-row--link' : ''; ?>" role="row">
+                                <div class="dc26-doc-row" role="row">
                                     <span class="dc26-doc-row__date" role="cell"><?php echo esc_html($post_date); ?></span>
 
                                     <span class="dc26-doc-row__title" role="cell">
@@ -173,6 +173,8 @@ if ($type_filter) {
                                             <a class="dc26-doc-row__more" href="<?php echo esc_url($post_link); ?>" aria-label="<?php echo esc_attr__('Lire la suite', 'dc26-oav'); ?>"></a>
                                         <?php endif; ?>
                                     </span>
+
+                                    <a class="dc26-doc-row__row-link" href="<?php echo esc_url($post_link); ?>" tabindex="-1" aria-hidden="true"></a>
                                 </div>
                             <?php endwhile; ?>
                         <?php else : ?>
