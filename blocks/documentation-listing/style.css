@@ -119,6 +119,7 @@
 }
 
 .dc26-doc-row__date {
+    align-items: flex-start;
     font-size: 0.875rem;
     color: var(--wp--preset--color--gray-text, #808080);
     font-variant-numeric: tabular-nums;
