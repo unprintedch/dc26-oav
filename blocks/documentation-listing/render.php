@@ -80,7 +80,6 @@ if ($type_filter) {
                         <span role="columnheader"><?php echo esc_html__('Date', 'dc26-oav'); ?></span>
                         <span role="columnheader"><?php echo esc_html__('Titre', 'dc26-oav'); ?></span>
                         <span role="columnheader"><?php echo esc_html__('Catégorie', 'dc26-oav'); ?></span>
-                        <span role="columnheader" class="dc26-doc-row__actions-head"><span class="screen-reader-text"><?php echo esc_html__('Documents', 'dc26-oav'); ?></span></span>
                     </div>
 
                     <div class="facetwp-template dc26-doc-listing__items">
@@ -166,12 +165,6 @@ if ($type_filter) {
                                         <?php foreach ($terms as $term) : ?>
                                             <a class="dc26-doc-row__tag" href="<?php echo esc_url(get_term_link($term)); ?>"><?php echo esc_html($term->name); ?></a>
                                         <?php endforeach; ?>
-                                    </span>
-
-                                    <span class="dc26-doc-row__actions" role="cell">
-                                        <?php if (!$has_attachments) : ?>
-                                            <a class="dc26-doc-row__more" href="<?php echo esc_url($post_link); ?>" aria-label="<?php echo esc_attr__('Lire la suite', 'dc26-oav'); ?>"></a>
-                                        <?php endif; ?>
                                     </span>
 
                                     <a class="dc26-doc-row__row-link" href="<?php echo esc_url($post_link); ?>" tabindex="-1" aria-hidden="true"></a>
