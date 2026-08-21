@@ -108,7 +108,7 @@
 }
 
 .dc26-doc-row:hover {
-    background: var(--wp--preset--color--gray-light, #f4f4f4);
+    background: var(--wp--preset--color--white, #fff);
 }
 
 .dc26-doc-row > * {
