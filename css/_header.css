@@ -28,3 +28,20 @@
     background-color: color-mix(in srgb, currentColor 10%, transparent);
     padding-left: 1rem;
 }
+
+/* Menu mobile : dc26/nav-trigger + dc26/nav-drawer remplacent le hamburger et
+   l'overlay natifs de wp:navigation (overlayMenu:"never" sur les blocs nav). */
+
+/* "Espace membre" : bouton texte sur desktop, icône seule sur mobile (le
+   bouton wrappait sur plusieurs lignes à côté du burger en dessous de 1024px). */
+@media (max-width: 1023px) {
+    .oav-header__login-btn {
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .oav-header__login-icon {
+        display: none;
+    }
+}
