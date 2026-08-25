@@ -24,29 +24,21 @@
     opacity: 0.4;
 }
 
-.dc26-atc__label {
-    margin: 0 0 0.4rem;
+.dc26-atc__cta {
+    display: inline-block;
+    background-color: var(--wp--preset--color--primary);
+    color: var(--wp--preset--color--white);
     font-size: var(--wp--preset--font-size--small);
-    font-weight: 600;
-    color: var(--wp--preset--color--gray-dark);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 30px;
+    padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
+    transition: background-color 0.2s ease;
 }
 
-.dc26-atc__buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.3rem;
-}
-
-.dc26-atc__btn {
-    color: var(--wp--preset--color--primary);
-    font-size: var(--wp--preset--font-size--small);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    text-decoration-color: transparent;
-    transition: text-decoration-color 0.15s ease;
-}
-
-.dc26-atc__btn:hover {
-    text-decoration-color: currentColor;
+.dc26-atc__cta:hover {
+    background-color: var(--wp--preset--color--primary-hover);
+    color: var(--wp--preset--color--white);
 }

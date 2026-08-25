@@ -23,41 +23,13 @@ if (!$date_raw) {
 
 $date_obj     = DateTime::createFromFormat('Ymd', $date_raw);
 $date_display = date_i18n('l j F Y', $date_obj->getTimestamp());
-$date_ical    = $date_obj->format('Ymd');
 
-// Parse heure (ex: "18h30", "18:30", "18.30") → HHii for iCal
-$heure_ical = '';
-if ($heure) {
-    preg_match('/(\d{1,2})[h:.](\d{2})/i', $heure, $m);
-    if (!empty($m)) {
-        $heure_ical = sprintf('%02d%02d00', (int) $m[1], (int) $m[2]);
-    }
-}
-
-// iCal download URL
+// iCal download URL — fonctionne universellement (Google/Outlook/Apple
+// importent tous un .ics), contrairement aux deep-links Google/Outlook Web
+// retirés ici : outlook.live.com/calendar/deeplink ne marche que pour les
+// comptes outlook.com/live personnels (pas les comptes pro O365) et son
+// endpoint est régulièrement indisponible (503 constaté en prod).
 $ics_url = add_query_arg(['dc26-ics' => $post_id], home_url('/'));
-
-// Google Calendar
-$gc_start = $heure_ical ? $date_ical . 'T' . $heure_ical : $date_ical;
-$gc_end   = $heure_ical
-    ? $date_ical . 'T' . sprintf('%02d%02d00', (int) date('H', strtotime('+2 hours', strtotime($date_obj->format('Y-m-d') . ' ' . $heure))), (int) date('i', strtotime('+2 hours', strtotime($date_obj->format('Y-m-d') . ' ' . $heure))))
-    : date('Ymd', strtotime('+1 day', $date_obj->getTimestamp()));
-$gc_url = 'https://calendar.google.com/calendar/render?' . http_build_query([
-    'action'   => 'TEMPLATE',
-    'text'     => $titre,
-    'dates'    => $gc_start . '/' . $gc_end,
-    'location' => $adresse,
-]);
-
-// Outlook Web
-$ol_start = $date_obj->format('Y-m-d') . ($heure_ical ? 'T' . substr($heure_ical, 0, 2) . ':' . substr($heure_ical, 2, 2) . ':00' : '');
-$ol_url   = 'https://outlook.live.com/calendar/0/deeplink/compose?' . http_build_query([
-    'subject'  => $titre,
-    'startdt'  => $ol_start,
-    'location' => $adresse,
-    'path'     => '/calendar/action/compose',
-    'rru'      => 'addevent',
-]);
 
 $block_id   = !empty($block['anchor']) ? $block['anchor'] : $block['id'];
 $class_name = 'dc26-atc';
@@ -72,10 +44,5 @@ if (!empty($block['className'])) {
         <?php if ($heure) : ?><span class="dc26-atc__sep">·</span><?php echo esc_html($heure); ?><?php endif; ?>
         <?php if ($adresse) : ?><span class="dc26-atc__sep">·</span><?php echo esc_html($adresse); ?><?php endif; ?>
     </p>
-    <p class="dc26-atc__label"><?php echo esc_html__('Ajouter à mon calendrier', 'dc26-oav'); ?></p>
-    <div class="dc26-atc__buttons">
-        <a class="dc26-atc__btn" href="<?php echo esc_url($gc_url); ?>" target="_blank" rel="noopener noreferrer">Google Calendar</a>
-        <a class="dc26-atc__btn" href="<?php echo esc_url($ol_url); ?>" target="_blank" rel="noopener noreferrer">Outlook</a>
-        <a class="dc26-atc__btn" href="<?php echo esc_url($ics_url); ?>">iCal (.ics)</a>
-    </div>
+    <a class="dc26-atc__cta" href="<?php echo esc_url($ics_url); ?>"><?php echo esc_html__('Ajouter à mon calendrier', 'dc26-oav'); ?></a>
 </div>
