@@ -59,3 +59,17 @@
         display: none !important;
     }
 }
+
+/* Drawer mobile : plus d'air entre les items de l'accordéon (dc26/nav de
+   dc26-base est très compact par défaut — padding:0 sur les liens, pas de
+   gap dans les sous-menus). Scopé au drawer pour ne pas toucher dc26-ejma. */
+.dc26-nav-drawer .dc26-nav__link {
+    padding-block: var(--wp--preset--spacing--30);
+}
+
+.dc26-nav-drawer .dc26-nav__submenu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wp--preset--spacing--20);
+    padding-top: var(--wp--preset--spacing--20);
+}
