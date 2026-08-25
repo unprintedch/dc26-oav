@@ -29,6 +29,19 @@ $query_args = array(
     'post_status' => 'publish',
     'orderby' => array('date' => 'DESC'),
     'facetwp' => true,
+    // Exclut les contenus avec la coche "Exclure de la grille Documentation" (ACF field group_dc26_doc_grid_exclude).
+    'meta_query' => array(
+        'relation' => 'OR',
+        array(
+            'key'     => 'exclude_from_doc_grid',
+            'compare' => 'NOT EXISTS',
+        ),
+        array(
+            'key'     => 'exclude_from_doc_grid',
+            'value'   => '1',
+            'compare' => '!=',
+        ),
+    ),
 );
 
 if ($type_filter) {
