@@ -33,25 +33,29 @@
    l'overlay natifs de wp:navigation (overlayMenu:"never" sur les blocs nav). */
 
 /* "Espace membre" : bouton texte sur desktop, icône seule sur mobile (le
-   bouton wrappait sur plusieurs lignes à côté du burger en dessous de 1024px). */
+   bouton wrappait sur plusieurs lignes à côté du burger en dessous de 1024px).
+   !important nécessaire : .wp-block-buttons.is-layout-flex { display:flex }
+   (WP core, chargé après) écraserait sinon ce display:none. */
 @media (max-width: 1023px) {
     .oav-header__login-btn {
-        display: none;
+        display: none !important;
     }
 }
 
 @media (min-width: 1024px) {
     .oav-header__login-icon {
-        display: none;
+        display: none !important;
     }
 }
 
 /* Nav desktop (les deux wp:navigation + le séparateur "|") : masqué en
    dessous de 1024px maintenant que overlayMenu:"never" désactive son propre
    repli responsive — sans ça elle s'affichait toujours en ligne et wrappait
-   lettre par lettre à côté du burger. */
+   lettre par lettre à côté du burger.
+   !important nécessaire : .wp-block-navigation.is-layout-flex { display:flex }
+   (WP core, chargé après) écraserait sinon ce display:none. */
 @media (max-width: 1023px) {
     .oav-header__nav-desktop {
-        display: none;
+        display: none !important;
     }
 }
