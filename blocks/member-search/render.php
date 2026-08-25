@@ -30,7 +30,7 @@ $query_args = array(
         array(
             'taxonomy' => 'statut',
             'field' => 'slug',
-            'terms' => array('membre_actif', 'stagiaire', 'membre_invite', 'avocat_conseil'),
+            'terms' => array('membre_actif', 'stagiaire', 'membre_invite', 'avocat_conseil', 'membre_eu_aele'),
         ),
     ),
     'facetwp' => true,
