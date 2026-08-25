@@ -1,8 +1,9 @@
 <?php
 /**
  * Post Attachments block template.
- * Reads `documents` (CPT documentation) or `liens_ou_documents` (posts/articles),
- * whichever has data. Outputs nothing if empty.
+ * Reads `documents` (CPT documentation), `liens_ou_documents` (posts/articles),
+ * or `document_repeater` (events / 5 à 7), whichever has data. Outputs nothing
+ * if empty.
  *
  * @param array $block      Block settings and attributes.
  * @param bool  $is_preview True in the block editor preview.
@@ -15,6 +16,8 @@ if (have_rows('documents', $post_id)) {
     $field_source = 'documents';
 } elseif (have_rows('liens_ou_documents', $post_id)) {
     $field_source = 'liens_ou_documents';
+} elseif (have_rows('document_repeater', $post_id)) {
+    $field_source = 'document_repeater';
 } else {
     if ($is_preview) {
         echo '<div class="dc26-post-attachments--empty"><p>Documents &amp; Liens — aucune donnée sur ce post.</p></div>';
@@ -39,6 +42,10 @@ while (have_rows($field_source, $post_id)) : the_row();
             $url   = $link['url'] ?? '';
             $label = $link['title'] ?? $url;
         }
+    } elseif ($field_source === 'document_repeater') {
+        $url   = get_sub_field('document_file') ?: '';
+        $label = get_sub_field('intitule') ?: ($url ? basename((string) $url) : '');
+        $type  = 'document';
     } elseif ($field_source === 'liens_ou_documents') {
         $texte = get_sub_field('texte') ?: '';
         if (get_row_layout() === 'document') {
