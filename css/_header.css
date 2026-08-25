@@ -45,3 +45,13 @@
         display: none;
     }
 }
+
+/* Nav desktop (les deux wp:navigation + le séparateur "|") : masqué en
+   dessous de 1024px maintenant que overlayMenu:"never" désactive son propre
+   repli responsive — sans ça elle s'affichait toujours en ligne et wrappait
+   lettre par lettre à côté du burger. */
+@media (max-width: 1023px) {
+    .oav-header__nav-desktop {
+        display: none;
+    }
+}
