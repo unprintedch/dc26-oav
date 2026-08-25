@@ -13,6 +13,13 @@
     margin-bottom: var(--wp--preset--spacing--60);
 }
 
+/* Neutralise le margin-bottom global des facets (facet-reset.css) qui
+   décale pills/recherche vers le haut par rapport au bouton "passés",
+   celui-ci n'ayant pas cette marge : casse l'alignement vertical du flex. */
+.dc26-news-listing__toolbar .facetwp-facet {
+    margin-bottom: 0;
+}
+
 .dc26-news-listing__grid {
     display: grid;
     column-gap: var(--wp--preset--spacing--50);
@@ -40,11 +47,12 @@
 }
 
 .dc26-news-listing__section-title {
+    grid-column: 1 / -1;
     margin-top: var(--wp--preset--spacing--80);
     margin-bottom: var(--wp--preset--spacing--60);
 }
 
-.dc26-news-listing__grid--past {
+.dc26-news-card--past {
     opacity: 0.6;
 }
 

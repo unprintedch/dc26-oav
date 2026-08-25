@@ -57,14 +57,31 @@ foreach ($selected_ids as $tid) {
 }
 $all_ids = array_unique($all_ids);
 
+// Toggle "Événements passés" — lien simple (pas un facet FacetWP), lu depuis
+// l'URL sur le chargement initial ET reconstitué par FacetWP sur ses appels
+// AJAX (load more / pills) via `extras.uri`.
+$show_past_only = isset($_GET['vue']) && $_GET['vue'] === 'passes';
+
 $query_args = [
-    'post_type'      => 'post',
+    'post_type'      => ['post', 'documentation'],
     'post_status'    => 'publish',
     'posts_per_page' => $posts_per_page,
     'orderby'        => 'date',
     'order'          => 'DESC',
     'facetwp'        => true,
 ];
+
+if ($show_past_only) {
+    $query_args['meta_key']     = 'date';
+    $query_args['orderby']      = 'meta_value_num';
+    $query_args['order']        = 'DESC';
+    $query_args['meta_query']   = [[
+        'key'     => 'date',
+        'value'   => (int) current_time('Ymd'),
+        'compare' => '<',
+        'type'    => 'NUMERIC',
+    ]];
+}
 
 if (!empty($all_ids)) {
     $query_args['tax_query'] = [[
@@ -74,6 +91,10 @@ if (!empty($all_ids)) {
         'include_children' => false,
     ]];
 }
+
+$toggle_url = $show_past_only
+    ? remove_query_arg('vue')
+    : add_query_arg('vue', 'passes');
 ?>
 
 <div id="<?php echo esc_attr($block_id); ?>" class="<?php echo esc_attr($class_name); ?>"
@@ -84,6 +105,11 @@ if (!empty($all_ids)) {
             <?php echo facetwp_display('facet', 'categories_news_pills'); ?>
             <?php echo facetwp_display('facet', 'recherche'); ?>
         <?php endif; ?>
+        <a class="dc26-sub-pill dc26-news-listing__past-toggle<?php echo $show_past_only ? ' is-active' : ''; ?>" href="<?php echo esc_url($toggle_url); ?>">
+            <?php echo $show_past_only
+                ? esc_html__('← Voir les événements à venir', 'dc26-oav')
+                : esc_html__('Voir les événements passés', 'dc26-oav'); ?>
+        </a>
         <div class="dc26-news-listing__sub-pills" style="display:none"></div>
     </div>
 
@@ -121,7 +147,7 @@ if (!empty($all_ids)) {
     usort($upcoming, fn($a, $b) => $a['distance'] <=> $b['distance']);
     usort($past, fn($a, $b) => $a['distance'] <=> $b['distance']);
 
-    $render_card = function ($post_id) {
+    $render_card = function ($post_id, $is_past = false) {
                 $permalink  = get_permalink($post_id);
                 $title      = get_the_title($post_id);
                 $date_iso   = get_the_date('c', $post_id);
@@ -164,7 +190,7 @@ if (!empty($all_ids)) {
                     }
                 }
                 ?>
-                <article class="dc26-news-card">
+                <article class="dc26-news-card<?php echo $is_past ? ' dc26-news-card--past' : ''; ?>">
 
                     <div class="dc26-news-card__top">
 
@@ -232,20 +258,14 @@ if (!empty($all_ids)) {
     };
     ?>
 
-    <div class="facetwp-template dc26-news-listing__results">
-        <?php if (!empty($upcoming)) : ?>
-            <div class="dc26-news-listing__grid dc26-news-listing__grid--cols-<?php echo esc_attr($columns); ?>">
-                <?php foreach ($upcoming as $item) : $render_card($item['post_id']); endforeach; ?>
-            </div>
-        <?php endif; ?>
+    <div class="facetwp-template dc26-news-listing__results dc26-news-listing__grid dc26-news-listing__grid--cols-<?php echo esc_attr($columns); ?>">
+        <?php foreach ($upcoming as $item) : $render_card($item['post_id']); endforeach; ?>
 
         <?php if (!empty($past)) : ?>
             <?php if ($current_page <= 1) : ?>
                 <h2 class="dc26-news-listing__section-title"><?php esc_html_e('Événements passés', 'dc26-oav'); ?></h2>
             <?php endif; ?>
-            <div class="dc26-news-listing__grid dc26-news-listing__grid--cols-<?php echo esc_attr($columns); ?> dc26-news-listing__grid--past">
-                <?php foreach ($past as $item) : $render_card($item['post_id']); endforeach; ?>
-            </div>
+            <?php foreach ($past as $item) : $render_card($item['post_id'], true); endforeach; ?>
         <?php endif; ?>
 
         <?php if (empty($upcoming) && empty($past)) : ?>
