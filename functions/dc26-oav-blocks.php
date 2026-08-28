@@ -24,6 +24,17 @@ add_action('init', function (): void {
     ]);
 });
 
+// Échappe une valeur TEXT pour l'inclure dans un fichier .ics (RFC 5545 §3.3.11).
+// Sans ça, une virgule dans SUMMARY/LOCATION (ex: adresse "Rue X, Lausanne")
+// casse le parsing et Calendar.app / Outlook rejettent le fichier.
+function dc26_oav_escape_ics_string(string $string): string
+{
+    $string = str_replace('\\', '\\\\', $string);
+    $string = preg_replace('/([,;])/', '\\\\$1', $string);
+    $string = str_replace(["\r\n", "\n", "\r"], '\\n', $string);
+    return $string;
+}
+
 // Endpoint .ics — ?dc26-ics=POST_ID
 add_action('template_redirect', function (): void {
     $post_id = filter_input(INPUT_GET, 'dc26-ics', FILTER_VALIDATE_INT);
@@ -84,8 +95,8 @@ add_action('template_redirect', function (): void {
         'DTSTAMP:' . $now,
         'DTSTART;' . $tzid . $dtstart,
         'DTEND;' . $tzid . $dtend,
-        'SUMMARY:' . $titre,
-        'LOCATION:' . $adresse,
+        'SUMMARY:' . dc26_oav_escape_ics_string($titre),
+        'LOCATION:' . dc26_oav_escape_ics_string($adresse),
         'URL:' . $url,
         'END:VEVENT',
         'END:VCALENDAR',
