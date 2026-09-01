@@ -76,6 +76,11 @@ if ($type_filter) {
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
+                <div class="dc26-doc-listing__news-cat">
+                    <?php if (function_exists('facetwp_display')) : ?>
+                        <?php echo facetwp_display('facet', 'news_cat'); ?>
+                    <?php endif; ?>
+                </div>
                 <div class="dc26-doc-listing__dates">
                     <?php if (function_exists('facetwp_display')) : ?>
                         <?php echo facetwp_display('facet', 'date_de_publication'); ?>

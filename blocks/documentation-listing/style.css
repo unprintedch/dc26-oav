@@ -10,7 +10,7 @@
 
 .dc26-doc-listing__filters {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
     align-items: start;
     gap: 0.75rem;
     padding-bottom: 1.5rem;
@@ -19,11 +19,13 @@
 
 .dc26-doc-listing__search,
 .dc26-doc-listing__types,
+.dc26-doc-listing__news-cat,
 .dc26-doc-listing__dates {
     min-width: 0;
 }
 
 .dc26-doc-listing__types .facetwp-type-dropdown,
+.dc26-doc-listing__news-cat .facetwp-type-dropdown,
 .dc26-doc-listing__dates .facetwp-type-dropdown {
     box-sizing: border-box;
     height: 3rem;
@@ -44,6 +46,7 @@
 
 .dc26-doc-listing__search .facetwp-search,
 .dc26-doc-listing__types .facetwp-dropdown,
+.dc26-doc-listing__news-cat .facetwp-dropdown,
 .dc26-doc-listing__dates .facetwp-dropdown {
     width: 100%;
 }
