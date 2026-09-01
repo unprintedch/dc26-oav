@@ -121,7 +121,20 @@ if ($type_filter) {
                                     }
                                 }
                                 $post_date = get_the_date('j F Y', $post_id);
-                                $has_attachments = have_rows('documents', $post_id);
+                                // Documents are stored under different field names depending on
+                                // content type: `documents` (CPT documentation), `liens_ou_documents`
+                                // (posts/articles) or `document_repeater` (events / 5 à 7) — see
+                                // blocks/post-attachments/render.php for the same field-source logic.
+                                if (have_rows('documents', $post_id)) {
+                                    $attachments_source = 'documents';
+                                } elseif (have_rows('liens_ou_documents', $post_id)) {
+                                    $attachments_source = 'liens_ou_documents';
+                                } elseif (have_rows('document_repeater', $post_id)) {
+                                    $attachments_source = 'document_repeater';
+                                } else {
+                                    $attachments_source = '';
+                                }
+                                $has_attachments = '' !== $attachments_source;
                                 $is_private = function_exists('dc26_members_only_is_protected')
                                     && dc26_members_only_is_protected($post_id);
                                 ?>
@@ -138,8 +151,8 @@ if ($type_filter) {
                                         </a>
                                         <?php if ($has_attachments) : ?>
                                             <ul class="dc26-doc-row__files">
-                                                <?php while (have_rows('documents', $post_id)) : the_row(); ?>
-                                                    <?php if (get_row_layout() === 'link') : ?>
+                                                <?php while (have_rows($attachments_source, $post_id)) : the_row(); ?>
+                                                    <?php if ('documents' === $attachments_source && get_row_layout() === 'link') : ?>
                                                         <?php
                                                         $link = get_sub_field('link');
                                                         $link_title = !empty($link['title']) ? $link['title'] : '';
@@ -154,7 +167,7 @@ if ($type_filter) {
                                                             </li>
                                                         <?php endif; ?>
                                                     <?php endif; ?>
-                                                    <?php if (get_row_layout() === 'document') : ?>
+                                                    <?php if ('documents' === $attachments_source && get_row_layout() === 'document') : ?>
                                                         <?php
                                                         $document = get_sub_field('document');
                                                         $document_title = !empty($document['title']) ? $document['title'] : '';
@@ -165,6 +178,44 @@ if ($type_filter) {
                                                                 <a class="dc26-doc-row__file" href="<?php echo esc_url($document_url); ?>">
                                                                     <img src="<?php echo esc_url($icon_base_path . 'document.svg'); ?>" alt="">
                                                                     <?php echo esc_html($document_title); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                    <?php endif; ?>
+                                                    <?php if ('liens_ou_documents' === $attachments_source) : ?>
+                                                        <?php
+                                                        $texte = get_sub_field('texte') ?: '';
+                                                        $link_layout = get_row_layout();
+                                                        if ('document' === $link_layout) {
+                                                            $file = get_sub_field('lien_document');
+                                                            $file_url = !empty($file['url']) ? $file['url'] : '';
+                                                            $file_title = $texte ?: (!empty($file['title']) ? $file['title'] : '');
+                                                            $file_icon = 'document.svg';
+                                                        } else {
+                                                            $file_url = get_sub_field('lien') ?: '';
+                                                            $file_title = $texte ?: $file_url;
+                                                            $file_icon = 'link.svg';
+                                                        }
+                                                        ?>
+                                                        <?php if ($file_title && $file_url) : ?>
+                                                            <li>
+                                                                <a class="dc26-doc-row__file" href="<?php echo esc_url($file_url); ?>">
+                                                                    <img src="<?php echo esc_url($icon_base_path . $file_icon); ?>" alt="">
+                                                                    <?php echo esc_html($file_title); ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endif; ?>
+                                                    <?php endif; ?>
+                                                    <?php if ('document_repeater' === $attachments_source) : ?>
+                                                        <?php
+                                                        $file_url = get_sub_field('document_file') ?: '';
+                                                        $file_title = get_sub_field('intitule') ?: ($file_url ? basename((string) $file_url) : '');
+                                                        ?>
+                                                        <?php if ($file_title && $file_url) : ?>
+                                                            <li>
+                                                                <a class="dc26-doc-row__file" href="<?php echo esc_url($file_url); ?>">
+                                                                    <img src="<?php echo esc_url($icon_base_path . 'document.svg'); ?>" alt="">
+                                                                    <?php echo esc_html($file_title); ?>
                                                                 </a>
                                                             </li>
                                                         <?php endif; ?>
