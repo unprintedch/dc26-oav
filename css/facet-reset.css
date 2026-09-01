@@ -46,8 +46,15 @@
 }
 
 @media (max-width: 640px) {
+    /* Le conteneur (dc26-base) porte border-radius:9999px + fond blanc pensés
+       pour une seule ligne de pills : une fois les pills empilées sur leur
+       propre ligne (flex-basis ci-dessous), ce rayon énorme sur un bloc haut
+       et étroit déforme tout le groupe en bulle. Les pills individuelles
+       gardent leur propre pill-shape (dc26-base, .facetwp-radio). */
     .facetwp-facet-categories_news_pills {
         gap: 0.5rem;
+        background: none;
+        border-radius: 0;
     }
 
     .facetwp-facet-categories_news_pills .facetwp-radio {
