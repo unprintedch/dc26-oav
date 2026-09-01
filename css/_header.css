@@ -67,7 +67,7 @@
     padding-block: var(--wp--preset--spacing--30);
 }
 
-.dc26-nav-drawer .dc26-nav__submenu {
+.dc26-nav-drawer .dc26-nav__submenu:not([hidden]) {
     display: flex;
     flex-direction: column;
     gap: var(--wp--preset--spacing--20);
