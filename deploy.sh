@@ -6,7 +6,7 @@ ROOT_DIR="$(cd "$THEME_DIR/../.." && pwd)"
 THEMES_DIR="$(cd "$THEME_DIR/.." && pwd)"
 
 # Load SSH credentials from root .env (safe parse — ignores values with spaces)
-ENV_FILE="$ROOT_DIR/.env"
+ENV_FILE="$HOME/.config/dc26/.env"
 if [[ -f "$ENV_FILE" ]]; then
   while IFS='=' read -r key value; do
     [[ "$key" =~ ^OAV_SSH_ ]] && export "$key=$value"
