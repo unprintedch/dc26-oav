@@ -5,6 +5,7 @@ require_once get_stylesheet_directory() . '/functions/dc26-login-screen.php';
 require_once get_stylesheet_directory() . '/functions/dc26-member.php';
 require_once get_stylesheet_directory() . '/functions/dc26-member-api.php';
 require_once get_stylesheet_directory() . '/functions/dc26-gform-prefill.php';
+require_once get_stylesheet_directory() . '/functions/dc26-gform-pilates.php';
 require_once get_stylesheet_directory() . '/functions/dc26-documentation-visibility.php';
 require_once get_stylesheet_directory() . '/functions/dc26-documentation-category.php';
 require_once get_stylesheet_directory() . '/functions/dc26-examen-api.php';
