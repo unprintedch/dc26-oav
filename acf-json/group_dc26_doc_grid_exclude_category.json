@@ -1,0 +1,46 @@
+{
+    "key": "group_dc26_doc_grid_exclude_category",
+    "title": "TAXONOMY – Catégorie (exclusion grille Documentation)",
+    "fields": [
+        {
+            "key": "field_dgec_exclude",
+            "label": "Exclure de la grille Documentation",
+            "name": "exclude_from_doc_grid",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Masque tous les contenus de cette catégorie dans la grille du bloc Documentation listing (annuaire de documents), même s'ils correspondent aux filtres. Un contenu individuel peut aussi être exclu via son propre champ « Exclure de la grille Documentation ».",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "category"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Coche pour retirer toute une catégorie de la grille Documentation (blocks/documentation-listing)",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1789628400
+}

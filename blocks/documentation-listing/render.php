@@ -22,6 +22,22 @@ $is_admin = is_admin();
 
 $type_filter = get_field('type_filter') ?: '';
 
+// Catégories avec la coche "Exclure de la grille Documentation" (ACF field group_dc26_doc_grid_exclude_category).
+$excluded_category_ids = get_terms(array(
+    'taxonomy'   => 'category',
+    'hide_empty' => false,
+    'fields'     => 'ids',
+    'meta_query' => array(
+        array(
+            'key'   => 'exclude_from_doc_grid',
+            'value' => '1',
+        ),
+    ),
+));
+if (is_wp_error($excluded_category_ids)) {
+    $excluded_category_ids = array();
+}
+
 $query_args = array(
     'posts_per_page' => -1,
     'post_type' => array('documentation', 'post', 'page'),
@@ -44,14 +60,28 @@ $query_args = array(
     ),
 );
 
+$tax_query = array();
 if ($type_filter) {
-    $query_args['tax_query'] = array(
-        array(
-            'taxonomy' => 'documentation-type',
-            'field' => 'term_id',
-            'terms' => (int) $type_filter,
-        ),
+    $tax_query[] = array(
+        'taxonomy' => 'documentation-type',
+        'field' => 'term_id',
+        'terms' => (int) $type_filter,
     );
+}
+if ($excluded_category_ids) {
+    // Exclut les contenus dont la catégorie est marquée "Exclure de la grille Documentation".
+    $tax_query[] = array(
+        'taxonomy' => 'category',
+        'field' => 'term_id',
+        'terms' => $excluded_category_ids,
+        'operator' => 'NOT IN',
+    );
+}
+if ($tax_query) {
+    if (count($tax_query) > 1) {
+        $tax_query['relation'] = 'AND';
+    }
+    $query_args['tax_query'] = $tax_query;
 }
 ?>
 
