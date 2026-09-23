@@ -193,7 +193,7 @@ function dc26_sync_member_to_api( int $post_id ): void {
     $all_specs = get_the_terms( $post_id, 'speciality' );
     if ( ! empty( $all_specs ) && ! is_wp_error( $all_specs ) ) {
         foreach ( $all_specs as $term ) {
-            $oav_id = get_field( 'id_specialite_oav', $term );
+            $oav_id = dc26_member_scalar( get_field( 'id_specialite_oav', $term ) );
             if ( $oav_id ) {
                 $spec_ids[] = $oav_id;
             }
@@ -204,7 +204,7 @@ function dc26_sync_member_to_api( int $post_id ): void {
     $all_langs = get_the_terms( $post_id, 'language' );
     if ( ! empty( $all_langs ) && ! is_wp_error( $all_langs ) ) {
         foreach ( $all_langs as $term ) {
-            $oav_id = get_field( 'id_langue_oav', $term );
+            $oav_id = dc26_member_scalar( get_field( 'id_langue_oav', $term ) );
             if ( $oav_id ) {
                 $lang_ids[] = $oav_id;
             }
