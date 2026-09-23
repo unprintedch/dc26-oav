@@ -102,3 +102,24 @@
     color: var(--facet-color-bg, #fff);
     border-color: var(--facet-color-primary);
 }
+
+/* FacetWP fSelect (member-search) — le plugin force white-space:nowrap sur
+   .fs-option-label et .fs-dropdown hérite de la largeur du trigger (sidebar
+   étroite), ce qui tronque les libellés longs sans ellipse ni retour à la
+   ligne. On élargit le panneau ouvert au-delà du trigger sur desktop. */
+.facetwp-type-fselect .fs-dropdown {
+    width: max-content;
+    min-width: 100%;
+    max-width: min(26rem, calc(100vw - 2rem));
+}
+
+@media (max-width: 960px) {
+    .facetwp-type-fselect .fs-dropdown {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .facetwp-type-fselect .fs-option-label {
+        white-space: normal;
+    }
+}
