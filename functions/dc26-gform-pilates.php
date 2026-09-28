@@ -14,7 +14,12 @@ declare(strict_types=1);
 
 /**
  * Parse a "11 septembre 2026" French label into a DateTime at midnight.
- * Returns null when the label doesn't match the expected format.
+ * Matches only the leading date and ignores anything after it, because
+ * GP Inventory (gform_pre_render, default priority) appends stock text
+ * like " 2 places dispo." to the choice before our form-specific filter
+ * runs (Gravity Forms applies the generic gform_pre_render hook first,
+ * then gform_pre_render_{form_id} — see gf_apply_filters()).
+ * Returns null when the label doesn't start with a date in that format.
  */
 function dc26_pilates_parse_date_choice( string $label ): ?DateTime {
     static $months = [
@@ -35,7 +40,7 @@ function dc26_pilates_parse_date_choice( string $label ): ?DateTime {
         'decembre'  => 12,
     ];
 
-    if ( ! preg_match( '/^(\d{1,2})\s+(\p{L}+)\s+(\d{4})$/u', trim( $label ), $matches ) ) {
+    if ( ! preg_match( '/^(\d{1,2})\s+(\p{L}+)\s+(\d{4})/u', trim( $label ), $matches ) ) {
         return null;
     }
 
