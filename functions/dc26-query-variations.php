@@ -1,71 +1,76 @@
 <?php
 /**
  * Query Loop variations pour les conférences du stage.
- * Utilise pre_render_block + pre_get_posts pour injecter
- * le filtre date ACF — plus fiable que query_loop_block_query_vars.
+ * Injecte le filtre date ACF via query_loop_block_query_vars.
  */
 declare(strict_types=1);
 
 /**
- * Capture le namespace du bloc Query Loop juste avant son rendu.
- * Stocké dans un static pour être lu par pre_get_posts.
+ * Namespace du bloc core/query en cours de rendu.
+ *
+ * Le filtre `query_loop_block_query_vars` reçoit le bloc core/post-template,
+ * qui ne porte pas le namespace du bloc Query parent : on le relève donc juste
+ * avant le rendu de chaque core/query. Il n'est jamais « consommé » : chaque
+ * bloc Query le réécrit, ce qui évite le bug où seule la première requête de
+ * la page était filtrée (« Conférences passées » affichait les conférences à venir).
  */
-add_filter( 'pre_render_block', function ( $pre, array $block ) {
-    if ( 'core/query' !== ( $block['blockName'] ?? '' ) ) {
-        return $pre;
-    }
-
-    $namespace = $block['attrs']['namespace'] ?? '';
-    if ( in_array( $namespace, [ 'dc26/conferences-a-venir', 'dc26/conferences-passees' ], true ) ) {
-        dc26_set_conference_namespace( $namespace );
-    }
-
-    return $pre;
-}, 10, 2 );
-
-/**
- * Stockage du namespace courant (static).
- */
-function dc26_set_conference_namespace( string $ns = '' ): string {
+function dc26_conference_current_namespace( ?string $set = null ): string {
     static $current = '';
-    if ( '' !== $ns ) {
-        $current = $ns;
+    if ( null !== $set ) {
+        $current = $set;
     }
     return $current;
 }
 
+add_filter( 'pre_render_block', function ( $pre, array $block ) {
+    if ( 'core/query' === ( $block['blockName'] ?? '' ) ) {
+        dc26_conference_current_namespace( (string) ( $block['attrs']['namespace'] ?? '' ) );
+    }
+    return $pre;
+}, 10, 2 );
+
 /**
- * Injecte le filtre date ACF sur la query de conférences.
+ * Filtre date ACF sur les deux Query Loop de conférences, selon le namespace du bloc.
+ *
+ * Les conférences sans date ACF sont rangées dans « passées » (en fin de liste).
+ *
+ * @param array<string, mixed> $query Query vars du bloc.
+ * @param WP_Block             $block Bloc core/post-template.
+ * @return array<string, mixed>
  */
-add_action( 'pre_get_posts', function ( WP_Query $query ) {
-    $namespace = dc26_set_conference_namespace();
-
-    if ( '' === $namespace ) {
-        return;
-    }
-    if ( 'conference-du-stage' !== $query->get( 'post_type' ) ) {
-        return;
-    }
-
-    $today = date( 'Ymd' );
+add_filter( 'query_loop_block_query_vars', function ( array $query, WP_Block $block ): array {
+    $namespace = dc26_conference_current_namespace();
+    $today     = (int) current_time( 'Ymd' );
 
     if ( 'dc26/conferences-a-venir' === $namespace ) {
-        $query->set( 'meta_key', 'date' );
-        $query->set( 'meta_value', $today );
-        $query->set( 'meta_compare', '>=' );
-        $query->set( 'orderby', 'meta_value' );
-        $query->set( 'order', 'ASC' );
+        $query['meta_query'] = [
+            'dc26_date' => [
+                'key'     => 'date',
+                'value'   => $today,
+                'compare' => '>=',
+                'type'    => 'NUMERIC',
+            ],
+        ];
+        $query['orderby'] = [ 'dc26_date' => 'ASC' ];
     } elseif ( 'dc26/conferences-passees' === $namespace ) {
-        $query->set( 'meta_key', 'date' );
-        $query->set( 'meta_value', $today );
-        $query->set( 'meta_compare', '<' );
-        $query->set( 'orderby', 'meta_value' );
-        $query->set( 'order', 'DESC' );
+        $query['meta_query'] = [
+            'relation'  => 'OR',
+            'dc26_date' => [
+                'key'     => 'date',
+                'value'   => $today,
+                'compare' => '<',
+                'type'    => 'NUMERIC',
+            ],
+            [
+                'key'     => 'date',
+                'compare' => 'NOT EXISTS',
+            ],
+        ];
+        $query['orderby'] = [ 'dc26_date' => 'DESC', 'date' => 'DESC' ];
     }
 
-    // Reset après usage pour ne pas polluer les autres queries.
-    dc26_set_conference_namespace( '__done__' );
-} );
+    return $query;
+}, 20, 2 );
 
 /**
  * Enqueue le script de variations dans l'éditeur.
