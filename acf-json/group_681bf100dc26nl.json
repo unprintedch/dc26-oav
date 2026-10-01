@@ -75,6 +75,27 @@
             "allow_custom": 0,
             "search_placeholder": "",
             "allow_in_bindings": 0
+        },
+        {
+            "key": "field_nl_hide_past",
+            "label": "Masquer les événements passés",
+            "name": "nl_hide_past",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Activé : le lien « Voir les événements passés » et la section des événements passés sont masqués.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -82,7 +103,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "dc26\/news-listing"
+                "value": "dc26/news-listing"
             }
         ]
     ],
@@ -96,5 +117,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1747044000
+    "modified": 1790849728
 }

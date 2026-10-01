@@ -27,6 +27,7 @@ endif;
 $selected_cats  = get_field('nl_categories') ?: [];
 $posts_per_page = (int) (get_field('nl_posts_per_page') ?: 24);
 $columns        = (int) (get_field('nl_columns') ?: 3);
+$show_past_ui   = !get_field('nl_hide_past');
 
 $selected_ids = !empty($selected_cats)
     ? array_map('intval', wp_list_pluck($selected_cats, 'term_id'))
@@ -60,7 +61,7 @@ $all_ids = array_unique($all_ids);
 // Toggle "Événements passés" — lien simple (pas un facet FacetWP), lu depuis
 // l'URL sur le chargement initial ET reconstitué par FacetWP sur ses appels
 // AJAX (load more / pills) via `extras.uri`.
-$show_past_only = isset($_GET['vue']) && $_GET['vue'] === 'passes';
+$show_past_only = $show_past_ui && isset($_GET['vue']) && $_GET['vue'] === 'passes';
 
 $query_args = [
     'post_type'      => ['post', 'documentation'],
@@ -105,11 +106,13 @@ $toggle_url = $show_past_only
             <?php echo facetwp_display('facet', 'categories_news_pills'); ?>
             <?php echo facetwp_display('facet', 'recherche'); ?>
         <?php endif; ?>
+        <?php if ($show_past_ui) : ?>
         <a class="dc26-sub-pill dc26-news-listing__past-toggle<?php echo $show_past_only ? ' is-active' : ''; ?>" href="<?php echo esc_url($toggle_url); ?>">
             <?php echo $show_past_only
                 ? esc_html__('← Voir les événements à venir', 'dc26-oav')
                 : esc_html__('Voir les événements passés', 'dc26-oav'); ?>
         </a>
+        <?php endif; ?>
         <div class="dc26-news-listing__sub-pills" style="display:none"></div>
     </div>
 
@@ -142,7 +145,9 @@ $toggle_url = $show_past_only
     endif;
 
     $upcoming = array_values(array_filter($sortable, fn($item) => !$item['is_past']));
-    $past     = array_values(array_filter($sortable, fn($item) => $item['is_past']));
+    $past     = $show_past_ui
+        ? array_values(array_filter($sortable, fn($item) => $item['is_past']))
+        : [];
 
     usort($upcoming, fn($a, $b) => $a['distance'] <=> $b['distance']);
     usort($past, fn($a, $b) => $a['distance'] <=> $b['distance']);

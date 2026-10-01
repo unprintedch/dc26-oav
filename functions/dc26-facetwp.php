@@ -18,6 +18,56 @@ add_filter('facetwp_query_args', function (array $query_args, $class): array {
 }, 10, 2);
 
 /**
+ * Find a dc26/news-listing block (at any depth) and return its selected category IDs.
+ *
+ * @param array<int, array<string, mixed>> $blocks Parsed blocks.
+ * @return int[]|null Category IDs, or null when the content has no news-listing block.
+ */
+function dc26_news_listing_block_cat_ids(array $blocks): ?array {
+    foreach ($blocks as $block) {
+        if ('dc26/news-listing' === ($block['blockName'] ?? '')) {
+            return array_map('intval', (array) ($block['attrs']['data']['nl_categories'] ?? []));
+        }
+        if (!empty($block['innerBlocks'])) {
+            $found = dc26_news_listing_block_cat_ids($block['innerBlocks']);
+            if (null !== $found) {
+                return $found;
+            }
+        }
+    }
+    return null;
+}
+
+/**
+ * Preselect the "À la une" pill server-side on pages whose news-listing block
+ * offers it, so the first render already matches the highlighted pill (no
+ * "everything" flash while a JS click catches up). Deep-linked selections
+ * (?_categories_news_pills=…) are never overridden.
+ *
+ * FacetWP applies this filter on `init`, before the main query exists, so the
+ * page is resolved from the request URL.
+ */
+add_filter('facetwp_preload_url_vars', function (array $url_vars): array {
+    if (!empty($url_vars['categories_news_pills']) || empty($_SERVER['REQUEST_URI'])) {
+        return $url_vars;
+    }
+
+    $path    = (string) strtok(wp_unslash((string) $_SERVER['REQUEST_URI']), '?');
+    $post_id = url_to_postid(home_url($path));
+    if (!$post_id) {
+        return $url_vars;
+    }
+
+    $default = get_term_by('slug', 'actualite', 'category');
+    $cat_ids = dc26_news_listing_block_cat_ids(parse_blocks((string) get_post_field('post_content', $post_id)));
+    if ($default && null !== $cat_ids && in_array((int) $default->term_id, $cat_ids, true)) {
+        $url_vars['categories_news_pills'] = ['actualite'];
+    }
+
+    return $url_vars;
+});
+
+/**
  * Limit the categories_news_pills facet choices to only the
  * categories selected in the news-listing block.
  */
