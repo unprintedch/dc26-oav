@@ -52,7 +52,9 @@ add_action('template_redirect', function (): void {
         wp_die('Aucune date définie.', 404);
     }
 
-    $titre   = get_the_title($post_id);
+    // get_the_title() renvoie des entités HTML (&#8217; …) : les décoder, sinon
+    // elles s'affichent telles quelles dans l'agenda de l'utilisateur.
+    $titre   = html_entity_decode(wp_strip_all_tags(get_the_title($post_id)), ENT_QUOTES | ENT_HTML5, 'UTF-8');
     $heure   = get_field('heure', $post_id) ?: '';
     $adresse = get_field('adresse', $post_id) ?: '';
     $url     = get_permalink($post_id);
@@ -82,7 +84,13 @@ add_action('template_redirect', function (): void {
 
     $uid  = $post_id . '-' . $date_raw . '@oav.ch';
     $now  = gmdate('Ymd\THis\Z');
-    $slug = sanitize_title($titre);
+    // Nom de fichier strictement ASCII : sanitize_title() laisse des « %c2%b7 »
+    // (ex. « avocat·e »), ce qui fait perdre l'extension .ics sous Windows.
+    $slug = trim((string) preg_replace('/[^a-z0-9]+/', '-', strtolower(remove_accents($titre))), '-');
+    $slug = trim(substr($slug, 0, 80), '-');
+    if ('' === $slug) {
+        $slug = 'evenement';
+    }
 
     $ics = implode("\r\n", [
         'BEGIN:VCALENDAR',
