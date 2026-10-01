@@ -149,9 +149,36 @@ if ( is_user_logged_in() ) {
                     </span>
                 <?php endif; ?> -->
             </div>
+
+            <?php if ( ! empty( $d['specialities'] ) || ! empty( $d['languages'] ) ) : ?>
+            <div class="dc26-member-view__facets">
+                <?php if ( ! empty( $d['specialities'] ) ) : ?>
+                <div class="dc26-member-view__facet">
+                    <h3><?php echo esc_html__( "Domaines d'activités", 'dc26-oav' ); ?></h3>
+                    <ul class="dc26-member-view__tags">
+                        <?php foreach ( $d['specialities'] as $term ) : ?>
+                            <li><span class="dc26-member-view__tag"><?php echo esc_html( $term->name ); ?></span></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <?php endif; ?>
+
+                <?php if ( ! empty( $d['languages'] ) ) : ?>
+                <div class="dc26-member-view__facet">
+                    <h3><?php echo esc_html__( 'Langues', 'dc26-oav' ); ?></h3>
+                    <ul class="dc26-member-view__tags">
+                        <?php foreach ( $d['languages'] as $term ) : ?>
+                            <li><span class="dc26-member-view__tag"><?php echo esc_html( $term->name ); ?></span></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 
+    <?php if ( ! empty( $d['specialities_fsa'] ) || ! empty( $d['commissions'] ) ) : ?>
     <div class="dc26-member-view__sections-wrap alignfull wp-block-group has-gray-light-background-color has-background has-global-padding is-layout-constrained wp-block-group-is-layout-constrained" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)">
 
     <?php if ( ! empty( $d['specialities_fsa'] ) ) : ?>
@@ -162,36 +189,6 @@ if ( is_user_logged_in() ) {
         <div class="dc26-member-view__section-content wp-block-column is-layout-flow wp-block-column-is-layout-flow">
             <ul class="dc26-member-view__tags">
                 <?php foreach ( $d['specialities_fsa'] as $term ) : ?>
-                    <li><span class="dc26-member-view__tag"><?php echo esc_html( $term->name ); ?></span></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </div>
-    <?php endif; ?>
-
-    <?php if ( ! empty( $d['specialities'] ) ) : ?>
-    <div class="dc26-member-view__section wp-block-columns alignwide is-layout-flex wp-block-columns-is-layout-flex">
-        <div class="dc26-member-view__section-label wp-block-column is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:40%">
-            <h3><?php echo esc_html__( "Domaines d'activités", 'dc26-oav' ); ?></h3>
-        </div>
-        <div class="dc26-member-view__section-content wp-block-column is-layout-flow wp-block-column-is-layout-flow">
-            <ul class="dc26-member-view__tags">
-                <?php foreach ( $d['specialities'] as $term ) : ?>
-                    <li><span class="dc26-member-view__tag"><?php echo esc_html( $term->name ); ?></span></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </div>
-    <?php endif; ?>
-
-    <?php if ( ! empty( $d['languages'] ) ) : ?>
-    <div class="dc26-member-view__section wp-block-columns alignwide is-layout-flex wp-block-columns-is-layout-flex">
-        <div class="dc26-member-view__section-label wp-block-column is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:40%">
-            <h3><?php echo esc_html__( 'Langues', 'dc26-oav' ); ?></h3>
-        </div>
-        <div class="dc26-member-view__section-content wp-block-column is-layout-flow wp-block-column-is-layout-flow">
-            <ul class="dc26-member-view__tags">
-                <?php foreach ( $d['languages'] as $term ) : ?>
                     <li><span class="dc26-member-view__tag"><?php echo esc_html( $term->name ); ?></span></li>
                 <?php endforeach; ?>
             </ul>
@@ -220,6 +217,7 @@ if ( is_user_logged_in() ) {
     <?php endif; ?>
 
     </div><!-- /.dc26-member-view__sections-wrap -->
+    <?php endif; ?>
 
     <div class="dc26-member-view__back">
         <a href="<?php echo esc_url( $annuaire_url ); ?>">&larr; <?php echo esc_html__( 'Retour à l\'annuaire', 'dc26-oav' ); ?></a>
