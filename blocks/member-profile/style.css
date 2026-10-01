@@ -70,7 +70,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    aspect-ratio: 3 / 4;
+    max-width: 140px;
+    aspect-ratio: 1 / 1;
     background: var(--wp--preset--color--gray-light, #f4f4f4);
     border-radius: 8px;
     color: var(--wp--preset--color--gray-medium, #8e8e8e);
