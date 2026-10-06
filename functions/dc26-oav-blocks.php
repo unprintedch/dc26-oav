@@ -18,6 +18,11 @@ add_action('init', function (): void {
         'label' => __('Grand accordéon', 'dc26-oav'),
     ]);
 
+    register_block_style('core/table', [
+        'name'  => 'narrow-last-col',
+        'label' => __('Dernière colonne étroite', 'dc26-oav'),
+    ]);
+
     register_block_style('core/page-list', [
         'name'  => 'sitemap',
         'label' => __('Plan du site', 'dc26-oav'),

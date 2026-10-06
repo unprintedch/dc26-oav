@@ -163,3 +163,14 @@ ul.wp-block-page-list.is-style-sitemap ul.wp-block-navigation__submenu-container
 ul.wp-block-page-list.is-style-sitemap ul.wp-block-navigation__submenu-container a.wp-block-pages-list__item__link:hover {
     opacity: 1;
 }
+
+/* Tableau : dernière colonne réduite à son contenu (ex. crédits / Cts) */
+.wp-block-table.is-style-narrow-last-col table {
+    table-layout: auto;
+}
+
+.wp-block-table.is-style-narrow-last-col :is(th, td):last-child {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+}
