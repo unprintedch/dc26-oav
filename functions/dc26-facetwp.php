@@ -110,3 +110,38 @@ add_filter('facetwp_indexer_row_data', function (array $output, array $params): 
 
     return $output;
 }, 10, 2);
+
+/**
+ * Annuaire : membres actifs en premier, puis conseil, invités, UE/AELE et
+ * stagiaires en dernier (au lieu de l'ordre de date, où les stagiaires
+ * récemment importés passaient devant). L'ordre existant sert de départage.
+ *
+ * Activé par l'argument `dc26_statut_priority` de la WP_Query du bloc
+ * member-search ; ignoré quand FacetWP impose un ordre de pertinence
+ * (recherche texte : orderby post__in).
+ */
+add_filter('posts_clauses', function (array $clauses, WP_Query $query): array {
+    if (!$query->get('dc26_statut_priority') || 'post__in' === $query->get('orderby')) {
+        return $clauses;
+    }
+
+    global $wpdb;
+
+    $priority = $wpdb->prepare(
+        "(SELECT MIN(CASE t.slug WHEN %s THEN 0 WHEN %s THEN 1 WHEN %s THEN 2 WHEN %s THEN 3 WHEN %s THEN 4 ELSE 5 END)
+          FROM {$wpdb->term_relationships} tr
+          INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id AND tt.taxonomy = %s
+          INNER JOIN {$wpdb->terms} t ON t.term_id = tt.term_id
+          WHERE tr.object_id = {$wpdb->posts}.ID)",
+        'membre_actif',
+        'avocat_conseil',
+        'membre_invite',
+        'membre_eu_aele',
+        'stagiaire',
+        'statut'
+    );
+
+    $clauses['orderby'] = $priority . ' ASC' . ('' !== trim((string) $clauses['orderby']) ? ', ' . $clauses['orderby'] : '');
+
+    return $clauses;
+}, 10, 2);

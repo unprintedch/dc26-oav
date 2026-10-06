@@ -34,6 +34,8 @@ $query_args = array(
         ),
     ),
     'facetwp' => true,
+    // Membres actifs en premier (voir dc26-facetwp.php).
+    'dc26_statut_priority' => true,
 );
 
 $etude_listing_url = get_permalink(6608);
