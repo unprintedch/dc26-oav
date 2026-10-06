@@ -1,0 +1,68 @@
+.dc26-avantages__preview {
+    border: 1px dashed var(--wp--preset--color--gray-medium);
+    background: var(--wp--preset--color--gray-light);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.dc26-avantages__empty {
+    margin: 0;
+}
+
+.dc26-avantages__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--wp--preset--spacing--40);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.dc26-avantage {
+    display: flex;
+}
+
+.dc26-avantage__link {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+    background: var(--wp--preset--color--gray-light);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.dc26-avantage__media {
+    display: block;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+}
+
+.dc26-avantage__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dc26-avantage__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wp--preset--spacing--20);
+    padding: var(--wp--preset--spacing--40);
+}
+
+.dc26-avantage__title {
+    color: var(--wp--preset--color--primary);
+    font-weight: 500;
+    font-size: var(--wp--preset--font-size--large);
+}
+
+.dc26-avantage__summary {
+    font-size: var(--wp--preset--font-size--medium);
+}
+
+.dc26-avantage__link:hover .dc26-avantage__title {
+    text-decoration: underline;
+}

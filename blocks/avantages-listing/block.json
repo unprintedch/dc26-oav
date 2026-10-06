@@ -1,0 +1,26 @@
+{
+    "name": "dc26/avantages-listing",
+    "title": "Avantages membres",
+    "description": "Grille des avantages réservés aux membres (CPT avantage).",
+    "category": "dc26",
+    "icon": "star-filled",
+    "keywords": [
+        "avantage",
+        "partenaire",
+        "offre",
+        "oav"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "align": [
+            "wide",
+            "full"
+        ],
+        "anchor": true,
+        "customClassName": true
+    }
+}
