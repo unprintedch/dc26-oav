@@ -60,6 +60,12 @@ $query_args = array(
     ),
 );
 
+// Visiteur non connecté : uniquement le contenu public (exclusion dans la requête).
+$hidden_ids = function_exists('dc26_grid_hidden_post_ids') ? dc26_grid_hidden_post_ids($query_args['post_type']) : array();
+if ($hidden_ids) {
+    $query_args['post__not_in'] = $hidden_ids;
+}
+
 $tax_query = array();
 if ($type_filter) {
     $tax_query[] = array(

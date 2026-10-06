@@ -72,6 +72,12 @@ $query_args = [
     'facetwp'        => true,
 ];
 
+// Visiteur non connecté : uniquement le contenu public (exclusion dans la requête).
+$hidden_ids = function_exists('dc26_grid_hidden_post_ids') ? dc26_grid_hidden_post_ids($query_args['post_type']) : [];
+if ($hidden_ids) {
+    $query_args['post__not_in'] = $hidden_ids;
+}
+
 if ($show_past_only) {
     $query_args['meta_key']     = 'date';
     $query_args['orderby']      = 'meta_value_num';
@@ -131,7 +137,7 @@ $toggle_url = $show_past_only
         while ($news_query->have_posts()) :
             $news_query->the_post();
             $pid            = get_the_ID();
-            $date_raw       = get_field('date', $pid, false);
+            $date_raw      = get_field('date', $pid, false);
             $has_event_date = !empty($date_raw);
             $effective_ymd  = $has_event_date ? (int) $date_raw : (int) get_the_date('Ymd');
 
