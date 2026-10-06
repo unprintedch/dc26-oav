@@ -11,7 +11,7 @@
 
 .dc26-avantages__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--wp--preset--spacing--40);
     margin: 0;
     padding: 0;
@@ -22,47 +22,58 @@
     display: flex;
 }
 
+/* Carte façon cover : fond plein, contenu centré */
 .dc26-avantage__link {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--wp--preset--spacing--40);
     width: 100%;
-    color: inherit;
+    min-height: 22rem;
+    padding: var(--wp--preset--spacing--50);
+    box-sizing: border-box;
+    text-align: center;
+    color: var(--wp--preset--color--white);
     text-decoration: none;
-    background: var(--wp--preset--color--gray-light);
-    border-radius: 12px;
-    overflow: hidden;
+    background: var(--wp--preset--color--primary);
 }
 
 .dc26-avantage__media {
     display: block;
-    aspect-ratio: 3 / 2;
-    overflow: hidden;
 }
 
 .dc26-avantage__media img {
     display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.dc26-avantage__body {
-    display: flex;
-    flex-direction: column;
-    gap: var(--wp--preset--spacing--20);
-    padding: var(--wp--preset--spacing--40);
+    width: auto;
+    max-width: 100%;
+    max-height: 10rem;
+    object-fit: contain;
 }
 
 .dc26-avantage__title {
-    color: var(--wp--preset--color--primary);
+    font-size: var(--wp--preset--font-size--x-large);
+    line-height: 1.2;
     font-weight: 500;
-    font-size: var(--wp--preset--font-size--large);
 }
 
-.dc26-avantage__summary {
+.dc26-avantage__button {
+    padding: 0.6em 1.4em;
+    background: var(--wp--preset--color--white);
+    color: var(--wp--preset--color--primary-hover);
     font-size: var(--wp--preset--font-size--medium);
 }
 
-.dc26-avantage__link:hover .dc26-avantage__title {
-    text-decoration: underline;
+.dc26-avantage__link:hover .dc26-avantage__button {
+    background: var(--wp--preset--color--gray-light);
+}
+
+@media (max-width: 640px) {
+    .dc26-avantages__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dc26-avantage__link {
+        min-height: 18rem;
+    }
 }

@@ -41,20 +41,14 @@ $query = new WP_Query( array(
         <p class="dc26-avantages__empty"><?php echo esc_html__( 'Aucun avantage disponible pour le moment.', 'dc26-oav' ); ?></p>
     <?php else : ?>
         <ul class="dc26-avantages__grid">
-            <?php while ( $query->have_posts() ) : $query->the_post();
-                $summary = has_excerpt() ? get_the_excerpt() : wp_trim_words( wp_strip_all_tags( strip_shortcodes( get_the_content() ) ), 24 );
-                ?>
+            <?php while ( $query->have_posts() ) : $query->the_post(); ?>
                 <li class="dc26-avantage">
                     <a class="dc26-avantage__link" href="<?php echo esc_url( get_permalink() ); ?>">
                         <?php if ( has_post_thumbnail() ) : ?>
-                            <span class="dc26-avantage__media"><?php the_post_thumbnail( 'medium_large' ); ?></span>
+                            <span class="dc26-avantage__media"><?php the_post_thumbnail( 'medium' ); ?></span>
                         <?php endif; ?>
-                        <span class="dc26-avantage__body">
-                            <span class="dc26-avantage__title"><?php echo esc_html( get_the_title() ); ?></span>
-                            <?php if ( '' !== $summary ) : ?>
-                                <span class="dc26-avantage__summary"><?php echo esc_html( $summary ); ?></span>
-                            <?php endif; ?>
-                        </span>
+                        <span class="dc26-avantage__title"><?php echo esc_html( get_the_title() ); ?></span>
+                        <span class="dc26-avantage__button"><?php echo esc_html__( 'En savoir plus', 'dc26-oav' ); ?></span>
                     </a>
                 </li>
             <?php endwhile; wp_reset_postdata(); ?>
