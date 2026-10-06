@@ -232,7 +232,11 @@ $toggle_url = $show_past_only
                             <?php endif; ?>
                         </div>
                         <?php elseif ($surtitre) : ?>
-                        <p class="dc26-news-card__surtitle"><?php echo esc_html($surtitre); ?></p>
+                        <div class="dc26-news-card__event">
+                            <div class="dc26-news-card__event-meta">
+                                <span class="dc26-news-card__event-date"><?php echo esc_html($surtitre); ?></span>
+                            </div>
+                        </div>
                         <?php endif; ?>
 
                         <h2 class="dc26-news-card__title"><?php echo esc_html($title); ?></h2>
