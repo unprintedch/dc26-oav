@@ -182,6 +182,7 @@ $toggle_url = $show_past_only
                 }
                 $event_time    = get_field('heure', $post_id) ?: '';
                 $event_adresse = get_field('adresse', $post_id) ?: '';
+                $surtitre      = trim((string) get_field('surtitre', $post_id));
 
                 // Icône — catégorie principale Yoast, fallback première cat par term_id
                 $icon_url        = '';
@@ -205,6 +206,7 @@ $toggle_url = $show_past_only
 
                     <div class="dc26-news-card__top">
 
+                        <?php if ($event_date || $event_time || $event_adresse) : ?>
                         <div class="dc26-news-card__event">
                             <div class="dc26-news-card__event-meta">
                                 <?php if ($event_date) : ?>
@@ -229,8 +231,9 @@ $toggle_url = $show_past_only
                                 <span class="dc26-news-card__event-adresse"><?php echo esc_html($event_adresse); ?></span>
                             <?php endif; ?>
                         </div>
-                   
-
+                        <?php elseif ($surtitre) : ?>
+                        <p class="dc26-news-card__surtitle"><?php echo esc_html($surtitre); ?></p>
+                        <?php endif; ?>
 
                         <h2 class="dc26-news-card__title"><?php echo esc_html($title); ?></h2>
 

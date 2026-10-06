@@ -196,3 +196,13 @@
 .dc26-news-card:hover .dc26-news-card__readmore::after {
     transform: translateX(3px);
 }
+
+/* Surtitre (cartes non-événement) */
+.dc26-news-card__surtitle {
+    margin: 0 0 var(--wp--preset--spacing--40);
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--wp--preset--color--primary);
+}
