@@ -70,6 +70,8 @@ $query_args = [
     'orderby'        => 'date',
     'order'          => 'DESC',
     'facetwp'        => true,
+    // Ordre chronologique calculé dans la requête (voir dc26-facetwp.php).
+    'dc26_event_order' => true,
 ];
 
 // Visiteur non connecté : uniquement le contenu public (exclusion dans la requête).
@@ -88,6 +90,17 @@ if ($show_past_only) {
         'compare' => '<',
         'type'    => 'NUMERIC',
     ]];
+}
+
+// Pas d'UI "passés" : on les exclut dans la requête (pas après coup), pour que
+// pagination et "Charger plus" restent justes.
+if (!$show_past_ui) {
+    $query_args['meta_query'] = [
+        'relation' => 'OR',
+        ['key' => 'date', 'compare' => 'NOT EXISTS'],
+        ['key' => 'date', 'value' => '', 'compare' => '='],
+        ['key' => 'date', 'value' => (int) current_time('Ymd'), 'compare' => '>=', 'type' => 'NUMERIC'],
+    ];
 }
 
 if (!empty($all_ids)) {
@@ -123,12 +136,12 @@ $toggle_url = $show_past_only
     </div>
 
     <?php
-    // Tri par proximité de date (le plus proche d'aujourd'hui en premier) — un post
-    // sans date d'événement ACF est toujours considéré "à venir" et trié par date de
-    // publication ; seul un événement dont la date ACF est passée descend dans la
-    // section "passés".
+    // L'ordre vient de la requête (dc26_event_order) : à venir du plus proche au
+    // plus lointain, puis événements passés du plus récent au plus ancien. Ici on
+    // ne fait que répartir la page en deux sections, sans retrier.
     $today_ymd = (int) current_time('Ymd');
-    $sortable  = [];
+    $upcoming  = [];
+    $past      = [];
 
     $news_query   = new WP_Query($query_args);
     $current_page = (int) ($news_query->query_vars['paged'] ?? 1) ?: 1;
@@ -136,27 +149,40 @@ $toggle_url = $show_past_only
     if ($news_query->have_posts()) :
         while ($news_query->have_posts()) :
             $news_query->the_post();
-            $pid            = get_the_ID();
-            $date_raw      = get_field('date', $pid, false);
-            $has_event_date = !empty($date_raw);
-            $effective_ymd  = $has_event_date ? (int) $date_raw : (int) get_the_date('Ymd');
+            $pid      = get_the_ID();
+            $date_raw = get_field('date', $pid, false);
+            $is_past  = !empty($date_raw) && (int) $date_raw < $today_ymd;
 
-            $sortable[] = [
-                'post_id'  => $pid,
-                'is_past'  => $has_event_date && $effective_ymd < $today_ymd,
-                'distance' => abs($effective_ymd - $today_ymd),
-            ];
+            if ($is_past) {
+                $past[] = ['post_id' => $pid];
+            } else {
+                $upcoming[] = ['post_id' => $pid];
+            }
         endwhile;
         wp_reset_postdata();
     endif;
 
-    $upcoming = array_values(array_filter($sortable, fn($item) => !$item['is_past']));
-    $past     = $show_past_ui
-        ? array_values(array_filter($sortable, fn($item) => $item['is_past']))
-        : [];
-
-    usort($upcoming, fn($a, $b) => $a['distance'] <=> $b['distance']);
-    usort($past, fn($a, $b) => $a['distance'] <=> $b['distance']);
+    // Le titre "Événements passés" s'affiche au premier passé de toute la liste :
+    // sur cette page s'il suit des "à venir", ou si l'élément précédent (fin de la
+    // page d'avant) était encore "à venir".
+    $show_past_heading = false;
+    if (!empty($past)) {
+        if (!empty($upcoming) || 1 === $current_page) {
+            $show_past_heading = true;
+        } else {
+            $prev_vars = $news_query->query_vars;
+            unset($prev_vars['paged']);
+            $prev_vars['offset']         = ($current_page - 1) * $posts_per_page - 1;
+            $prev_vars['posts_per_page'] = 1;
+            $prev_vars['fields']         = 'ids';
+            $prev_vars['no_found_rows']  = true;
+            $prev_ids = (new WP_Query($prev_vars))->posts;
+            if (!empty($prev_ids)) {
+                $prev_raw = get_field('date', (int) $prev_ids[0], false);
+                $show_past_heading = empty($prev_raw) || (int) $prev_raw >= $today_ymd;
+            }
+        }
+    }
 
     $render_card = function ($post_id, $is_past = false) {
                 $permalink  = get_permalink($post_id);
@@ -280,7 +306,7 @@ $toggle_url = $show_past_only
         <?php foreach ($upcoming as $item) : $render_card($item['post_id']); endforeach; ?>
 
         <?php if (!empty($past)) : ?>
-            <?php if ($current_page <= 1) : ?>
+            <?php if ($show_past_heading) : ?>
                 <h2 class="dc26-news-listing__section-title"><?php esc_html_e('Événements passés', 'dc26-oav'); ?></h2>
             <?php endif; ?>
             <?php foreach ($past as $item) : $render_card($item['post_id'], true); endforeach; ?>

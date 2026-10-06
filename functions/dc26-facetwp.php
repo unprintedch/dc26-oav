@@ -145,3 +145,34 @@ add_filter('posts_clauses', function (array $clauses, WP_Query $query): array {
 
     return $clauses;
 }, 10, 2);
+
+/**
+ * Grille d'actualités/agenda : ordre chronologique calculé dans la requête
+ * (et non page par page), pour que « Charger plus » prolonge l'ordre sans
+ * rupture : d'abord les contenus à venir, du plus proche au plus lointain,
+ * puis les événements passés, du plus récent au plus ancien.
+ *
+ * Un contenu sans date d'événement (champ ACF `date`) est « à venir » et
+ * se positionne selon sa date de publication.
+ *
+ * Activé par l'argument `dc26_event_order` de la WP_Query du bloc news-listing.
+ */
+add_filter('posts_clauses', function (array $clauses, WP_Query $query): array {
+    if (!$query->get('dc26_event_order')) {
+        return $clauses;
+    }
+
+    global $wpdb;
+
+    $event_date = "(SELECT pm.meta_value FROM {$wpdb->postmeta} pm WHERE pm.post_id = {$wpdb->posts}.ID AND pm.meta_key = 'date' AND pm.meta_value <> '' LIMIT 1)";
+    $effective  = "COALESCE({$event_date}, DATE_FORMAT({$wpdb->posts}.post_date, '%Y%m%d'))";
+    $today      = (int) current_time('Ymd');
+
+    // $today est un entier issu de current_time() : pas de prepare() ici, il
+    // traiterait les %Y%m%d des formats de date comme des placeholders.
+    $clauses['orderby'] = "({$event_date} IS NOT NULL AND {$event_date} < {$today}) ASC,
+         ABS(DATEDIFF(STR_TO_DATE({$effective}, '%Y%m%d'), STR_TO_DATE('{$today}', '%Y%m%d'))) ASC,
+         {$wpdb->posts}.ID DESC";
+
+    return $clauses;
+}, 11, 2);
