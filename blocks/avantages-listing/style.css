@@ -39,12 +39,11 @@
     color: var(--wp--preset--color--primary);
     text-decoration: none;
     background: var(--wp--preset--color--gray-light);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .dc26-avantage__media {
     display: block;
-    overflow: hidden;
 }
 
 .dc26-avantage__media img {
@@ -53,7 +52,6 @@
     max-width: 100%;
     max-height: 10rem;
     object-fit: contain;
-    transition: transform 0.4s ease;
 }
 
 .dc26-avantage__title {
@@ -71,16 +69,11 @@
     transition: background-color 0.3s ease;
 }
 
-/* Hover : légère élévation, zoom du visuel, bouton qui s'assombrit */
+/* Hover : même effet que les cards news / membres */
 .dc26-avantage__link:hover,
 .dc26-avantage__link:focus-visible {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-}
-
-.dc26-avantage__link:hover .dc26-avantage__media img,
-.dc26-avantage__link:focus-visible .dc26-avantage__media img {
-    transform: scale(1.04);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .dc26-avantage__link:hover .dc26-avantage__button,
@@ -90,14 +83,12 @@
 
 @media (prefers-reduced-motion: reduce) {
     .dc26-avantage__link,
-    .dc26-avantage__media img,
     .dc26-avantage__button {
         transition: none;
     }
 
     .dc26-avantage__link:hover,
-    .dc26-avantage__link:focus-visible,
-    .dc26-avantage__link:hover .dc26-avantage__media img {
+    .dc26-avantage__link:focus-visible {
         transform: none;
     }
 }
