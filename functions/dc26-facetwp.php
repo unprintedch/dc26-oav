@@ -176,3 +176,15 @@ add_filter('posts_clauses', function (array $clauses, WP_Query $query): array {
 
     return $clauses;
 }, 11, 2);
+
+/**
+ * Libellés français pour le filtre « Période » (date_range) de FacetWP.
+ */
+add_filter('facetwp_i18n', function (string $string): string {
+    $labels = [
+        'Start date' => 'Du',
+        'End date'   => 'Au',
+        'Date'       => 'Date',
+    ];
+    return $labels[$string] ?? $string;
+});

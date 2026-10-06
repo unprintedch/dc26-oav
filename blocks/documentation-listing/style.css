@@ -19,13 +19,13 @@
 
 .dc26-doc-listing__search,
 .dc26-doc-listing__types,
-.dc26-doc-listing__news-cat,
+.dc26-doc-listing__themes,
 .dc26-doc-listing__dates {
     min-width: 0;
 }
 
 .dc26-doc-listing__types .facetwp-type-dropdown,
-.dc26-doc-listing__news-cat .facetwp-type-dropdown,
+.dc26-doc-listing__themes .facetwp-type-dropdown,
 .dc26-doc-listing__dates .facetwp-type-dropdown {
     box-sizing: border-box;
     height: 3rem;
@@ -46,9 +46,22 @@
 
 .dc26-doc-listing__search .facetwp-search,
 .dc26-doc-listing__types .facetwp-dropdown,
-.dc26-doc-listing__news-cat .facetwp-dropdown,
+.dc26-doc-listing__themes .facetwp-dropdown,
 .dc26-doc-listing__dates .facetwp-dropdown {
     width: 100%;
+}
+
+/* Période : deux champs date côte à côte */
+.dc26-doc-listing__dates .facetwp-type-date_range {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.dc26-doc-listing__dates .facetwp-date {
+    box-sizing: border-box;
+    width: 100%;
+    height: 3rem;
+    padding: 0 12px;
 }
 
 @media (max-width: 900px) {

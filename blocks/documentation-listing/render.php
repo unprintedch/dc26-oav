@@ -112,14 +112,14 @@ if ($tax_query) {
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
-                <div class="dc26-doc-listing__news-cat">
+                <div class="dc26-doc-listing__themes">
                     <?php if (function_exists('facetwp_display')) : ?>
-                        <?php echo facetwp_display('facet', 'news_cat'); ?>
+                        <?php echo facetwp_display('facet', 'documentation_theme'); ?>
                     <?php endif; ?>
                 </div>
                 <div class="dc26-doc-listing__dates">
                     <?php if (function_exists('facetwp_display')) : ?>
-                        <?php echo facetwp_display('facet', 'date_de_publication'); ?>
+                        <?php echo facetwp_display('facet', 'date_range_doc'); ?>
                     <?php endif; ?>
                 </div>
                 <button class="dc26-doc-listing__reset" type="button" onclick="FWP.reset()">
@@ -153,7 +153,10 @@ if ($tax_query) {
                                 $post_link = get_permalink($post_id);
                                 ?>
                                 <?php
-                                $taxonomies = ['category', 'post_tag', 'documentation-type'];
+                                // Documents : nature + thème. Articles / pages : catégorie + étiquettes.
+                                $taxonomies = 'documentation' === get_post_type($post_id)
+                                    ? ['documentation-type', 'documentation-theme']
+                                    : ['category', 'post_tag'];
                                 $terms      = [];
                                 foreach ($taxonomies as $tax) {
                                     $t = get_the_terms($post_id, $tax);
