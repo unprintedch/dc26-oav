@@ -11,7 +11,7 @@
 
 .dc26-avantages__grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--wp--style--block-gap, 2em);
     margin: 0 !important;
     padding: 0 !important;
@@ -29,7 +29,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     gap: var(--wp--preset--spacing--40);
     width: 100%;
     min-height: 22rem;
@@ -43,7 +43,10 @@
 }
 
 .dc26-avantage__media {
-    display: block;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
 }
 
 .dc26-avantage__media img {
@@ -55,7 +58,10 @@
 }
 
 .dc26-avantage__title {
-    font-size: var(--wp--preset--font-size--large);
+    display: flex;
+    align-items: center;
+    min-height: 2.6em; /* 2 lignes : les boutons restent alignés d'une carte à l'autre */
+    font-size: var(--wp--preset--font-size--card-title, 24px);
     line-height: 1.3;
     font-weight: 500;
 }
@@ -65,7 +71,7 @@
     border-radius: 999px;
     background: var(--wp--preset--color--primary);
     color: var(--wp--preset--color--white);
-    font-size: var(--wp--preset--font-size--medium);
+    font-size: var(--wp--preset--font-size--small);
     transition: background-color 0.3s ease;
 }
 
@@ -93,6 +99,12 @@
     }
 }
 
+@media (max-width: 1024px) {
+    .dc26-avantages__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
 @media (max-width: 640px) {
     .dc26-avantages__grid {
         grid-template-columns: 1fr;
@@ -101,4 +113,12 @@
     .dc26-avantage__link {
         min-height: 18rem;
     }
+}
+
+.dc26-avantages__group-title {
+    margin: var(--wp--preset--spacing--60) 0 var(--wp--preset--spacing--40);
+}
+
+.dc26-avantages__group-title:first-child {
+    margin-top: 0;
 }

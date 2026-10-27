@@ -1,0 +1,47 @@
+{
+    "key": "group_dc26_avantage_categorie",
+    "title": "AVANTAGE CATÉGORIE – Ordre",
+    "fields": [
+        {
+            "key": "field_av_cat_ordre",
+            "label": "Ordre",
+            "name": "ordre",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Position d’affichage de la catégorie (1 = en premier). Les catégories sans valeur passent à la fin.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": 0,
+            "max": "",
+            "step": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "avantage-categorie"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1792100000
+}

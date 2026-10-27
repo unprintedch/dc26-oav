@@ -68,7 +68,9 @@
         "thumbnail",
         "excerpt"
     ],
-    "taxonomies": [],
+    "taxonomies": [
+        "avantage-categorie"
+    ],
     "has_archive": 0,
     "has_archive_slug": "",
     "rewrite": {
