@@ -70,9 +70,13 @@ $member_link_map = dc26_commissions_member_permalink_map();
                                 $president_info = is_array( $president['info_commission'] ?? null ) ? '' : trim( (string) ( $president['info_commission'] ?? '' ) );
                                 $president_url  = $member_link_map[ $president_id ] ?? '';
                                 $president_genre = trim( (string) ( $president['genre'] ?? '' ) );
-                                $president_role  = 'F' === $president_genre ? __( 'Présidente', 'dc26-oav' ) : __( 'Président', 'dc26-oav' );
+                                if ( count( $presidents ) > 1 ) {
+                                    $president_role = 'F' === $president_genre ? __( 'Coprésidente', 'dc26-oav' ) : __( 'Coprésident', 'dc26-oav' );
+                                } else {
+                                    $president_role = 'F' === $president_genre ? __( 'Présidente', 'dc26-oav' ) : __( 'Président', 'dc26-oav' );
+                                }
                                 if ( '' !== $president_info ) {
-                                    $president_role .= ' ' . $president_info;
+                                    $president_role .= ' – ' . $president_info;
                                 }
                                 ?>
                                 <div class="dc26-commission__president-block">
