@@ -76,10 +76,6 @@ $member_link_map = dc26_commissions_member_permalink_map();
                                 } else {
                                     $president_role = 'F' === $president_genre ? __( 'Présidente', 'dc26-oav' ) : __( 'Président', 'dc26-oav' );
                                 }
-                                // Le titre est déjà généré : on ignore une mention « Coprésident… » saisie côté API.
-                                if ( 0 === stripos( $president_info, 'coprésid' ) ) {
-                                    $president_info = '';
-                                }
                                 if ( '' !== $president_info ) {
                                     $president_role .= ' ' . $president_info;
                                 }
