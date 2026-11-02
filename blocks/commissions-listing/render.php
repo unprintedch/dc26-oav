@@ -48,17 +48,13 @@ $member_link_map = dc26_commissions_member_permalink_map();
                     $lawyers_raw = $commission['avocats']['avocat'] ?? [];
                     $lawyers     = dc26_commissions_normalize_items( $lawyers_raw, 'id' );
 
-                    $president_index = null;
+                    // Une commission peut avoir plusieurs président.e.s (co-présidence).
+                    $presidents = [];
                     foreach ( $lawyers as $idx => $lawyer ) {
                         if ( '1' === (string) ( $lawyer['est_president_commission'] ?? '' ) ) {
-                            $president_index = $idx;
-                            break;
+                            $presidents[] = $lawyer;
+                            unset( $lawyers[ $idx ] );
                         }
-                    }
-                    $president = null;
-                    if ( null !== $president_index ) {
-                        $president = $lawyers[ $president_index ];
-                        unset( $lawyers[ $president_index ] );
                     }
                     ?>
                     <article class="dc26-commission">
@@ -68,7 +64,7 @@ $member_link_map = dc26_commissions_member_permalink_map();
                         </div>
 
                         <div class="dc26-commission__content">
-                            <?php if ( is_array( $president ) ) :
+                            <?php foreach ( $presidents as $president ) :
                                 $president_id   = trim( (string) ( $president['id'] ?? '' ) );
                                 $president_name = trim( (string) ( ( $president['prenom'] ?? '' ) . ' ' . ( $president['nom'] ?? '' ) ) );
                                 $president_info = is_array( $president['info_commission'] ?? null ) ? '' : trim( (string) ( $president['info_commission'] ?? '' ) );
@@ -85,7 +81,7 @@ $member_link_map = dc26_commissions_member_permalink_map();
                                     </h3>
                                     <h3 class="dc26-commission__president-role"><?php echo esc_html( $president_role ); ?></h3>
                                 </div>
-                            <?php endif; ?>
+                            <?php endforeach; ?>
 
                             <?php if ( ! empty( $lawyers ) ) : ?>
                                 <details class="dc26-commission__members">
