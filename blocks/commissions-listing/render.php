@@ -75,6 +75,8 @@ $member_link_map = dc26_commissions_member_permalink_map();
                                 } else {
                                     $president_role = 'F' === $president_genre ? __( 'Présidente', 'dc26-oav' ) : __( 'Président', 'dc26-oav' );
                                 }
+                                // L'API fournit parfois déjà un tiret en tête : on le retire pour éviter « – – ».
+                                $president_info = trim( (string) preg_replace( '/^[\s\-–—]+/u', '', $president_info ) );
                                 if ( '' !== $president_info ) {
                                     $president_role .= ' – ' . $president_info;
                                 }
