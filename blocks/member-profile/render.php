@@ -404,14 +404,14 @@ wp_enqueue_script( 'tom-select', $ts_base . '/tom-select.complete.min.js', [], (
             <button type="button" class="dc26-member-profile__edit-btn"><?php echo esc_html__( 'Modifier', 'dc26-oav' ); ?></button>
         </div>
         <div class="dc26-member-profile__display">
-            <ul class="dc26-member-profile__tags" data-lists-display>
-                <?php foreach ( $member_lists as $list ) : ?>
-                    <?php if ( $list['on'] ) : ?>
-                        <li><span class="dc26-member-profile__tag"><?php echo esc_html( $list['label'] ); ?></span></li>
-                    <?php endif; ?>
+            <ul class="dc26-member-profile__lists" data-lists-display>
+                <?php foreach ( $member_lists as $list_key => $list ) : ?>
+                    <li class="<?php echo $list['on'] ? 'is-on' : 'is-off'; ?>" data-list="<?php echo esc_attr( $list_key ); ?>">
+                        <span class="dc26-member-profile__list-label"><?php echo esc_html( $list['label'] ); ?></span>
+                        <span class="dc26-member-profile__list-state"><?php echo esc_html( $list['on'] ? __( 'Inscrit·e', 'dc26-oav' ) : __( 'Non inscrit·e', 'dc26-oav' ) ); ?></span>
+                    </li>
                 <?php endforeach; ?>
             </ul>
-            <p class="dc26-member-profile__empty" data-lists-empty<?php echo array_filter( array_column( $member_lists, 'on' ) ) ? ' hidden' : ''; ?>><?php echo esc_html__( 'Aucune liste sélectionnée.', 'dc26-oav' ); ?></p>
         </div>
         <form class="dc26-member-profile__form">
             <fieldset class="dc26-member-profile__field dc26-member-profile__checks">

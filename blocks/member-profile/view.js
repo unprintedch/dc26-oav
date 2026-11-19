@@ -198,15 +198,14 @@
         }
 
         if (sectionName === 'lists') {
-          var listEl  = section.querySelector('[data-lists-display]');
-          var emptyEl = section.querySelector('[data-lists-empty]');
-          var checked = Array.from(form.querySelectorAll('input[type="checkbox"]:checked'));
-          if (listEl) {
-            listEl.innerHTML = checked.map(function (c) {
-              return '<li><span class="dc26-member-profile__tag">' + escapeHtml(c.parentNode.textContent.trim()) + '</span></li>';
-            }).join('');
-          }
-          if (emptyEl) emptyEl.hidden = checked.length > 0;
+          var onKeys = Array.from(form.querySelectorAll('input[type="checkbox"]:checked')).map(function (c) {
+            return c.value;
+          });
+          section.querySelectorAll('[data-list]').forEach(function (li) {
+            var on = onKeys.indexOf(li.dataset.list) !== -1;
+            li.className = on ? 'is-on' : 'is-off';
+            li.querySelector('.dc26-member-profile__list-state').textContent = on ? 'Inscrit·e' : 'Non inscrit·e';
+          });
         } else if (result.data.data) {
           updateDisplayFromData(section, sectionName, result.data.data);
         }

@@ -794,3 +794,25 @@
     width: auto;
     margin: 0;
 }
+
+.dc26-member-profile__lists {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dc26-member-profile__lists li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+}
+
+.dc26-member-profile__lists .is-off {
+    opacity: 0.55;
+}
+
+.dc26-member-profile__lists .is-on .dc26-member-profile__list-state {
+    font-weight: 600;
+}
