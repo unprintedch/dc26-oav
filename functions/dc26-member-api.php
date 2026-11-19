@@ -98,6 +98,14 @@ function dc26_rest_member_update( WP_REST_Request $request ): WP_REST_Response {
             wp_set_object_terms( $post_id, array_map( 'absint', $term_ids ), 'language', false );
             break;
 
+        case 'lists':
+            $selected = $request->get_param( 'lists' );
+            $selected = is_array( $selected ) ? array_map( 'sanitize_key', $selected ) : [];
+            foreach ( dc26_member_lists() as $key => $list ) {
+                update_field( $list['field'], in_array( $key, $selected, true ) ? 1 : 0, $post_id );
+            }
+            break;
+
         case 'password':
             $current  = $request->get_param( 'current_password' ) ?? '';
             $new_pass = $request->get_param( 'new_password' ) ?? '';
@@ -211,19 +219,9 @@ function dc26_sync_member_to_api( int $post_id ): void {
         }
     }
 
-    $domaine_fields = [
-        'domaine1' => 'avocat_plafa',
-        'domaine2' => 'avocat_enlevement_enfant',
-        'domaine3' => 'avocat_procedure_mesure_contrainte',
-        'domaine4' => 'permanence_avocats_1ere_heure',
-        'domaine5' => 'defenseur_office',
-        'domaine6' => 'appels_en_dehors',
-        'domaine7' => 'avocat_mpc',
-        'domaine8' => 'curatelles',
-    ];
     $domaines = [];
-    foreach ( $domaine_fields as $key => $acf_field ) {
-        $domaines[ $key ] = get_field( $acf_field, $post_id ) ? '1' : '';
+    foreach ( dc26_member_lists() as $key => $list ) {
+        $domaines[ $key ] = get_field( $list['field'], $post_id ) ? '1' : '';
     }
 
     $body = array_merge(

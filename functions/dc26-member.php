@@ -264,3 +264,24 @@ function dc26_get_member_data( int $post_id ): array {
         'commissions'        => $commissions,
     ];
 }
+
+
+/**
+ * Listes auxquelles un membre peut s'inscrire (même ordre et mêmes champs
+ * que l'ancien formulaire « Demande de modification »).
+ *
+ * La clé est le nom du paramètre envoyé à Kena (`request-update-avocat.php`).
+ *
+ * @return array<string, array{field: string, label: string}>
+ */
+function dc26_member_lists(): array {
+    return [
+        'domaine1' => [ 'field' => 'avocat_plafa',                       'label' => 'PLAFA' ],
+        'domaine2' => [ 'field' => 'avocat_enlevement_enfant',           'label' => "Enlèvement d'enfants" ],
+        'domaine3' => [ 'field' => 'avocat_procedure_mesure_contrainte', 'label' => 'Mesures de contrainte' ],
+        'domaine4' => [ 'field' => 'permanence_avocats_1ere_heure',      'label' => 'Première heure' ],
+        'domaine5' => [ 'field' => 'defenseur_office',                   'label' => "Défense d'office" ],
+        'domaine6' => [ 'field' => 'appels_en_dehors',                   'label' => 'Appels en dehors' ],
+        'domaine7' => [ 'field' => 'curatelles',                         'label' => 'Curatelles 308 al. 2 CC' ],
+    ];
+}

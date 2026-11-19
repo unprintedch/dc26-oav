@@ -162,6 +162,10 @@
           return parseInt(o.value, 10);
         });
       }
+    } else if (sectionName === 'lists') {
+      body.lists = Array.from(form.querySelectorAll('input[type="checkbox"]:checked')).map(function (c) {
+        return c.value;
+      });
     } else {
       var inputs = form.querySelectorAll('input[name], select[name], textarea[name]');
       inputs.forEach(function (input) {
@@ -193,7 +197,17 @@
           return;
         }
 
-        if (result.data.data) {
+        if (sectionName === 'lists') {
+          var listEl  = section.querySelector('[data-lists-display]');
+          var emptyEl = section.querySelector('[data-lists-empty]');
+          var checked = Array.from(form.querySelectorAll('input[type="checkbox"]:checked'));
+          if (listEl) {
+            listEl.innerHTML = checked.map(function (c) {
+              return '<li><span class="dc26-member-profile__tag">' + escapeHtml(c.parentNode.textContent.trim()) + '</span></li>';
+            }).join('');
+          }
+          if (emptyEl) emptyEl.hidden = checked.length > 0;
+        } else if (result.data.data) {
           updateDisplayFromData(section, sectionName, result.data.data);
         }
 

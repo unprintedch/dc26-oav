@@ -62,6 +62,10 @@ $member_spec_ids = array_merge(
     array_map( fn( $t ) => $t->term_id, $d['specialities_fsa'] ),
     array_map( fn( $t ) => $t->term_id, $d['specialities'] )
 );
+$member_lists    = [];
+foreach ( dc26_member_lists() as $list_key => $list ) {
+    $member_lists[ $list_key ] = [ 'label' => $list['label'], 'on' => (bool) get_field( $list['field'], $member_post->ID ) ];
+}
 $member_lang_ids = array_map( fn( $t ) => $t->term_id, $d['languages'] );
 
 $ts_base = get_template_directory_uri() . '/assets/vendor/tom-select';
@@ -385,6 +389,40 @@ wp_enqueue_script( 'tom-select', $ts_base . '/tom-select.complete.min.js', [], (
                     <?php endforeach; ?>
                 </select>
             </div>
+            <div class="dc26-member-profile__form-actions">
+                <button type="submit" class="dc26-member-profile__save-btn"><?php echo esc_html__( 'Enregistrer', 'dc26-oav' ); ?></button>
+                <button type="button" class="dc26-member-profile__cancel-btn" aria-label="<?php echo esc_attr__( 'Annuler', 'dc26-oav' ); ?>">&times;</button>
+            </div>
+            <div class="dc26-member-profile__feedback" aria-live="polite"></div>
+        </form>
+    </div>
+
+    <!-- Listes -->
+    <div class="dc26-member-profile__card" data-section="lists">
+        <div class="dc26-member-profile__section-header">
+            <h3><?php echo esc_html__( 'Listes', 'dc26-oav' ); ?></h3>
+            <button type="button" class="dc26-member-profile__edit-btn"><?php echo esc_html__( 'Modifier', 'dc26-oav' ); ?></button>
+        </div>
+        <div class="dc26-member-profile__display">
+            <ul class="dc26-member-profile__tags" data-lists-display>
+                <?php foreach ( $member_lists as $list ) : ?>
+                    <?php if ( $list['on'] ) : ?>
+                        <li><span class="dc26-member-profile__tag"><?php echo esc_html( $list['label'] ); ?></span></li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+            <p class="dc26-member-profile__empty" data-lists-empty<?php echo array_filter( array_column( $member_lists, 'on' ) ) ? ' hidden' : ''; ?>><?php echo esc_html__( 'Aucune liste sélectionnée.', 'dc26-oav' ); ?></p>
+        </div>
+        <form class="dc26-member-profile__form">
+            <fieldset class="dc26-member-profile__field dc26-member-profile__checks">
+                <legend><?php echo esc_html__( "Inscription aux listes", 'dc26-oav' ); ?></legend>
+                <?php foreach ( $member_lists as $list_key => $list ) : ?>
+                    <label>
+                        <input type="checkbox" name="lists[]" value="<?php echo esc_attr( $list_key ); ?>" <?php checked( $list['on'] ); ?>>
+                        <span><?php echo esc_html( $list['label'] ); ?></span>
+                    </label>
+                <?php endforeach; ?>
+            </fieldset>
             <div class="dc26-member-profile__form-actions">
                 <button type="submit" class="dc26-member-profile__save-btn"><?php echo esc_html__( 'Enregistrer', 'dc26-oav' ); ?></button>
                 <button type="button" class="dc26-member-profile__cancel-btn" aria-label="<?php echo esc_attr__( 'Annuler', 'dc26-oav' ); ?>">&times;</button>
