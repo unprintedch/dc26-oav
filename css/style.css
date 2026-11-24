@@ -4,6 +4,7 @@
 @import "_button-variants.css";
 @import "_header-sticky.css";
 @import "facet-reset.css";
+@import "_facet-sort.css";
 @import "_block-style.css";
 @import "_block-style_accordion.css";
 @import "accordion-tabs.css";

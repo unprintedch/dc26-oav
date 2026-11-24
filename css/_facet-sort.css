@@ -1,0 +1,57 @@
+/* OAV — sélecteur de tri « sort_firm » (boutons-bascule). Déplacé depuis dc26-base v1.2.2 (css/facet-reset.css).
+   Utilise les variables --facet-* : définies par dc26-base v1, puis par le module facetwp de dc26-library. */
+
+.facetwp-facet-sort_firm {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.facetwp-facet-sort_firm select {
+    display: block;
+}
+
+.facetwp-facet-sort_firm.has-sort-toggle select {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.dc26-sort-toggle {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+   
+    border-radius: var(--facet-radius-pill);
+    overflow: hidden;
+    background: var(--facet-color-bg);
+}
+
+.dc26-sort-toggle__button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    flex: 1 1 0;
+    padding: 0.5rem 1rem;
+    font-size: var(--facet-font-size);
+    color: var(--facet-color-primary);
+    cursor: pointer;
+    line-height: 1.2;
+    text-align: center;
+    border-radius: var(--facet-radius-pill);
+}
+
+.dc26-sort-toggle__button.is-active {
+    background: var(--facet-color-primary);
+    color: var(--facet-color-bg);
+}
+
+.dc26-sort-toggle__button:focus-visible {
+    outline: 2px solid var(--facet-color-primary);
+    outline-offset: 2px;
+}
