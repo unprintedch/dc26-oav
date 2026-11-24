@@ -1,0 +1,42 @@
+{
+    "key": "group_dc26_avantage_lien",
+    "title": "AVANTAGE – Lien externe",
+    "fields": [
+        {
+            "key": "field_av_lien_externe",
+            "label": "Lien externe",
+            "name": "lien_externe",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Optionnel. Si renseigné, la carte pointe vers cette adresse (nouvel onglet) au lieu de la fiche.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https:\/\/"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "avantage"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1792000000
+}

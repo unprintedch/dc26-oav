@@ -51,6 +51,16 @@ echo "Building dc26-oav..."
 npm run build
 
 # ── 4. Deploy (sans --delete) ───────────────────────────────────────────────
+# ⚠️  AVERTISSEMENT : dc26-base est envoyé tel quel depuis le dossier de travail
+#    (WIP + commits non validés pour CE site). Modèle sûr : voir
+#    themes/dc26-ejma/deploy.sh (base seulement via --base, depuis un tag figé).
+echo "⚠️  ATTENTION : dc26-base va être déployé depuis le dossier de travail (version non figée)."
+echo "   Dernier commit : $(git -C "$THEMES_DIR/dc26-base" log -1 --format='%h %ad %s' --date=short)"
+if [[ -n "$(git -C "$THEMES_DIR/dc26-base" status --porcelain)" ]]; then
+  echo "   → modifications NON commitées dans dc26-base :"
+  git -C "$THEMES_DIR/dc26-base" status --short | sed 's/^/     /'
+fi
+
 echo "Deploying dc26-base..."
 rsync -avz "${EXCLUDE[@]}" "$THEMES_DIR/dc26-base/" "$REMOTE/dc26-base/"
 

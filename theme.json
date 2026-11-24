@@ -209,6 +209,11 @@
 					"name": "XXX Large",
 					"size": "2.5rem",
 					"slug": "xxx-large"
+				},
+				{
+					"name": "Card title",
+					"size": "24px",
+					"slug": "card-title"
 				}
 			]
 		},
